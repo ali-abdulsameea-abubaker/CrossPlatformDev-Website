@@ -1,39 +1,1163 @@
 ﻿@page "/about"
 
-<SeoHead Title="About Ali Abubaker — CrossPlatformDev"
-         Description="Software developer with 5+ years of experience in full-stack development, IT infrastructure, and cybersecurity."
-         Path="/about" />
+<div class="page-enter">
 
-<div class="page-enter section">
-    <div class="container about-grid">
-        <AnimatedSection Variant="reveal-left">
-            <SectionEyebrow Text="about" />
-            <h1>Hi, I'm Ali.</h1>
-            <p>
-                Senior software developer with 5+ years of experience in full-stack development, IT infrastructure,
-                and operations. I've built and maintained production .NET and Node.js applications, with a strong
-                foundation in cybersecurity and cloud architecture.
-            </p>
-            <p>
-                Currently a .NET Software Developer at Gerrie Electric, and previously an IT Help Desk Technician
-                resolving 300+ support requests. I hold an Advanced Diploma in Software Development from Mohawk
-                College and a Microsoft Azure certification.
-            </p>
-            <a href="/contact" class="btn btn-primary">Get in Touch</a>
-        </AnimatedSection>
-
-        <AnimatedSection Variant="reveal-right">
-            <div class="card">
-                <h3>Core Stack</h3>
-                <div class="tag-row">
-                    <span class="pill">C# / .NET</span>
-                    <span class="pill">ASP.NET Core</span>
-                    <span class="pill">JavaScript / TypeScript</span>
-                    <span class="pill">Node.js / Express</span>
-                    <span class="pill">SQL Server / MySQL</span>
-                    <span class="pill">Azure DevOps</span>
+    <!-- ===== HERO SECTION ===== -->
+    <section class="about-hero section">
+        <div class="container">
+            <div class="about-hero-grid">
+                <div class="about-hero-content">
+                    <div class="hero-badge reveal" style="--stagger-index:0">
+                        <span class="badge-dot"></span>
+                        <span>About me</span>
+                    </div>
+                    <h1 class="about-headline reveal" style="--stagger-index:1">
+                        <span class="about-line">Hi, I'm Ali.</span>
+                        <span class="about-line about-line-gradient">I build software that works.</span>
+                    </h1>
+                    <p class="about-description reveal" style="--stagger-index:2">
+                        Senior software developer with 5+ years of experience in full-stack development, IT infrastructure,
+                        and operations. I've built and maintained production .NET and Node.js applications, with a strong
+                        foundation in cybersecurity and cloud architecture.
+                    </p>
+                    <div class="about-actions reveal" style="--stagger-index:3">
+                        <a href="/contact" class="btn btn-primary btn-large">
+                            <span>Get in Touch</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+                        </a>
+                        <a href="/portfolio" class="btn btn-ghost btn-large">View My Work</a>
+                    </div>
+                </div>
+                <div class="about-hero-visual reveal" style="--stagger-index:2">
+                    <div class="about-orb"></div>
+                    <div class="about-avatar">
+                        <div class="avatar-ring">
+                            <div class="avatar-inner">
+                                <span class="avatar-emoji">👨‍💻</span>
+                            </div>
+                        </div>
+                        <div class="avatar-status">
+                            <span class="status-dot"></span>
+                            <span class="status-text">Available for projects</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </AnimatedSection>
-    </div>
+        </div>
+    </section>
+
+    <!-- ===== BIO + STATS ===== -->
+    <section class="bio-section section-tight">
+        <div class="container">
+            <div class="bio-grid">
+                <div class="bio-content reveal" style="--stagger-index:0">
+                    <span class="eyebrow">who-i-am</span>
+                    <h2>From Hamilton,<br><span class="grad-text">building global solutions.</span></h2>
+                    <p>
+                        Currently a <strong>.NET Software Developer</strong> at Gerrie Electric in Burlington, ON,
+                        and previously an IT Help Desk Technician resolving 300+ support requests. I hold an
+                        <strong>Advanced Diploma in Software Development</strong> from Mohawk College and a
+                        <strong>Microsoft Azure certification</strong>.
+                    </p>
+                    <p>
+                        I'm passionate about leveraging technology to solve real-world problems. My experience
+                        spans full-stack development, cloud architecture, and IT operations — all with a focus
+                        on building software that actually ships.
+                    </p>
+                    <div class="bio-highlights">
+                        <div class="highlight-item">
+                            <span class="highlight-icon">📍</span>
+                            <span>Hamilton, ON, Canada</span>
+                        </div>
+                        <div class="highlight-item">
+                            <span class="highlight-icon">🌍</span>
+                            <span>Available worldwide</span>
+                        </div>
+                        <div class="highlight-item">
+                            <span class="highlight-icon">🗣️</span>
+                            <span>English, Kurdish, Arabic</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bio-stats reveal" style="--stagger-index:1">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <span class="stat-number" data-count="5">0</span>
+                            <span class="stat-label">Years Experience</span>
+                            <div class="stat-bar"><div class="stat-bar-fill" style="width: 100%;"></div></div>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number" data-count="300">0</span>
+                            <span class="stat-label">Support Cases Resolved</span>
+                            <div class="stat-bar"><div class="stat-bar-fill" style="width: 100%;"></div></div>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number" data-count="100">0</span>
+                            <span class="stat-label">% Test Coverage</span>
+                            <div class="stat-bar"><div class="stat-bar-fill" style="width: 100%;"></div></div>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number" data-count="12">0</span>
+                            <span class="stat-label">Projects Delivered</span>
+                            <div class="stat-bar"><div class="stat-bar-fill" style="width: 90%;"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section class="skills-section section-tight">
+        <div class="container">
+            <div class="section-header reveal text-center">
+                <span class="eyebrow" style="justify-content: center;">tech-stack</span>
+                <h2>What I work with<br><span class="grad-text">every single day.</span></h2>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-category reveal" style="--stagger-index:0">
+                    <div class="skill-category-header">
+                        <span class="skill-category-icon">⚡</span>
+                        <h4>Languages</h4>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">C#</span>
+                            <div class="skill-bar"><div class="skill-bar-fill" style="width: 95%;"></div></div>
+                            <span class="skill-percent">95%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">JavaScript / TypeScript</span>
+                            <div class="skill-bar"><div class="skill-bar-fill" style="width: 90%;"></div></div>
+                            <span class="skill-percent">90%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Python</span>
+                            <div class="skill-bar"><div class="skill-bar-fill" style="width: 70%;"></div></div>
+                            <span class="skill-percent">70%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Java</span>
+                            <div class="skill-bar"><div class="skill-bar-fill" style="width: 75%;"></div></div>
+                            <span class="skill-percent">75%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">SQL</span>
+                            <div class="skill-bar"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+                            <span class="skill-percent">85%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category reveal" style="--stagger-index:1">
+                    <div class="skill-category-header">
+                        <span class="skill-category-icon">🛠️</span>
+                        <h4>Frameworks & Libraries</h4>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">.NET Core / ASP.NET</span>
+                            <div class="skill-bar"><div class="skill-bar-fill" style="width: 95%;"></div></div>
+                            <span class="skill-percent">95%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Node.js / Express</span>
+                            <div class="skill-bar"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+                            <span class="skill-percent">85%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">React</span>
+                            <div class="skill-bar"><div class="skill-bar-fill" style="width: 80%;"></div></div>
+                            <span class="skill-percent">80%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Bootstrap</span>
+                            <div class="skill-bar"><div class="skill-bar-fill" style="width: 90%;"></div></div>
+                            <span class="skill-percent">90%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category reveal" style="--stagger-index:2">
+                    <div class="skill-category-header">
+                        <span class="skill-category-icon">☁️</span>
+                        <h4>Cloud & Databases</h4>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">Azure</span>
+                            <div class="skill-bar"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+                            <span class="skill-percent">85%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">SQL Server</span>
+                            <div class="skill-bar"><div class="skill-bar-fill" style="width: 90%;"></div></div>
+                            <span class="skill-percent">90%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">MySQL</span>
+                            <div class="skill-bar"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+                            <span class="skill-percent">85%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">MongoDB</span>
+                            <div class="skill-bar"><div class="skill-bar-fill" style="width: 75%;"></div></div>
+                            <span class="skill-percent">75%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category reveal" style="--stagger-index:3">
+                    <div class="skill-category-header">
+                        <span class="skill-category-icon">🔧</span>
+                        <h4>Tools & Methodologies</h4>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">Git / Azure DevOps</span>
+                            <div class="skill-bar"><div class="skill-bar-fill" style="width: 95%;"></div></div>
+                            <span class="skill-percent">95%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Agile / Scrum</span>
+                            <div class="skill-bar"><div class="skill-bar-fill" style="width: 90%;"></div></div>
+                            <span class="skill-percent">90%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">TDD (Jest / Cypress)</span>
+                            <div class="skill-bar"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+                            <span class="skill-percent">85%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">RESTful APIs</span>
+                            <div class="skill-bar"><div class="skill-bar-fill" style="width: 95%;"></div></div>
+                            <span class="skill-percent">95%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EXPERIENCE TIMELINE ===== -->
+    <section class="timeline-section section-tight">
+        <div class="container">
+            <div class="section-header reveal text-center">
+                <span class="eyebrow" style="justify-content: center;">experience</span>
+                <h2>My professional<br><span class="grad-text">journey so far.</span></h2>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item reveal" style="--stagger-index:0">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <span class="timeline-date">Sep 2024 – Present</span>
+                            <span class="timeline-badge">Current</span>
+                        </div>
+                        <h4>.NET Software Developer</h4>
+                        <p class="timeline-company">Gerrie Electric — Burlington, ON</p>
+                        <ul class="timeline-details">
+                            <li>Spearheaded design and development of high-performance .NET applications and RESTful APIs</li>
+                            <li>Collaborated with cross-functional teams to gather complex requirements</li>
+                            <li>Engineered front-end components using TypeScript and JavaScript</li>
+                            <li>Implemented secure coding practices and conducted code reviews</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal" style="--stagger-index:1">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <span class="timeline-date">Jul 2022 – Sep 2024</span>
+                        </div>
+                        <h4>IT Help Desk Technician</h4>
+                        <p class="timeline-company">Gerrie Electric — Burlington, ON</p>
+                        <ul class="timeline-details">
+                            <li>Managed and resolved over 300 hardware, software, and network support requests</li>
+                            <li>Diagnosed and repaired complex issues with Surface devices</li>
+                            <li>Streamlined network printer installations across the organization</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal" style="--stagger-index:2">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <span class="timeline-date">May 2019 – Jul 2022</span>
+                        </div>
+                        <h4>Cargo Operator</h4>
+                        <p class="timeline-company">Hamilton Airport — Hamilton, ON</p>
+                        <ul class="timeline-details">
+                            <li>Operated heavy-duty tug vehicles for safe and timely cargo transport</li>
+                            <li>Executed precise loading and unloading procedures</li>
+                            <li>Collaborated with 100+ team members to optimize logistics</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal" style="--stagger-index:3">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <span class="timeline-date">Dec 2025</span>
+                            <span class="timeline-badge">Graduating</span>
+                        </div>
+                        <h4>Advanced Diploma in Software Development</h4>
+                        <p class="timeline-company">Mohawk College — Hamilton, ON</p>
+                        <ul class="timeline-details">
+                            <li>.NET Programming, Data Structures & Algorithms</li>
+                            <li>Mobile Web Development, Secure Software Development</li>
+                            <li>Cybersecurity Assessment & Testing, Object-Oriented Systems</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CERTIFICATIONS ===== -->
+    <section class="certs-section section-tight">
+        <div class="container">
+            <div class="certs-grid">
+                <div class="certs-content reveal" style="--stagger-index:0">
+                    <span class="eyebrow">certifications</span>
+                    <h2>Always learning,<br><span class="grad-text">always growing.</span></h2>
+                    <p>I believe in continuous improvement. Here are some of the certifications I've earned along the way.</p>
+                </div>
+                <div class="certs-list reveal" style="--stagger-index:1">
+                    <div class="cert-item">
+                        <span class="cert-icon">☁️</span>
+                        <div>
+                            <span class="cert-name">Microsoft Azure Certification</span>
+                            <span class="cert-year">2024</span>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <span class="cert-icon">🛡️</span>
+                        <div>
+                            <span class="cert-name">Worker Health & Safety Awareness</span>
+                            <span class="cert-year">2024</span>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <span class="cert-icon">📚</span>
+                        <div>
+                            <span class="cert-name">EAP Certified</span>
+                            <span class="cert-year">2024</span>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <span class="cert-icon">🌍</span>
+                        <div>
+                            <span class="cert-name">English Fluency</span>
+                            <span class="cert-year">Native</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="section-tight">
+        <div class="container">
+            <div class="reveal cta-banner">
+                <span class="eyebrow" style="justify-content: center;">let's-talk</span>
+                <h2 style="font-size: 2rem;">Want to work together?</h2>
+                <p style="max-width: 500px; margin: 0 auto var(--space-5);">I'm always open to new projects, collaborations, and interesting challenges.</p>
+                <a href="/contact" class="btn btn-primary">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
 </div>
+
+<style>
+    /* ===== ABOUT HERO ===== */
+    .about-hero {
+        padding-top: var(--space-4);
+    }
+
+    .about-hero-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: var(--space-8);
+        align-items: center;
+        min-height: 50vh;
+    }
+
+    .about-hero-content {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+    }
+
+    .about-headline {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        font-size: clamp(2.4rem, 5vw, 4rem);
+        font-weight: 700;
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+        margin: 0;
+    }
+
+    .about-line-gradient {
+        background: var(--accent-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .about-description {
+        font-size: 1.1rem;
+        max-width: 500px;
+        color: var(--text-secondary);
+        line-height: 1.7;
+        margin: 0;
+    }
+
+    .about-actions {
+        display: flex;
+        gap: var(--space-4);
+        flex-wrap: wrap;
+        margin-top: var(--space-2);
+    }
+
+    /* ===== AVATAR ===== */
+    .about-hero-visual {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 300px;
+    }
+
+    .about-orb {
+        position: absolute;
+        width: 350px;
+        height: 350px;
+        background: radial-gradient(circle at center, rgba(0, 229, 255, 0.06), transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        animation: floatY 8s ease-in-out infinite;
+    }
+
+    .about-avatar {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-4);
+    }
+
+    .avatar-ring {
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        padding: 4px;
+        background: var(--accent-gradient);
+        animation: spin 10s linear infinite;
+        box-shadow: 0 0 60px rgba(0, 229, 255, 0.1);
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .avatar-inner {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: var(--bg-void);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .avatar-emoji {
+        font-size: 4rem;
+        animation: floatY 4s ease-in-out infinite;
+    }
+
+    .avatar-status {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(10px);
+        padding: 8px 16px;
+        border-radius: 999px;
+        border: 1px solid var(--border-subtle);
+        font-size: 0.82rem;
+        color: var(--text-secondary);
+    }
+
+    .status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--success);
+        animation: pulseGlow 2s ease-in-out infinite;
+    }
+
+    .status-text {
+        color: var(--text-primary);
+    }
+
+    /* ===== BIO ===== */
+    .bio-section {
+        padding: var(--space-8) 0;
+    }
+
+    .bio-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: var(--space-8);
+        align-items: start;
+    }
+
+    .bio-content h2 {
+        font-size: clamp(2rem, 3vw, 2.6rem);
+        margin-bottom: var(--space-4);
+    }
+
+    .bio-content p {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .bio-content strong {
+        color: var(--text-primary);
+    }
+
+    .bio-highlights {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-4);
+        margin-top: var(--space-4);
+        padding-top: var(--space-4);
+        border-top: 1px solid var(--border-subtle);
+    }
+
+    .highlight-item {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+    }
+
+    .highlight-icon {
+        font-size: 1.2rem;
+    }
+
+    /* ===== STATS ===== */
+    .bio-stats {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-4);
+        width: 100%;
+    }
+
+    .stat-card {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-md);
+        padding: var(--space-4);
+        text-align: center;
+        transition: transform 0.3s var(--ease-out-expo), border-color 0.3s;
+    }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-glow);
+        }
+
+    .stat-number {
+        display: block;
+        font-family: var(--font-display);
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--accent-cyan);
+        line-height: 1.2;
+    }
+
+    .stat-label {
+        display: block;
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        margin-top: var(--space-1);
+    }
+
+    .stat-bar {
+        width: 100%;
+        height: 3px;
+        background: var(--border-subtle);
+        border-radius: 999px;
+        margin-top: var(--space-2);
+        overflow: hidden;
+    }
+
+    .stat-bar-fill {
+        height: 100%;
+        background: var(--accent-gradient);
+        border-radius: 999px;
+        transition: width 1.5s var(--ease-out-expo);
+    }
+
+    /* ===== SKILLS ===== */
+    .skills-section {
+        padding: var(--space-8) 0;
+        background: rgba(0, 0, 0, 0.2);
+        border-top: 1px solid var(--border-subtle);
+        border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .skills-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-5);
+        margin-top: var(--space-6);
+    }
+
+    .skill-category {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-lg);
+        padding: var(--space-5);
+        transition: transform 0.3s var(--ease-out-expo), border-color 0.3s;
+    }
+
+        .skill-category:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-glow);
+        }
+
+    .skill-category-header {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        margin-bottom: var(--space-4);
+        padding-bottom: var(--space-3);
+        border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .skill-category-icon {
+        font-size: 1.4rem;
+    }
+
+    .skill-category-header h4 {
+        font-size: 1rem;
+        margin: 0;
+        font-family: var(--font-display);
+        font-weight: 600;
+    }
+
+    .skill-items {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-3);
+    }
+
+    .skill-item {
+        display: grid;
+        grid-template-columns: 1fr 2fr 40px;
+        align-items: center;
+        gap: var(--space-3);
+    }
+
+    .skill-name {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+    }
+
+    .skill-bar {
+        height: 4px;
+        background: var(--border-subtle);
+        border-radius: 999px;
+        overflow: hidden;
+    }
+
+    .skill-bar-fill {
+        height: 100%;
+        background: var(--accent-gradient);
+        border-radius: 999px;
+        transition: width 1.5s var(--ease-out-expo);
+    }
+
+    .skill-percent {
+        font-size: 0.7rem;
+        color: var(--text-muted);
+        font-family: var(--font-mono);
+        text-align: right;
+    }
+
+    /* ===== TIMELINE ===== */
+    .timeline-section {
+        padding: var(--space-8) 0;
+    }
+
+    .timeline {
+        position: relative;
+        padding-left: 30px;
+        margin-top: var(--space-6);
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-subtle);
+        }
+
+    .timeline-item {
+        position: relative;
+        margin-bottom: var(--space-6);
+        padding-left: var(--space-5);
+    }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+    .timeline-marker {
+        position: absolute;
+        left: -26px;
+        top: 6px;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: var(--accent-gradient);
+        border: 2px solid var(--bg-void);
+        box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+    }
+
+    .timeline-content {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-md);
+        padding: var(--space-5);
+        transition: transform 0.3s var(--ease-out-expo), border-color 0.3s;
+    }
+
+        .timeline-content:hover {
+            transform: translateX(4px);
+            border-color: var(--border-glow);
+        }
+
+    .timeline-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+        margin-bottom: var(--space-2);
+    }
+
+    .timeline-date {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        color: var(--text-muted);
+    }
+
+    .timeline-badge {
+        font-size: 0.65rem;
+        padding: 2px 10px;
+        border-radius: 999px;
+        background: rgba(0, 229, 255, 0.1);
+        color: var(--accent-cyan);
+        border: 1px solid rgba(0, 229, 255, 0.15);
+        font-weight: 500;
+    }
+
+    .timeline-content h4 {
+        font-size: 1.1rem;
+        margin: 0 0 var(--space-1);
+    }
+
+    .timeline-company {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin: 0 0 var(--space-3);
+    }
+
+    .timeline-details {
+        margin: 0;
+        padding-left: var(--space-4);
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+        .timeline-details li {
+            margin-bottom: var(--space-1);
+        }
+
+    /* ===== CERTIFICATIONS ===== */
+    .certs-section {
+        padding: var(--space-8) 0;
+        background: rgba(0, 0, 0, 0.2);
+        border-top: 1px solid var(--border-subtle);
+        border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .certs-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-8);
+        align-items: start;
+    }
+
+    .certs-content h2 {
+        font-size: clamp(2rem, 3vw, 2.6rem);
+    }
+
+    .certs-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-3);
+    }
+
+    .cert-item {
+        display: flex;
+        align-items: center;
+        gap: var(--space-4);
+        background: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-md);
+        padding: var(--space-4);
+        transition: transform 0.3s var(--ease-out-expo), border-color 0.3s;
+    }
+
+        .cert-item:hover {
+            transform: translateX(6px);
+            border-color: var(--border-glow);
+        }
+
+    .cert-icon {
+        font-size: 1.6rem;
+    }
+
+    .cert-item div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .cert-name {
+        font-weight: 500;
+        color: var(--text-primary);
+    }
+
+    .cert-year {
+        font-size: 0.78rem;
+        color: var(--text-muted);
+    }
+
+    /* ===== SECTION HEADER ===== */
+    .section-header {
+        margin-bottom: var(--space-6);
+    }
+
+        .section-header.text-center {
+            text-align: center;
+        }
+
+            .section-header.text-center h2 {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+    .text-center {
+        text-align: center;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2);
+        font-family: var(--font-body);
+        font-weight: 600;
+        font-size: 0.95rem;
+        padding: 13px 26px;
+        border-radius: var(--radius-md);
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: transform var(--dur-fast) var(--ease-out-expo), box-shadow var(--dur-fast), background var(--dur-fast);
+    }
+
+    .btn-primary {
+        background: var(--accent-gradient);
+        background-size: 200% 200%;
+        color: #04121a;
+    }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 229, 255, 0.28);
+            animation: gradientShift 3s ease infinite;
+        }
+
+    .btn-ghost {
+        background: transparent;
+        border-color: var(--border-subtle);
+        color: var(--text-primary);
+    }
+
+        .btn-ghost:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            transform: translateY(-2px);
+        }
+
+    .btn-large {
+        padding: 16px 32px;
+        font-size: 1rem;
+        border-radius: var(--radius-md);
+    }
+
+        .btn-large svg {
+            transition: transform 0.2s var(--ease-out-expo);
+        }
+
+        .btn-large:hover svg {
+            transform: translateX(4px);
+        }
+
+    .eyebrow {
+        font-family: var(--font-mono);
+        font-size: 0.82rem;
+        color: var(--accent-cyan);
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2);
+        margin-bottom: var(--space-3);
+        letter-spacing: 0.02em;
+    }
+
+        .eyebrow::before {
+            content: "~/";
+            color: var(--text-muted);
+        }
+
+    .cta-banner {
+        border: 1px solid var(--border-glow);
+        border-radius: var(--radius-lg);
+        padding: var(--space-8) var(--space-6);
+        text-align: center;
+        background: radial-gradient(60% 100% at 50% 0%, rgba(0, 229, 255, 0.08), transparent 70%), var(--bg-surface);
+    }
+
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-3);
+        background: rgba(0, 229, 255, 0.08);
+        border: 1px solid rgba(0, 229, 255, 0.15);
+        border-radius: 999px;
+        padding: 6px 16px 6px 10px;
+        font-size: 0.78rem;
+        font-weight: 500;
+        color: var(--accent-cyan);
+        width: fit-content;
+        font-family: var(--font-mono);
+    }
+
+    .badge-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--success);
+        animation: pulseGlow 2s ease-in-out infinite;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @@media (max-width: 1024px) {
+        .about-hero-grid {
+            grid-template-columns: 1fr;
+            min-height: auto;
+            gap: var(--space-6);
+        }
+
+        .about-hero-content {
+            order: 1;
+        }
+
+        .about-hero-visual {
+            order: 0;
+        }
+
+        .about-headline {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+        }
+
+        .about-description {
+            font-size: 1rem;
+            max-width: 100%;
+        }
+
+        .bio-grid {
+            grid-template-columns: 1fr;
+            gap: var(--space-6);
+        }
+
+        .skills-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .certs-grid {
+            grid-template-columns: 1fr;
+            gap: var(--space-6);
+        }
+
+        .stats-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .stats-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .about-actions {
+            flex-direction: column;
+            width: 100%;
+        }
+
+            .about-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+        .avatar-ring {
+            width: 120px;
+            height: 120px;
+        }
+
+        .avatar-emoji {
+            font-size: 3rem;
+        }
+    }
+
+    @@media (max-width: 480px) {
+        .stats-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .bio-highlights {
+            flex-direction: column;
+        }
+
+        .skill-item {
+            grid-template-columns: 1fr;
+            gap: var(--space-1);
+        }
+
+        .skill-percent {
+            text-align: left;
+        }
+
+        .timeline {
+            padding-left: 20px;
+        }
+
+        .timeline-marker {
+            left: -18px;
+            width: 10px;
+            height: 10px;
+        }
+
+        .timeline-item {
+            padding-left: var(--space-3);
+        }
+
+        .timeline-content {
+            padding: var(--space-3);
+        }
+
+        .cert-item {
+            padding: var(--space-3);
+        }
+    }
+</style>
+
+<script>
+    // ===== SCROLL REVEAL =====
+    (function() {
+        const targets = document.querySelectorAll('.reveal:not([data-observed])');
+        if (!targets.length) return;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+        targets.forEach(el => {
+            el.setAttribute('data-observed', 'true');
+            observer.observe(el);
+        });
+    })();
+
+    // ===== COUNTER ANIMATION =====
+    (function() {
+        const counters = document.querySelectorAll('.stat-number[data-count]');
+        if (!counters.length) return;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = parseInt(el.getAttribute('data-count'));
+                    let current = 0;
+                    const increment = Math.ceil(target / 40);
+                    const duration = 1500;
+                    const step = Math.floor(duration / 40);
+
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        el.textContent = current + (target > 1 ? '+' : '');
+                    }, step);
+
+                    observer.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(el => observer.observe(el));
+    })();
+</script>

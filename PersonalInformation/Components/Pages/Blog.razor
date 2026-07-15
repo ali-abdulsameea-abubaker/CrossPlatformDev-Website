@@ -1,18 +1,855 @@
 ﻿@page "/blog"
 
-<SeoHead Title="Blog — CrossPlatformDev"
-         Description="Notes on web development, mobile apps, and building business systems."
-         Path="/blog" />
+<div class="page-enter">
 
-<div class="page-enter section">
-    <div class="container">
-        <AnimatedSection>
-            <SectionEyebrow Text="blog" />
-            <h1>Notes from the build.</h1>
-            <p>
-                Writing about web development, mobile apps, and what actually matters when building business
-                software. First posts coming soon.
-            </p>
-        </AnimatedSection>
-    </div>
+    <!-- ===== HERO SECTION ===== -->
+    <section class="blog-hero section">
+        <div class="container">
+            <div class="blog-hero-grid">
+                <div class="blog-hero-content">
+                    <div class="hero-badge reveal" style="--stagger-index:0">
+                        <span class="badge-dot"></span>
+                        <span>Blog</span>
+                    </div>
+                    <h1 class="blog-headline reveal" style="--stagger-index:1">
+                        <span class="blog-line">Notes from</span>
+                        <span class="blog-line blog-line-gradient">the build.</span>
+                    </h1>
+                    <p class="blog-description reveal" style="--stagger-index:2">
+                        Writing about web development, mobile apps, and what actually matters when building
+                        business software that works.
+                    </p>
+                    <div class="blog-stats reveal" style="--stagger-index:3">
+                        <div class="blog-stat">
+                            <span class="blog-stat-number">0</span>
+                            <span class="blog-stat-label">Posts Published</span>
+                        </div>
+                        <div class="blog-stat-divider"></div>
+                        <div class="blog-stat">
+                            <span class="blog-stat-number">0</span>
+                            <span class="blog-stat-label">Readers</span>
+                        </div>
+                        <div class="blog-stat-divider"></div>
+                        <div class="blog-stat">
+                            <span class="blog-stat-number">0</span>
+                            <span class="blog-stat-label">Topics Covered</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog-hero-visual reveal" style="--stagger-index:2">
+                    <div class="blog-orb"></div>
+                    <div class="blog-writing-icon">
+                        <div class="writing-pulse"></div>
+                        <span class="writing-emoji">✍️</span>
+                        <div class="writing-rings">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TOPICS SECTION ===== -->
+    <section class="topics-section section-tight">
+        <div class="container">
+            <div class="section-header reveal text-center">
+                <span class="eyebrow" style="justify-content: center;">topics</span>
+                <h2>What I write about<br><span class="grad-text">(coming soon).</span></h2>
+            </div>
+
+            <div class="topics-grid">
+                <div class="topic-card reveal" style="--stagger-index:0">
+                    <div class="topic-card-icon">🌐</div>
+                    <div class="topic-card-content">
+                        <h4>Web Development</h4>
+                        <p>React, TypeScript, responsive design, and building fast websites.</p>
+                    </div>
+                </div>
+                <div class="topic-card reveal" style="--stagger-index:1">
+                    <div class="topic-card-icon">📱</div>
+                    <div class="topic-card-content">
+                        <h4>Mobile & Android</h4>
+                        <p>Cross-platform apps, native Android, and mobile UX best practices.</p>
+                    </div>
+                </div>
+                <div class="topic-card reveal" style="--stagger-index:2">
+                    <div class="topic-card-icon">🖥️</div>
+                    <div class="topic-card-content">
+                        <h4>Business Systems</h4>
+                        <p>Inventory, POS, management systems, and real-world software architecture.</p>
+                    </div>
+                </div>
+                <div class="topic-card reveal" style="--stagger-index:3">
+                    <div class="topic-card-icon">☁️</div>
+                    <div class="topic-card-content">
+                        <h4>Cloud & DevOps</h4>
+                        <p>Azure, CI/CD, deployment strategies, and cloud-native development.</p>
+                    </div>
+                </div>
+                <div class="topic-card reveal" style="--stagger-index:4">
+                    <div class="topic-card-icon">🔒</div>
+                    <div class="topic-card-content">
+                        <h4>Cybersecurity</h4>
+                        <p>OWASP, secure coding practices, and protecting user data.</p>
+                    </div>
+                </div>
+                <div class="topic-card reveal" style="--stagger-index:5">
+                    <div class="topic-card-icon">🚀</div>
+                    <div class="topic-card-content">
+                        <h4>Career & Growth</h4>
+                        <p>Lessons from 5+ years in tech, IT support, and software development.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FEATURED POSTS (Coming Soon) ===== -->
+    <section class="featured-section section-tight">
+        <div class="container">
+            <div class="section-header reveal text-center">
+                <span class="eyebrow" style="justify-content: center;">featured</span>
+                <h2>Coming <span class="grad-text">soon.</span></h2>
+                <p style="max-width: 500px; margin: 0 auto;">I'm currently working on my first posts. Here's what's in the pipeline.</p>
+            </div>
+
+            <div class="featured-grid">
+                <div class="featured-card reveal" style="--stagger-index:0">
+                    <div class="featured-card-status">
+                        <span class="status-dot"></span>
+                        <span class="status-label">Draft</span>
+                    </div>
+                    <div class="featured-card-icon">📝</div>
+                    <h4>Building a POS System from Scratch</h4>
+                    <p>Lessons learned building a point-of-sale system for a supermarket — database design, real-time inventory, and user experience.</p>
+                    <div class="featured-card-meta">
+                        <span class="meta-tag">Business Systems</span>
+                        <span class="meta-reading">5 min read</span>
+                    </div>
+                    <div class="featured-card-progress">
+                        <div class="progress-bar"><div class="progress-fill" style="width: 65%;"></div></div>
+                        <span class="progress-label">65% complete</span>
+                    </div>
+                </div>
+
+                <div class="featured-card reveal" style="--stagger-index:1">
+                    <div class="featured-card-status">
+                        <span class="status-dot"></span>
+                        <span class="status-label">Draft</span>
+                    </div>
+                    <div class="featured-card-icon">⚡</div>
+                    <h4>Deploying .NET Apps on Azure</h4>
+                    <p>A step-by-step guide to deploying .NET Core applications to Azure — from CI/CD pipelines to monitoring and scaling.</p>
+                    <div class="featured-card-meta">
+                        <span class="meta-tag">Cloud & DevOps</span>
+                        <span class="meta-reading">4 min read</span>
+                    </div>
+                    <div class="featured-card-progress">
+                        <div class="progress-bar"><div class="progress-fill" style="width: 40%;"></div></div>
+                        <span class="progress-label">40% complete</span>
+                    </div>
+                </div>
+
+                <div class="featured-card reveal" style="--stagger-index:2">
+                    <div class="featured-card-status">
+                        <span class="status-dot"></span>
+                        <span class="status-label">Draft</span>
+                    </div>
+                    <div class="featured-card-icon">📱</div>
+                    <h4>Android Development: Tips from 2025</h4>
+                    <p>Modern Android development practices — Kotlin vs Java, Jetpack Compose, and what I wish I knew when I started.</p>
+                    <div class="featured-card-meta">
+                        <span class="meta-tag">Mobile</span>
+                        <span class="meta-reading">6 min read</span>
+                    </div>
+                    <div class="featured-card-progress">
+                        <div class="progress-bar"><div class="progress-fill" style="width: 25%;"></div></div>
+                        <span class="progress-label">25% complete</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== NEWSLETTER SIGNUP ===== -->
+    <section class="newsletter-section section-tight">
+        <div class="container">
+            <div class="reveal newsletter-card">
+                <div class="newsletter-content">
+                    <div class="newsletter-icon">📬</div>
+                    <h2>Get notified when I post.</h2>
+                    <p>No spam, just good content. I'll send you an email when new articles are published.</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Enter your email" class="input newsletter-input">
+                        <button class="btn btn-primary newsletter-btn">
+                            <span>Subscribe</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+                        </button>
+                    </div>
+                    <span class="newsletter-note">No spam. Unsubscribe anytime.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </div>
+
+<style>
+    /* ===== BLOG HERO ===== */
+    .blog-hero {
+        padding-top: var(--space-4);
+    }
+
+    .blog-hero-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: var(--space-8);
+        align-items: center;
+        min-height: 50vh;
+    }
+
+    .blog-hero-content {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+    }
+
+    .blog-headline {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        font-size: clamp(2.4rem, 5vw, 4rem);
+        font-weight: 700;
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+        margin: 0;
+    }
+
+    .blog-line-gradient {
+        background: var(--accent-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .blog-description {
+        font-size: 1.1rem;
+        max-width: 480px;
+        color: var(--text-secondary);
+        line-height: 1.7;
+        margin: 0;
+    }
+
+    .blog-stats {
+        display: flex;
+        align-items: center;
+        gap: var(--space-6);
+        padding-top: var(--space-4);
+        border-top: 1px solid var(--border-subtle);
+        margin-top: var(--space-2);
+    }
+
+    .blog-stat {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .blog-stat-number {
+        font-family: var(--font-display);
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        letter-spacing: -0.01em;
+    }
+
+    .blog-stat-label {
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        font-weight: 400;
+    }
+
+    .blog-stat-divider {
+        width: 1px;
+        height: 32px;
+        background: var(--border-subtle);
+    }
+
+    /* ===== HERO VISUAL ===== */
+    .blog-hero-visual {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 300px;
+    }
+
+    .blog-orb {
+        position: absolute;
+        width: 350px;
+        height: 350px;
+        background: radial-gradient(circle at center, rgba(0, 229, 255, 0.06), transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        animation: floatY 8s ease-in-out infinite;
+    }
+
+    .blog-writing-icon {
+        position: relative;
+        z-index: 1;
+        width: 120px;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg-surface);
+        border-radius: 50%;
+        border: 2px solid var(--border-subtle);
+        animation: floatY 6s ease-in-out infinite;
+        transition: transform 0.3s var(--ease-out-expo), border-color 0.3s;
+    }
+
+        .blog-writing-icon:hover {
+            transform: scale(1.05);
+            border-color: var(--border-glow);
+        }
+
+    .writing-emoji {
+        font-size: 3.5rem;
+        animation: pulseGlow 3s ease-in-out infinite;
+    }
+
+    .writing-pulse {
+        position: absolute;
+        inset: -8px;
+        border-radius: 50%;
+        border: 2px solid rgba(0, 229, 255, 0.15);
+        animation: pulseRing 2.5s ease-in-out infinite;
+    }
+
+    .writing-rings {
+        position: absolute;
+        inset: -20px;
+        pointer-events: none;
+    }
+
+        .writing-rings span {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 229, 255, 0.05);
+            animation: ringExpand 4s ease-in-out infinite;
+        }
+
+            .writing-rings span:nth-child(2) {
+                animation-delay: 1.3s;
+            }
+
+            .writing-rings span:nth-child(3) {
+                animation-delay: 2.6s;
+            }
+
+    @@keyframes pulseRing {
+        0%, 100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        50% {
+            transform: scale(1.1);
+            opacity: 0.3;
+        }
+    }
+
+    @@keyframes ringExpand {
+        0%, 100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        50% {
+            transform: scale(1.3);
+            opacity: 0;
+        }
+    }
+
+    /* ===== TOPICS ===== */
+    .topics-section {
+        padding: var(--space-8) 0;
+        background: rgba(0, 0, 0, 0.2);
+        border-top: 1px solid var(--border-subtle);
+        border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .topics-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: var(--space-4);
+        margin-top: var(--space-6);
+    }
+
+    .topic-card {
+        display: flex;
+        align-items: center;
+        gap: var(--space-4);
+        background: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-md);
+        padding: var(--space-4);
+        transition: transform 0.3s var(--ease-out-expo), border-color 0.3s, box-shadow 0.3s;
+        cursor: default;
+    }
+
+        .topic-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            border-color: var(--border-glow);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+
+    .topic-card-icon {
+        font-size: 1.8rem;
+        flex-shrink: 0;
+        animation: floatY 4s ease-in-out infinite;
+    }
+
+    .topic-card:nth-child(2) .topic-card-icon {
+        animation-delay: 0.5s;
+    }
+
+    .topic-card:nth-child(3) .topic-card-icon {
+        animation-delay: 1s;
+    }
+
+    .topic-card:nth-child(4) .topic-card-icon {
+        animation-delay: 1.5s;
+    }
+
+    .topic-card:nth-child(5) .topic-card-icon {
+        animation-delay: 2s;
+    }
+
+    .topic-card:nth-child(6) .topic-card-icon {
+        animation-delay: 2.5s;
+    }
+
+    .topic-card-content h4 {
+        font-size: 0.95rem;
+        margin: 0 0 var(--space-1);
+        font-family: var(--font-display);
+        font-weight: 600;
+    }
+
+    .topic-card-content p {
+        font-size: 0.82rem;
+        color: var(--text-muted);
+        margin: 0;
+        line-height: 1.5;
+    }
+
+    /* ===== FEATURED ===== */
+    .featured-section {
+        padding: var(--space-8) 0;
+    }
+
+    .featured-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: var(--space-5);
+        margin-top: var(--space-6);
+    }
+
+    .featured-card {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-lg);
+        padding: var(--space-5);
+        transition: transform 0.4s var(--ease-out-expo), border-color 0.4s, box-shadow 0.4s;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-3);
+        position: relative;
+        overflow: hidden;
+    }
+
+        .featured-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent-gradient);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .featured-card:hover::before {
+            opacity: 1;
+        }
+
+        .featured-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--border-glow);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+    .featured-card-status {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        font-size: 0.7rem;
+        color: var(--text-muted);
+        font-family: var(--font-mono);
+    }
+
+        .featured-card-status .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--warning);
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+
+    .featured-card-icon {
+        font-size: 2rem;
+        line-height: 1;
+    }
+
+    .featured-card h4 {
+        font-size: 1.1rem;
+        margin: 0;
+        font-family: var(--font-display);
+        font-weight: 600;
+        line-height: 1.3;
+    }
+
+    .featured-card p {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        margin: 0;
+        line-height: 1.6;
+        flex: 1;
+    }
+
+    .featured-card-meta {
+        display: flex;
+        gap: var(--space-3);
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        flex-wrap: wrap;
+    }
+
+    .meta-tag {
+        font-family: var(--font-mono);
+        background: rgba(0, 229, 255, 0.06);
+        padding: 2px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(0, 229, 255, 0.08);
+        color: var(--accent-cyan);
+    }
+
+    .meta-reading {
+        font-family: var(--font-mono);
+    }
+
+    .featured-card-progress {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-1);
+        margin-top: var(--space-1);
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 4px;
+        background: var(--border-subtle);
+        border-radius: 999px;
+        overflow: hidden;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background: var(--accent-gradient);
+        border-radius: 999px;
+        transition: width 2s var(--ease-out-expo);
+    }
+
+    .progress-label {
+        font-size: 0.7rem;
+        color: var(--text-muted);
+        font-family: var(--font-mono);
+        text-align: right;
+    }
+
+    /* ===== NEWSLETTER ===== */
+    .newsletter-section {
+        padding: var(--space-8) 0;
+        background: rgba(0, 0, 0, 0.2);
+        border-top: 1px solid var(--border-subtle);
+    }
+
+    .newsletter-card {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-glow);
+        border-radius: var(--radius-lg);
+        padding: var(--space-8) var(--space-6);
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .newsletter-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(60% 100% at 50% 0%, rgba(0, 229, 255, 0.04), transparent 70%);
+            pointer-events: none;
+        }
+
+    .newsletter-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .newsletter-icon {
+        font-size: 3rem;
+        margin-bottom: var(--space-3);
+        animation: floatY 4s ease-in-out infinite;
+    }
+
+    .newsletter-content h2 {
+        font-size: 1.8rem;
+        margin-bottom: var(--space-2);
+    }
+
+    .newsletter-content p {
+        max-width: 400px;
+        margin: 0 auto var(--space-5);
+        color: var(--text-secondary);
+    }
+
+    .newsletter-form {
+        display: flex;
+        gap: var(--space-3);
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .newsletter-input {
+        flex: 1;
+        padding: 14px 18px;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-sm);
+        color: var(--text-primary);
+        font-family: var(--font-body);
+        font-size: 0.95rem;
+        transition: border-color 0.3s;
+    }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+        }
+
+        .newsletter-input::placeholder {
+            color: var(--text-muted);
+        }
+
+    .newsletter-btn {
+        padding: 14px 28px;
+        font-size: 0.95rem;
+        white-space: nowrap;
+    }
+
+        .newsletter-btn svg {
+            transition: transform 0.3s var(--ease-out-expo);
+        }
+
+        .newsletter-btn:hover svg {
+            transform: translateX(4px);
+        }
+
+    .newsletter-note {
+        display: block;
+        font-size: 0.7rem;
+        color: var(--text-muted);
+        margin-top: var(--space-3);
+        font-family: var(--font-mono);
+    }
+
+    /* ===== SECTION HEADER ===== */
+    .section-header {
+        margin-bottom: var(--space-6);
+    }
+
+        .section-header.text-center {
+            text-align: center;
+        }
+
+            .section-header.text-center h2 {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            .section-header.text-center p {
+                max-width: 500px;
+                margin: var(--space-3) auto 0;
+            }
+
+    .text-center {
+        text-align: center;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2);
+        font-family: var(--font-body);
+        font-weight: 600;
+        font-size: 0.95rem;
+        padding: 13px 26px;
+        border-radius: var(--radius-md);
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: transform var(--dur-fast) var(--ease-out-expo), box-shadow var(--dur-fast), background var(--dur-fast);
+    }
+
+    .btn-primary {
+        background: var(--accent-gradient);
+        background-size: 200% 200%;
+        color: #04121a;
+    }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 229, 255, 0.28);
+            animation: gradientShift 3s ease infinite;
+        }
+
+    .eyebrow {
+        font-family: var(--font-mono);
+        font-size: 0.82rem;
+        color: var(--accent-cyan);
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2);
+        margin-bottom: var(--space-3);
+        letter-spacing: 0.02em;
+    }
+
+        .eyebrow::before {
+            content: "~/";
+            color: var(--text-muted);
+        }
+
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-3);
+        background: rgba(0, 229, 255, 0.08);
+        border: 1px solid rgba(0, 229, 255, 0.15);
+        border-radius: 999px;
+        padding: 6px 16px 6px 10px;
+        font-size: 0.78rem;
+        font-weight: 500;
+        color: var(--accent-cyan);
+        width: fit-content;
+        font-family: var(--font-mono);
+    }
+
+    .badge-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--success);
+        animation: pulseGlow 2s ease-in-out infinite;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @@media (max-width: 1024px) {
+        .blog-hero-grid {
+            grid-template-columns: 1fr;
+            min-height: auto;
+            gap: var(--space-6);
+        }
+
+        .blog-hero-content {
+            order: 1;
+        }
+
+        .blog-hero-visual {
+            order: 0;
+        }
+
+        .blog-headline {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+        }
+
+        .blog-description {
+            font-size: 1rem;
+            max-width: 100%;
+        }
+
+        .topics-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .featured-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .blog-stats {
+            flex-wrap: wrap;
+            gap: var(--space-4);
+        }
+
+        .blog-stat-divider {
+            display: none;
+        }
+
+        .topics-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .featured-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .newsletter-form {
+            flex-direction: column;
+        }
+
+        .newsletter-btn {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .blog-writing-icon {
+            width: 90px;
+            height: 90px;
+        }
+
+        .writing-emoji {
+            font-size: 2.5rem;
+        }
+    }
+
+    @@media (max-width: 480px) {
+        .blog-stats {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .featured-card {
+            padding: var(--space-4);
+        }
+    }
+</style>

@@ -4,6 +4,7 @@
 @import 'css/base.css';
 @import 'css/animations.css';
 @import 'css/components.css';
+@import 'css/theme.css'; /* Load theme LAST so it overrides everything */
 
 .focus-visible-skip {
     position: absolute;

@@ -1,4 +1,9 @@
-﻿<button class="nav-toggle" aria-label="Toggle menu">
+﻿@using PersonalInformation.Services
+@inject IJSRuntime JS
+@inject ThemeService ThemeService
+@implements IDisposable
+
+<button class="nav-toggle" aria-label="Toggle menu">
     <span></span><span></span><span></span>
 </button>
 
@@ -14,9 +19,45 @@
         <NavLink href="/blog"><span class="nav-index">05</span> Blog</NavLink>
     </nav>
 
+    <!-- Theme Toggle Button -->
+    <div class="theme-toggle-wrapper">
+        <button class="theme-toggle-btn" @onclick="ToggleTheme" aria-label="Toggle theme">
+            <span class="theme-icon">@(ThemeService.IsDark ? "🌙" : "☀️")</span>
+            <span class="theme-label">@(ThemeService.IsDark ? "Dark" : "Light")</span>
+            <span class="theme-toggle-track">
+                <span class="theme-toggle-thumb" style="transform: @(ThemeService.IsDark ? "translateX(20px)" : "translateX(0)")"></span>
+            </span>
+        </button>
+    </div>
+
     <a href="/contact" class="btn btn-primary nav-cta">Start a Project</a>
 
     <span class="eyebrow nav-footer-tag">status: available</span>
 </aside>
 
 <div class="nav-overlay"></div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        // Subscribe to theme changes
+        ThemeService.OnThemeChanged += OnThemeChanged;
+    }
+
+    private void OnThemeChanged()
+    {
+        StateHasChanged(); // Force re-render when theme changes
+    }
+
+    private async Task ToggleTheme()
+    {
+        ThemeService.ToggleTheme();
+        await JS.InvokeVoidAsync("localStorage.setItem", "theme", ThemeService.CurrentTheme);
+        // StateHasChanged will be called by OnThemeChanged event
+    }
+
+    public void Dispose()
+    {
+        ThemeService.OnThemeChanged -= OnThemeChanged;
+    }
+}

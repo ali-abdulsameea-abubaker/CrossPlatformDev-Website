@@ -1,10 +1,14 @@
 using PersonalInformation.Components;
+using PersonalInformation.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+builder.Services.AddSingleton<ThemeService>();
+
+builder.Configuration.AddUserSecrets<Program>();
 
 var app = builder.Build();
 

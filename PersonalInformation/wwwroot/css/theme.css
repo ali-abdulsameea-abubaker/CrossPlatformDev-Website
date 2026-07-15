@@ -1,0 +1,553 @@
+﻿/* ===== DARK THEME (Default) ===== */
+.dark-theme {
+    /* Backgrounds */
+    --bg-void: #050810;
+    --bg-surface: #0B0F1A;
+    --bg-elevated: #121A2B;
+    --bg-card: #0B0F1A;
+    --bg-input: #121A2B;
+    --bg-hover: rgba(255, 255, 255, 0.04);
+    /* Borders */
+    --border-subtle: #1C2436;
+    --border-glow: rgba(0, 229, 255, 0.35);
+    /* Text */
+    --text-primary: #EAF0F7;
+    --text-secondary: #A7B2C4;
+    --text-muted: #5E6B82;
+    --text-inverse: #04121a;
+    /* Shadows */
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --card-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    --glow-color: rgba(0, 229, 255, 0.25);
+    /* Code colors */
+    --code-keyword: #FF7B9C;
+    --code-string: #9FCF8E;
+    --code-comment: #5E6B82;
+    --code-variable: #B392F0;
+    --code-bracket: #EAF0F7;
+}
+
+/* ===== LIGHT THEME ===== */
+.light-theme {
+    /* Backgrounds */
+    --bg-void: #F0F4F8;
+    --bg-surface: #FFFFFF;
+    --bg-elevated: #E8EDF3;
+    --bg-card: #FFFFFF;
+    --bg-input: #FFFFFF;
+    --bg-hover: rgba(0, 0, 0, 0.04);
+    /* Borders */
+    --border-subtle: #D1D9E6;
+    --border-glow: rgba(0, 229, 255, 0.35);
+    /* Text */
+    --text-primary: #0B1A2E;
+    --text-secondary: #2D4059;
+    --text-muted: #6B7F94;
+    --text-inverse: #FFFFFF;
+    /* Shadows */
+    --shadow-color: rgba(0, 0, 0, 0.08);
+    --card-shadow: 0 20px 50px rgba(0,0,0,0.08);
+    --glow-color: rgba(0, 229, 255, 0.15);
+    /* Code colors */
+    --code-keyword: #D73A49;
+    --code-string: #032F62;
+    --code-comment: #6A737D;
+    --code-variable: #6F42C1;
+    --code-bracket: #0B1A2E;
+}
+
+/* ===== Apply to all elements ===== */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ===== Body ===== */
+body {
+    background: var(--bg-void) !important;
+    color: var(--text-primary) !important;
+}
+
+    /* ===== Background Glow ===== */
+    body::before {
+        background: radial-gradient(60% 40% at 15% 0%, rgba(61, 127, 255, 0.14), transparent 60%), radial-gradient(50% 35% at 90% 20%, rgba(0, 229, 255, 0.10), transparent 60%), var(--bg-void) !important;
+    }
+
+/* ===== Typography ===== */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary) !important;
+}
+
+p, li, span {
+    color: var(--text-secondary) !important;
+}
+
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+/* ===== Cards ===== */
+.card {
+    background: var(--bg-card) !important;
+    border-color: var(--border-subtle) !important;
+    box-shadow: var(--card-shadow) !important;
+}
+
+    .card:hover {
+        border-color: var(--border-glow) !important;
+    }
+
+    .card h3, .card h4 {
+        color: var(--text-primary) !important;
+    }
+
+    .card p {
+        color: var(--text-secondary) !important;
+    }
+
+.card-icon {
+    background: rgba(0, 229, 255, 0.08) !important;
+}
+
+/* ===== Terminal / Code Blocks ===== */
+.terminal {
+    background: var(--bg-elevated) !important;
+    border-color: var(--border-subtle) !important;
+}
+
+.terminal-body {
+    color: var(--text-secondary) !important;
+}
+
+.code-body {
+    color: var(--text-secondary) !important;
+}
+
+.code-keyword {
+    color: var(--code-keyword) !important;
+}
+
+.code-string {
+    color: var(--code-string) !important;
+}
+
+.code-comment {
+    color: var(--code-comment) !important;
+}
+
+.code-variable {
+    color: var(--code-variable) !important;
+}
+
+.code-bracket {
+    color: var(--code-bracket) !important;
+}
+
+/* ===== Buttons ===== */
+.btn {
+    color: var(--text-primary) !important;
+}
+
+.btn-ghost {
+    border-color: var(--border-subtle) !important;
+    color: var(--text-primary) !important;
+}
+
+    .btn-ghost:hover {
+        border-color: var(--accent-cyan) !important;
+        color: var(--accent-cyan) !important;
+    }
+
+.btn-primary {
+    color: #04121a !important;
+}
+
+/* ===== Navigation ===== */
+.site-nav {
+    background: var(--bg-surface) !important;
+    border-color: var(--border-subtle) !important;
+}
+
+.nav-logo {
+    border-color: var(--border-subtle) !important;
+}
+
+.nav-links a {
+    color: var(--text-secondary) !important;
+}
+
+    .nav-links a:hover {
+        color: var(--text-primary) !important;
+        background: var(--bg-hover) !important;
+    }
+
+    .nav-links a.active {
+        color: var(--accent-cyan) !important;
+        background: rgba(0, 229, 255, 0.08) !important;
+    }
+
+.nav-index {
+    color: var(--text-muted) !important;
+}
+
+.nav-footer-tag {
+    color: var(--success) !important;
+}
+
+/* ===== Footer ===== */
+.site-footer {
+    background: var(--bg-surface) !important;
+    border-color: var(--border-subtle) !important;
+}
+
+.footer-heading {
+    color: var(--text-muted) !important;
+}
+
+.footer-links a {
+    color: var(--text-secondary) !important;
+}
+
+    .footer-links a:hover {
+        color: var(--text-primary) !important;
+    }
+
+.social-link {
+    background: var(--bg-elevated) !important;
+    border-color: var(--border-subtle) !important;
+    color: var(--text-muted) !important;
+}
+
+    .social-link:hover {
+        border-color: var(--accent-cyan) !important;
+        color: var(--accent-cyan) !important;
+    }
+
+.contact-link {
+    color: var(--text-secondary) !important;
+}
+
+    .contact-link:hover {
+        color: var(--accent-cyan) !important;
+    }
+
+.footer-availability {
+    background: rgba(0, 229, 255, 0.06) !important;
+    border-color: rgba(0, 229, 255, 0.1) !important;
+}
+
+.back-to-top {
+    background: var(--bg-elevated) !important;
+    border-color: var(--border-subtle) !important;
+    color: var(--text-secondary) !important;
+}
+
+    .back-to-top:hover {
+        border-color: var(--accent-cyan) !important;
+        color: var(--accent-cyan) !important;
+    }
+
+/* ===== Theme Toggle ===== */
+.theme-toggle-btn {
+    background: transparent !important;
+    border-color: var(--border-subtle) !important;
+    color: var(--text-secondary) !important;
+}
+
+    .theme-toggle-btn:hover {
+        border-color: var(--accent-cyan) !important;
+        color: var(--text-primary) !important;
+    }
+
+.theme-toggle-track {
+    background: var(--border-subtle) !important;
+}
+
+.theme-toggle-thumb {
+    background: var(--bg-void) !important;
+}
+
+/* ===== Chat / AI ===== */
+.ai-chat-body {
+    background: var(--bg-surface) !important;
+    border-color: var(--border-subtle) !important;
+}
+
+.ai-chat-messages {
+    background: var(--bg-surface) !important;
+}
+
+.ai-message .message-bubble {
+    background: var(--bg-elevated) !important;
+    border-color: var(--border-subtle) !important;
+    color: var(--text-primary) !important;
+}
+
+.user-message .message-bubble {
+    background: var(--accent-gradient) !important;
+    color: #04121a !important;
+}
+
+.message-time {
+    color: var(--text-muted) !important;
+}
+
+.ai-input {
+    background: var(--bg-input) !important;
+    border-color: var(--border-subtle) !important;
+    color: var(--text-primary) !important;
+}
+
+.quick-btn {
+    border-color: var(--border-subtle) !important;
+    color: var(--text-secondary) !important;
+}
+
+    .quick-btn:hover {
+        border-color: var(--accent-cyan) !important;
+        color: var(--accent-cyan) !important;
+    }
+
+/* ===== Inputs ===== */
+.input {
+    background: var(--bg-input) !important;
+    border-color: var(--border-subtle) !important;
+    color: var(--text-primary) !important;
+}
+
+    .input:focus {
+        border-color: var(--accent-cyan) !important;
+    }
+
+select.input {
+    background: var(--bg-input) !important;
+    border-color: var(--border-subtle) !important;
+    color: var(--text-primary) !important;
+}
+
+    select.input option {
+        background: var(--bg-elevated) !important;
+        color: var(--text-primary) !important;
+    }
+
+/* ===== Service Cards ===== */
+.service-card {
+    background: var(--bg-card) !important;
+    border-color: var(--border-subtle) !important;
+}
+
+    .service-card h3 {
+        color: var(--text-primary) !important;
+    }
+
+    .service-card p {
+        color: var(--text-secondary) !important;
+    }
+
+.service-card-link {
+    color: var(--accent-cyan) !important;
+}
+
+/* ===== Project Cards ===== */
+.project-card {
+    background: var(--bg-card) !important;
+    border-color: var(--border-subtle) !important;
+}
+
+    .project-card h3 {
+        color: var(--text-primary) !important;
+    }
+
+    .project-card p {
+        color: var(--text-secondary) !important;
+    }
+
+.project-tag {
+    border-color: var(--border-subtle) !important;
+    color: var(--text-muted) !important;
+}
+
+/* ===== Stats ===== */
+.stat strong {
+    color: var(--accent-cyan) !important;
+}
+
+.stat span {
+    color: var(--text-muted) !important;
+}
+
+/* ===== CTA Banner ===== */
+.cta-banner {
+    background: radial-gradient(60% 100% at 50% 0%, rgba(0,229,255,0.08), transparent 70%), var(--bg-surface) !important;
+    border-color: var(--border-glow) !important;
+}
+
+/* ===== Section Divider ===== */
+.divider {
+    background: var(--border-subtle) !important;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar-track {
+    background: var(--bg-void) !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-subtle) !important;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--text-muted) !important;
+    }
+
+/* ===== Selection ===== */
+::selection {
+    background: var(--accent-cyan) !important;
+    color: #04121a !important;
+}
+
+/* ===== Nav Overlay ===== */
+.nav-overlay {
+    background: var(--overlay-color) !important;
+}
+
+/* ===== Mobile Toggle ===== */
+.nav-toggle {
+    background: var(--bg-surface) !important;
+    border-color: var(--border-subtle) !important;
+}
+
+    .nav-toggle span {
+        background: var(--text-primary) !important;
+    }
+
+/* ===== Hero ===== */
+.hero-badge {
+    background: rgba(0, 229, 255, 0.08) !important;
+    border-color: rgba(0, 229, 255, 0.15) !important;
+    color: var(--accent-cyan) !important;
+}
+
+.hero-description {
+    color: var(--text-secondary) !important;
+}
+
+/* ===== Blog ===== */
+.featured-card {
+    background: var(--bg-card) !important;
+    border-color: var(--border-subtle) !important;
+}
+
+    .featured-card h4 {
+        color: var(--text-primary) !important;
+    }
+
+    .featured-card p {
+        color: var(--text-secondary) !important;
+    }
+
+.progress-bar {
+    background: var(--border-subtle) !important;
+}
+
+/* ===== Newsletter ===== */
+.newsletter-card {
+    background: var(--bg-surface) !important;
+    border-color: var(--border-glow) !important;
+}
+
+.newsletter-input {
+    background: var(--bg-input) !important;
+    border-color: var(--border-subtle) !important;
+    color: var(--text-primary) !important;
+}
+
+/* ===== About Page ===== */
+.about-avatar .avatar-inner {
+    background: var(--bg-void) !important;
+}
+
+.avatar-status {
+    background: var(--bg-surface) !important;
+    border-color: var(--border-subtle) !important;
+}
+
+.stat-card {
+    background: var(--bg-card) !important;
+    border-color: var(--border-subtle) !important;
+}
+
+.skill-category {
+    background: var(--bg-card) !important;
+    border-color: var(--border-subtle) !important;
+}
+
+.skill-name {
+    color: var(--text-secondary) !important;
+}
+
+.skill-percent {
+    color: var(--text-muted) !important;
+}
+
+.timeline-content {
+    background: var(--bg-card) !important;
+    border-color: var(--border-subtle) !important;
+}
+
+.timeline-date {
+    color: var(--text-muted) !important;
+}
+
+.cert-item {
+    background: var(--bg-card) !important;
+    border-color: var(--border-subtle) !important;
+}
+
+.cert-name {
+    color: var(--text-primary) !important;
+}
+
+.cert-year {
+    color: var(--text-muted) !important;
+}
+
+/* ===== Portfolio ===== */
+.portfolio-icon-card {
+    background: var(--bg-card) !important;
+    border-color: var(--border-subtle) !important;
+}
+
+.tech-icon {
+    background: var(--bg-card) !important;
+    border-color: var(--border-subtle) !important;
+    color: var(--text-secondary) !important;
+}
+
+    .tech-icon:hover {
+        border-color: var(--accent-cyan) !important;
+        color: var(--text-primary) !important;
+    }
+
+/* ===== Services Page ===== */
+.service-icon-card {
+    background: var(--bg-card) !important;
+    border-color: var(--border-subtle) !important;
+}
+
+.service-icon-label {
+    color: var(--text-muted) !important;
+}
+
+.process-step-content p {
+    color: var(--text-muted) !important;
+}
+
+/* ===== Contact Page ===== */
+label {
+    color: var(--text-muted) !important;
+}
+
+/* ===== Nav CTA Button ===== */
+.nav-cta {
+    color: #04121a !important;
+}

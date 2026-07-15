@@ -1,7 +1,10 @@
-﻿@inherits LayoutComponentBase
+﻿@using PersonalInformation.Services
+@inherits LayoutComponentBase
 @inject IJSRuntime JS
+@inject ThemeService ThemeService
+@implements IDisposable
 
-<div class="app-shell">
+<div class="app-shell @(ThemeService.IsDark ? "dark-theme" : "light-theme")" id="app-root">
     <NavMenu />
 
     <div class="content-area">
@@ -13,8 +16,46 @@
 </div>
 
 @code {
+    protected override void OnInitialized()
+    {
+        ThemeService.OnThemeChanged += OnThemeChanged;
+        ThemeService.OnThemeChanged += ApplyThemeToBody;
+    }
+
+    private void OnThemeChanged()
+    {
+        StateHasChanged();
+    }
+
+    private void ApplyThemeToBody()
+    {
+        // Apply theme class to body for global styles
+        if (JS is not null)
+        {
+            JS.InvokeVoidAsync("applyTheme", ThemeService.IsDark ? "dark-theme" : "light-theme");
+        }
+    }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        if (firstRender)
+        {
+            var savedTheme = await JS.InvokeAsync<string>("localStorage.getItem", "theme");
+            if (!string.IsNullOrEmpty(savedTheme))
+            {
+                ThemeService.CurrentTheme = savedTheme;
+            }
+            // Apply theme to body
+            await JS.InvokeVoidAsync("applyTheme", ThemeService.IsDark ? "dark-theme" : "light-theme");
+            StateHasChanged();
+        }
+
         await JS.InvokeVoidAsync("siteAnimations.initAll");
+    }
+
+    public void Dispose()
+    {
+        ThemeService.OnThemeChanged -= OnThemeChanged;
+        ThemeService.OnThemeChanged -= ApplyThemeToBody;
     }
 }

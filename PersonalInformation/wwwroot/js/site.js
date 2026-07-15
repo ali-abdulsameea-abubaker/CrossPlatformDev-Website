@@ -18,6 +18,27 @@
             observer.observe(el);
         });
     }
+    // ===== THEME FUNCTIONS =====
+    window.applyTheme = function (themeClass) {
+        // Remove existing theme classes from body
+        document.body.classList.remove('dark-theme', 'light-theme');
+        // Add new theme class
+        document.body.classList.add(themeClass);
+
+        // Update html background color
+        document.documentElement.style.backgroundColor =
+            themeClass === 'dark-theme' ? '#050810' : '#F0F4F8';
+
+        // Update meta theme-color for mobile browsers
+        const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+        if (metaThemeColor) {
+            metaThemeColor.content = themeClass === 'dark-theme' ? '#050810' : '#F0F4F8';
+        }
+    };
+
+    window.getCurrentTheme = function () {
+        return localStorage.getItem('theme') || 'dark';
+    };
 
     function initNavScroll() {
         const nav = document.querySelector('.site-nav');
