@@ -1,0 +1,65 @@
+﻿@page "/contact"
+@rendermode InteractiveServer
+
+<SeoHead Title="Contact — CrossPlatformDev"
+         Description="Start a website, mobile app, or business system project with CrossPlatformDev."
+         Path="/contact" />
+
+<div class="page-enter section">
+    <div class="container contact-grid">
+        <AnimatedSection Variant="reveal-left">
+            <SectionEyebrow Text="contact" />
+            <h1>Let's build something.</h1>
+            <p>
+                Tell me what you need — a business website, a mobile app, or a management system — and I'll get
+                back to you within a day.
+            </p>
+            <p><a href="mailto:aliabdulsameea69@gmail.com">aliabdulsameea69@gmail.com</a></p>
+            <p><a href="tel:+12893391367">+1 289 339 1367</a></p>
+        </AnimatedSection>
+
+        <AnimatedSection Variant="reveal-right">
+            <div class="card">
+                @if (submitted)
+                {
+                    <h3>Message sent.</h3>
+                    <p>Thanks — I'll reply within a day.</p>
+                }
+                else
+                {
+                    <EditForm Model="@form" OnValidSubmit="HandleSubmit">
+                        <DataAnnotationsValidator />
+                        <label>Name</label>
+                        <InputText @bind-Value="form.Name" class="input" />
+
+                        <label>Email</label>
+                        <InputText @bind-Value="form.Email" class="input" />
+
+                        <label>What do you need?</label>
+                        <InputTextArea @bind-Value="form.Message" class="input" rows="4" />
+
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </EditForm>
+                }
+            </div>
+        </AnimatedSection>
+    </div>
+</div>
+
+@code {
+    private ContactForm form = new();
+    private bool submitted = false;
+
+    private void HandleSubmit()
+    {
+        // TODO: wire this to an email service (e.g. SendGrid) or save to a database.
+        submitted = true;
+    }
+
+    public class ContactForm
+    {
+        public string Name { get; set; } = "";
+        public string Email { get; set; } = "";
+        public string Message { get; set; } = "";
+    }
+}

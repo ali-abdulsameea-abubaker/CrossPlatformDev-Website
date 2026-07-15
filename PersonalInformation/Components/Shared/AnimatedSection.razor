@@ -1,0 +1,10 @@
+﻿<div class="reveal @Variant @CssClass" style="@(StaggerIndex.HasValue ? $"--stagger-index:{StaggerIndex}" : "") reveal-stagger">
+    @ChildContent
+</div>
+
+@code {
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public string Variant { get; set; } = ""; // "" | reveal-left | reveal-right | reveal-scale
+    [Parameter] public string CssClass { get; set; } = "";
+    [Parameter] public int? StaggerIndex { get; set; }
+}

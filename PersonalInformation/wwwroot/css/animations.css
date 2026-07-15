@@ -1,0 +1,173 @@
+﻿/* ---- Keyframes ---- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(28px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes blinkCursor {
+    0%, 45% {
+        opacity: 1;
+    }
+
+    50%, 100% {
+        opacity: 0;
+    }
+}
+
+@keyframes floatY {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes drawLine {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(0,229,255,0.35);
+    }
+
+    50% {
+        box-shadow: 0 0 0 8px rgba(0,229,255,0);
+    }
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity var(--dur-slow) var(--ease-out-expo), transform var(--dur-slow) var(--ease-out-expo);
+    animation: fadeInUp 1s var(--ease-out-expo) 1.2s forwards; /* fallback reveal */
+}
+
+    .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+        animation: none; /* JS took over, cancel fallback */
+    }
+
+/* staggered children — set via style="--stagger-index:N" */
+.reveal-stagger {
+    transition-delay: calc(var(--stagger-index, 0) * 90ms);
+}
+
+.reveal-left {
+    transform: translateX(-32px);
+}
+
+    .reveal-left.is-visible {
+        transform: translateX(0);
+    }
+
+.reveal-right {
+    transform: translateX(32px);
+}
+
+    .reveal-right.is-visible {
+        transform: translateX(0);
+    }
+
+.reveal-scale {
+    transform: scale(0.94);
+}
+
+    .reveal-scale.is-visible {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+.floaty {
+    animation: floatY 5s ease-in-out infinite;
+}
+
+/* page enter animation for route content */
+.page-enter {
+    animation: fadeInUp var(--dur-med) var(--ease-out-expo);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .reveal, .reveal-left, .reveal-right, .reveal-scale, .page-enter, .floaty {
+        animation: none !important;
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .reveal, .reveal-left, .reveal-right, .reveal-scale, .page-enter, .floaty,
+    .reveal-word, .reveal-word-accent::after, .hero-sub {
+        animation: none !important;
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+    }
+
+    .reveal-word-accent::after {
+        transform: scaleX(1) !important;
+    }
+}
+
+@keyframes wordIn {
+    from {
+        opacity: 0;
+        filter: blur(8px);
+        transform: translateY(26px);
+    }
+
+    to {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+    }
+}

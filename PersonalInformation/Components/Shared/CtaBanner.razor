@@ -1,0 +1,11 @@
+﻿<div class="cta-banner">
+    <h2>@Heading</h2>
+    <p>@Subheading</p>
+    <a href="/contact" class="btn btn-primary">@ButtonText</a>
+</div>
+
+@code {
+    [Parameter] public string Heading { get; set; } = "Have a project in mind?";
+    [Parameter] public string Subheading { get; set; } = "Tell me what you're building — I'll reply within a day.";
+    [Parameter] public string ButtonText { get; set; } = "Start a Project";
+}

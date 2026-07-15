@@ -1,0 +1,31 @@
+﻿@page "/portfolio"
+
+<SeoHead Title="Portfolio — Projects by CrossPlatformDev"
+         Description="Selected websites, mobile apps, and business systems built by CrossPlatformDev."
+         Path="/portfolio" />
+
+<div class="page-enter section">
+    <div class="container">
+        <AnimatedSection>
+            <SectionEyebrow Text="portfolio" />
+            <h1>Selected work.</h1>
+        </AnimatedSection>
+
+        <div class="grid-3" style="margin-top:var(--space-6)">
+            <AnimatedSection StaggerIndex="0">
+                <ProjectCard Title="PetWell" Category="Full-Stack Platform"
+                             Description="A pet care management platform with real-time notifications, secure auth, and media management. Built with Node.js, Express, MySQL." />
+            </AnimatedSection>
+            <AnimatedSection StaggerIndex="1">
+                <ProjectCard Title="Internal Business Tools" Category=".NET / ASP.NET"
+                             Description="RESTful APIs and internal applications supporting daily operations, built with C#, ASP.NET, and SQL Server." />
+            </AnimatedSection>
+            <AnimatedSection StaggerIndex="2">
+                <ProjectCard Title="Business Website & System Projects" Category="Web + Systems"
+                             Description="Custom websites and lightweight management systems delivered for small business clients." />
+            </AnimatedSection>
+        </div>
+
+        <AnimatedSection><CtaBanner Heading="Want something like this for your business?" /></AnimatedSection>
+    </div>
+</div>

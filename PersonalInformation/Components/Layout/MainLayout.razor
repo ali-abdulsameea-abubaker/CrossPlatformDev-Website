@@ -1,0 +1,20 @@
+﻿@inherits LayoutComponentBase
+@inject IJSRuntime JS
+
+<div class="app-shell">
+    <NavMenu />
+
+    <div class="content-area">
+        <main class="page-enter">
+            @Body
+        </main>
+        <Footer />
+    </div>
+</div>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JS.InvokeVoidAsync("siteAnimations.initAll");
+    }
+}

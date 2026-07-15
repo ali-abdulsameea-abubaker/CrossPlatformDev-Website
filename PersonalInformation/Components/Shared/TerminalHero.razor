@@ -1,0 +1,30 @@
+﻿@inject IJSRuntime JS
+
+<div class="terminal" id="hero-terminal">
+    <div class="terminal-bar">
+        <span class="terminal-dot red"></span>
+        <span class="terminal-dot yellow"></span>
+        <span class="terminal-dot green"></span>
+        <span class="terminal-title">crossplatformdev — zsh</span>
+    </div>
+    <div class="terminal-body" id="hero-terminal-body"></div>
+</div>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var lines = new[]
+            {
+                new { text = "$ crossplatformdev deploy --client=\"your-business\"", className = "" },
+                new { text = "> analyzing requirements... done", className = "" },
+                new { text = "> building website / mobile app / management system", className = "" },
+                new { text = "> running tests... 100% passed", className = "" },
+                new { text = "✓ deployed. your idea is now live.", className = "success" },
+            };
+
+            await JS.InvokeVoidAsync("siteAnimations.typeTerminal", "hero-terminal-body", lines, 22);
+        }
+    }
+}
