@@ -1,5 +1,1 @@
-﻿bin/
-obj/
-.vs/
-*.user
-appsettings.Development.json
+﻿

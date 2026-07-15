@@ -8,6 +8,9 @@ builder.Services.AddRazorComponents()
 
 var app = builder.Build();
 
+var emailUsername = builder.Configuration["EmailSettings:Username"];
+var emailPassword = builder.Configuration["EmailSettings:Password"];
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

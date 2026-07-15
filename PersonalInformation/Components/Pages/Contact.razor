@@ -1,5 +1,9 @@
 ﻿@page "/contact"
 @rendermode InteractiveServer
+@inject IConfiguration Config
+@using System.Net
+@using System.Net.Mail
+@using System.ComponentModel.DataAnnotations
 
 <SeoHead Title="Contact — CrossPlatformDev"
          Description="Start a website, mobile app, or business system project with CrossPlatformDev."
@@ -27,18 +31,56 @@
                 }
                 else
                 {
-                    <EditForm Model="@form" OnValidSubmit="HandleSubmit">
+                    <EditForm Model="@form" OnValidSubmit="HandleSubmit" OnInvalidSubmit="HandleInvalidSubmit">
                         <DataAnnotationsValidator />
+                        <ValidationSummary />
+
                         <label>Name</label>
                         <InputText @bind-Value="form.Name" class="input" />
+                        <ValidationMessage For="@(() => form.Name)" />
 
                         <label>Email</label>
                         <InputText @bind-Value="form.Email" class="input" />
+                        <ValidationMessage For="@(() => form.Email)" />
+
+                        <label>Phone</label>
+                        <div class="phone-row">
+                            <select @bind="form.CountryCode" class="input phone-code">
+                                @foreach (var country in Countries)
+                                {
+                                    <option value="@country.Code">@country.Flag @country.Code (@country.Name)</option>
+                                }
+                            </select>
+                            <InputText @bind-Value="form.PhoneNumber" class="input phone-number" placeholder="289 339 1367" />
+                        </div>
+                        <ValidationMessage For="@(() => form.PhoneNumber)" />
+
+                        <label>Country</label>
+                        <InputSelect @bind-Value="form.Country" class="input">
+                            <option value="" disabled selected>Select your country</option>
+                            @foreach (var country in Countries)
+                            {
+                                <option value="@country.Name">@country.Flag @country.Name</option>
+                            }
+                        </InputSelect>
+                        <ValidationMessage For="@(() => form.Country)" />
+
+                        <label>City / Address</label>
+                        <InputText @bind-Value="form.Address" class="input" placeholder="City, street (optional detail)" />
+                        <ValidationMessage For="@(() => form.Address)" />
 
                         <label>What do you need?</label>
-                        <InputTextArea @bind-Value="form.Message" class="input" rows="4" />
+                        <InputTextArea @bind-Value="form.Message" class="input" rows="4" placeholder="Website, mobile app, management system..." />
+                        <ValidationMessage For="@(() => form.Message)" />
 
-                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        @if (errorMessage is not null)
+                        {
+                            <p style="color:var(--warning)">@errorMessage</p>
+                        }
+
+                        <button type="submit" class="btn btn-primary" disabled="@sending">
+                            @(sending ? "Sending..." : "Send Message")
+                        </button>
                     </EditForm>
                 }
             </div>
@@ -49,17 +91,153 @@
 @code {
     private ContactForm form = new();
     private bool submitted = false;
+    private bool sending = false;
+    private string? errorMessage;
 
-    private void HandleSubmit()
+    private async Task HandleSubmit()
     {
-        // TODO: wire this to an email service (e.g. SendGrid) or save to a database.
-        submitted = true;
+        sending = true;
+        errorMessage = null;
+
+        try
+        {
+            var username = Config["EmailSettings:Username"];
+            var password = Config["EmailSettings:Password"];
+
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+            {
+                errorMessage = "Email isn't configured yet — please email me directly instead.";
+                return;
+            }
+
+            using var client = new SmtpClient("smtp.gmail.com", 587)
+            {
+                Credentials = new NetworkCredential(username, password),
+                EnableSsl = true
+            };
+
+            var fullPhone = $"{form.CountryCode} {form.PhoneNumber}";
+
+            var mail = new MailMessage
+            {
+                From = new MailAddress(username, "CrossPlatformDev Contact Form"),
+                Subject = $"New inquiry from {form.Name}",
+                Body = $"Name: {form.Name}\n" +
+       $"Email: {form.Email}\n" +
+       $"Phone: {fullPhone}\n" +
+       $"Country: {form.Country}\n" +
+       $"Address: {form.Address}\n\n" +
+       $"Message:\n{form.Message}",
+                IsBodyHtml = false
+            };
+            mail.To.Add(username);
+            mail.ReplyToList.Add(new MailAddress(form.Email));
+
+            await client.SendMailAsync(mail);
+            submitted = true;
+        }
+        catch (Exception)
+        {
+            errorMessage = "Something went wrong sending your message — try emailing directly instead.";
+        }
+        finally
+        {
+            sending = false;
+        }
+    }
+
+    private void HandleInvalidSubmit()
+    {
+        errorMessage = "Please fill in all fields correctly before sending.";
     }
 
     public class ContactForm
     {
+        [Required(ErrorMessage = "Please enter your name.")]
         public string Name { get; set; } = "";
+
+        [Required(ErrorMessage = "Please select your country.")]
+        public string Country { get; set; } = "";
+
+        [Required(ErrorMessage = "Please enter your email.")]
+        [EmailAddress(ErrorMessage = "Please enter a valid email.")]
         public string Email { get; set; } = "";
+
+        public string CountryCode { get; set; } = "+1";
+
+        [Required(ErrorMessage = "Please enter your phone number.")]
+        [Phone(ErrorMessage = "Please enter a valid phone number.")]
+        public string PhoneNumber { get; set; } = "";
+
+        [Required(ErrorMessage = "Please enter your address.")]
+        public string Address { get; set; } = "";
+
+        [Required(ErrorMessage = "Please tell me what you need.")]
         public string Message { get; set; } = "";
     }
+
+    private record CountryOption(string Name, string Code, string Flag);
+
+    private static readonly List<CountryOption> Countries = new()
+    {
+        new("Afghanistan", "+93", "🇦🇫"),
+        new("Albania", "+355", "🇦🇱"),
+        new("Algeria", "+213", "🇩🇿"),
+        new("Argentina", "+54", "🇦🇷"),
+        new("Australia", "+61", "🇦🇺"),
+        new("Austria", "+43", "🇦🇹"),
+        new("Bahrain", "+973", "🇧🇭"),
+        new("Bangladesh", "+880", "🇧🇩"),
+        new("Belgium", "+32", "🇧🇪"),
+        new("Brazil", "+55", "🇧🇷"),
+        new("Canada", "+1", "🇨🇦"),
+        new("China", "+86", "🇨🇳"),
+        new("Denmark", "+45", "🇩🇰"),
+        new("Egypt", "+20", "🇪🇬"),
+        new("Finland", "+358", "🇫🇮"),
+        new("France", "+33", "🇫🇷"),
+        new("Germany", "+49", "🇩🇪"),
+        new("Greece", "+30", "🇬🇷"),
+        new("India", "+91", "🇮🇳"),
+        new("Indonesia", "+62", "🇮🇩"),
+        new("Iran", "+98", "🇮🇷"),
+        new("Iraq", "+964", "🇮🇶"),
+        new("Ireland", "+353", "🇮🇪"),
+        new("Israel", "+972", "🇮🇱"),
+        new("Italy", "+39", "🇮🇹"),
+        new("Japan", "+81", "🇯🇵"),
+        new("Jordan", "+962", "🇯🇴"),
+        new("Kuwait", "+965", "🇰🇼"),
+        new("Lebanon", "+961", "🇱🇧"),
+        new("Malaysia", "+60", "🇲🇾"),
+        new("Mexico", "+52", "🇲🇽"),
+        new("Morocco", "+212", "🇲🇦"),
+        new("Netherlands", "+31", "🇳🇱"),
+        new("New Zealand", "+64", "🇳🇿"),
+        new("Nigeria", "+234", "🇳🇬"),
+        new("Norway", "+47", "🇳🇴"),
+        new("Oman", "+968", "🇴🇲"),
+        new("Pakistan", "+92", "🇵🇰"),
+        new("Philippines", "+63", "🇵🇭"),
+        new("Poland", "+48", "🇵🇱"),
+        new("Portugal", "+351", "🇵🇹"),
+        new("Qatar", "+974", "🇶🇦"),
+        new("Romania", "+40", "🇷🇴"),
+        new("Russia", "+7", "🇷🇺"),
+        new("Saudi Arabia", "+966", "🇸🇦"),
+        new("Singapore", "+65", "🇸🇬"),
+        new("South Africa", "+27", "🇿🇦"),
+        new("South Korea", "+82", "🇰🇷"),
+        new("Spain", "+34", "🇪🇸"),
+        new("Sweden", "+46", "🇸🇪"),
+        new("Switzerland", "+41", "🇨🇭"),
+        new("Syria", "+963", "🇸🇾"),
+        new("Thailand", "+66", "🇹🇭"),
+        new("Turkey", "+90", "🇹🇷"),
+        new("Ukraine", "+380", "🇺🇦"),
+        new("United Arab Emirates", "+971", "🇦🇪"),
+        new("United Kingdom", "+44", "🇬🇧"),
+        new("United States", "+1", "🇺🇸"),
+        new("Yemen", "+967", "🇾🇪"),
+    };
 }

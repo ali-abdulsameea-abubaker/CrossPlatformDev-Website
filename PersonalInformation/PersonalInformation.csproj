@@ -5,15 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
+    <UserSecretsId>108bc231-8e1d-4813-a386-e5afd72073f1</UserSecretsId>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Include=".cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>.gitignore</DependentUpon>
-    </None>
-  </ItemGroup>
 
   <ItemGroup>
     <None Update=".gitignore">
