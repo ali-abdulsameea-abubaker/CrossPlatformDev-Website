@@ -1,0 +1,366 @@
+﻿@page "/blog/{Slug}"
+@inject PersonalInformation.Services.BlogService BlogService
+@inject IJSRuntime JS
+
+<div class="page-enter">
+    @if (post is null)
+    {
+        <div class="container section text-center">
+            <span class="eyebrow" style="justify-content:center;">404</span>
+            <h1>Post not found.</h1>
+            <a href="/blog" class="btn btn-primary">← Back to Blog</a>
+        </div>
+    }
+    else
+    {
+        <div class="reading-progress" id="reading-progress"></div>
+
+        <!-- ===== POST HERO ===== -->
+        <section class="post-hero section">
+            <div class="container">
+                <a href="/blog" class="back-link reveal" style="--stagger-index:0">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12" /><polyline points="12 19 5 12 12 5" /></svg>
+                    <span>Back to Blog</span>
+                </a>
+
+                <div class="post-hero-badge reveal" style="--stagger-index:1">
+                    <span class="badge-dot"></span>
+                    <span>@post.Tag</span>
+                </div>
+
+                <h1 class="post-title reveal" style="--stagger-index:2">@post.Title</h1>
+
+                <div class="post-meta reveal" style="--stagger-index:3">
+                    <span>@post.Date.ToString("MMMM d, yyyy")</span>
+                    <span class="meta-divider"></span>
+                    <span>@post.ReadTime</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== POST BODY ===== -->
+        <section class="section-tight">
+            <div class="container post-container">
+                <article class="post-body reveal" style="--stagger-index:0">
+                    @((MarkupString)post.ContentHtml)
+                </article>
+            </div>
+        </section>
+
+        <!-- ===== NEXT / PREV NAV ===== -->
+        @if (previousPost is not null || nextPost is not null)
+        {
+            <section class="section-tight">
+                <div class="container post-container">
+                    <div class="post-nav reveal">
+                        @if (previousPost is not null)
+                        {
+                            <a href="/blog/@previousPost.Slug" class="post-nav-card">
+                                <span class="post-nav-label">← Previous</span>
+                                <span class="post-nav-title">@previousPost.Title</span>
+                            </a>
+                        }
+                        else
+                        {
+                            <div></div>
+                        }
+                        @if (nextPost is not null)
+                        {
+                            <a href="/blog/@nextPost.Slug" class="post-nav-card post-nav-right">
+                                <span class="post-nav-label">Next →</span>
+                                <span class="post-nav-title">@nextPost.Title</span>
+                            </a>
+                        }
+                    </div>
+                </div>
+            </section>
+        }
+
+        <!-- ===== CTA ===== -->
+        <section class="section-tight">
+            <div class="container post-container">
+                <div class="reveal cta-banner">
+                    <span class="eyebrow" style="justify-content:center;">let's-talk</span>
+                    <h2 style="font-size:2rem;">Have a project like this in mind?</h2>
+                    <p style="max-width:480px;margin:0 auto var(--space-5);">I build websites, mobile apps, and business systems — let's talk about what you need.</p>
+                    <a href="/contact" class="btn btn-primary">Start a Project</a>
+                </div>
+            </div>
+        </section>
+    }
+</div>
+
+<style>
+    /* ===== READING PROGRESS BAR ===== */
+    .reading-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        width: 0%;
+        background: var(--accent-gradient);
+        z-index: 200;
+        transition: width 0.1s linear;
+    }
+
+    /* ===== POST HERO ===== */
+    .post-hero {
+        padding: var(--space-7) 0 var(--space-5);
+    }
+
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2);
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        margin-bottom: var(--space-6);
+        transition: color 0.25s, gap 0.25s;
+    }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+            gap: var(--space-3);
+        }
+
+    .post-hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-3);
+        background: rgba(0, 229, 255, 0.08);
+        border: 1px solid rgba(0, 229, 255, 0.15);
+        border-radius: 999px;
+        padding: 6px 16px 6px 10px;
+        font-size: 0.78rem;
+        font-weight: 500;
+        color: var(--accent-cyan);
+        width: fit-content;
+        font-family: var(--font-mono);
+        margin-bottom: var(--space-5);
+    }
+
+    .badge-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--success);
+        animation: pulseGlow 2s ease-in-out infinite;
+    }
+
+    .post-title {
+        font-size: clamp(2rem, 4.5vw, 3.4rem);
+        max-width: 800px;
+        margin-bottom: var(--space-4);
+    }
+
+    .post-meta {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+        color: var(--text-muted);
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+    }
+
+    .meta-divider {
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--text-muted);
+    }
+
+    /* ===== POST BODY ===== */
+    .post-container {
+        max-width: 760px;
+    }
+
+    .post-body {
+        color: var(--text-secondary);
+        line-height: 1.85;
+        font-size: 1.05rem;
+    }
+
+        .post-body h2 {
+            font-size: 1.7rem;
+            margin-top: var(--space-8);
+            margin-bottom: var(--space-4);
+            position: relative;
+            padding-left: var(--space-4);
+        }
+
+            .post-body h2::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 6px;
+                bottom: 6px;
+                width: 3px;
+                border-radius: 2px;
+                background: var(--accent-gradient);
+            }
+
+        .post-body h3 {
+            font-size: 1.3rem;
+            margin-top: var(--space-6);
+        }
+
+        .post-body p {
+            margin-bottom: var(--space-5);
+        }
+
+        .post-body strong {
+            color: var(--text-primary);
+        }
+
+        .post-body ul, .post-body ol {
+            margin: 0 0 var(--space-5);
+            padding-left: var(--space-5);
+        }
+
+        .post-body li {
+            margin-bottom: var(--space-2);
+        }
+
+        .post-body code {
+            background: var(--bg-elevated);
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.88em;
+            color: var(--accent-cyan);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .post-body pre {
+            background: var(--bg-elevated);
+            padding: var(--space-5);
+            border-radius: var(--radius-md);
+            overflow-x: auto;
+            border: 1px solid var(--border-subtle);
+            margin-bottom: var(--space-5);
+        }
+
+            .post-body pre code {
+                background: none;
+                border: none;
+                padding: 0;
+                color: var(--text-secondary);
+            }
+
+        .post-body blockquote {
+            border-left: 3px solid var(--accent-cyan);
+            background: rgba(0, 229, 255, 0.04);
+            padding: var(--space-4) var(--space-5);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            margin: 0 0 var(--space-5);
+            font-style: italic;
+        }
+
+        .post-body a {
+            border-bottom: 1px solid rgba(0, 229, 255, 0.3);
+            transition: border-color 0.25s;
+        }
+
+            .post-body a:hover {
+                border-color: var(--accent-cyan);
+            }
+
+    /* ===== NEXT/PREV NAV ===== */
+    .post-nav {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-5);
+    }
+
+    .post-nav-card {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+        padding: var(--space-5);
+        background: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-md);
+        transition: transform 0.3s var(--ease-out-expo), border-color 0.3s;
+    }
+
+        .post-nav-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-glow);
+        }
+
+    .post-nav-right {
+        text-align: right;
+        align-items: flex-end;
+    }
+
+    .post-nav-label {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--text-muted);
+    }
+
+    .post-nav-title {
+        color: var(--text-primary);
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+
+    @@media (max-width: 700px) {
+        .post-nav {
+            grid-template-columns: 1fr;
+        }
+
+        .post-nav-right {
+            text-align: left;
+            align-items: flex-start;
+        }
+    }
+</style>
+
+@code {
+    [Parameter] public string Slug { get; set; } = "";
+
+    private PersonalInformation.Models.BlogPost? post;
+    private PersonalInformation.Models.BlogPost? previousPost;
+    private PersonalInformation.Models.BlogPost? nextPost;
+
+    protected override void OnInitialized()
+    {
+        var all = BlogService.GetAllPosts(); // already sorted newest-first
+        post = all.FirstOrDefault(p => p.Slug == Slug);
+
+        if (post is not null)
+        {
+            var index = all.IndexOf(post);
+            // "Next" = newer post (comes before in the list), "Previous" = older post
+            nextPost = index > 0 ? all[index - 1] : null;
+            previousPost = index < all.Count - 1 ? all[index + 1] : null;
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (post is not null)
+        {
+            await JS.InvokeVoidAsync("siteAnimations.initAll");
+            if (firstRender)
+            {
+                await JS.InvokeVoidAsync("eval", @"
+                    (function() {
+                        const bar = document.getElementById('reading-progress');
+                        if (!bar) return;
+                        const onScroll = () => {
+                            const doc = document.documentElement;
+                            const scrollTop = doc.scrollTop || document.body.scrollTop;
+                            const scrollHeight = (doc.scrollHeight || document.body.scrollHeight) - doc.clientHeight;
+                            const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+                            bar.style.width = pct + '%';
+                        };
+                        window.addEventListener('scroll', onScroll, { passive: true });
+                        onScroll();
+                    })();
+                ");
+            }
+        }
+    }
+}
