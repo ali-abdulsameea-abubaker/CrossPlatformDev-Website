@@ -30,26 +30,11 @@ function handleReconnectStateChanged(event) {
 }
 
 async function retry() {
-    document.removeEventListener("visibilitychange", retryWhenDocumentBecomesVisible);
-
-    try {
-        const successful = await Blazor.reconnect();
-        if (!successful) {
-            const resumeSuccessful = await Blazor.resumeCircuit();
-            if (!resumeSuccessful) {
-                // Don't auto-reload - show error and let user decide
-                reconnectModal.classList.add("components-reconnect-failed");
-                // location.reload(); // REMOVED
-            } else {
-                reconnectModal.close();
-            }
-        } else {
-            reconnectModal.close();
-        }
-    } catch (err) {
-        document.addEventListener("visibilitychange", retryWhenDocumentBecomesVisible);
-    }
+    // Do not attempt to reconnect automatically
+    // Just show the failed state and let the user reload.
+    reconnectModal.classList.add("components-reconnect-failed");
 }
+
 
 async function resume() {
     try {
