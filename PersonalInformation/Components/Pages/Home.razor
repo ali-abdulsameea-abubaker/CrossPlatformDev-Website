@@ -1058,4 +1058,199 @@
     .code-cursor-line {
         margin-top: var(--space-2);
     }
+
+    @@media (max-width: 768px) {
+        .hero-code-block {
+            max-width: 100%;
+            transform: scale(0.8);
+            transform-origin: top left;
+        }
+
+            .hero-code-block .code-body {
+                min-height: auto;
+                max-height: 200px;
+                font-size: 0.65rem;
+                padding: var(--space-3);
+            }
+
+            .hero-code-block .code-header {
+                padding: var(--space-2) var(--space-3);
+            }
+
+        .code-title {
+            font-size: 0.6rem;
+        }
+
+        .code-branch {
+            font-size: 0.5rem;
+        }
+
+        /* ===== FIX MOBILE OVERFLOW ===== */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        * {
+            max-width: 100%;
+        }
+        /* Fix hero grid on mobile */
+        @@media (max-width: 768px) {
+            .hero-grid-new {
+                display: flex;
+                flex-direction: column;
+                gap: var(--space-4);
+                min-height: auto;
+                padding: var(--space-2) 0;
+                width: 100%;
+                overflow: hidden;
+            }
+
+            .hero-content {
+                width: 100%;
+                gap: var(--space-3);
+            }
+
+            .hero-headline {
+                font-size: clamp(1.8rem, 5vw, 2.4rem);
+                word-wrap: break-word;
+            }
+
+            .hero-description {
+                font-size: 0.95rem;
+                max-width: 100%;
+            }
+            /* Hide the code block on mobile completely */
+            .hero-visual {
+                display: none !important;
+            }
+
+            .hero-trust {
+                flex-wrap: wrap;
+                gap: var(--space-3);
+                justify-content: flex-start;
+            }
+
+            .trust-item {
+                flex: 1 0 auto;
+                min-width: 80px;
+            }
+
+            .trust-divider {
+                display: none;
+            }
+
+            .container {
+                padding: 0 var(--space-3);
+                overflow: hidden;
+            }
+
+            .section {
+                padding: var(--space-6) 0;
+            }
+
+            .section-tight {
+                padding: var(--space-4) 0;
+            }
+            /* Fix grid-3 on mobile */
+            .grid-3 {
+                grid-template-columns: 1fr;
+                gap: var(--space-3);
+            }
+
+            .card {
+                padding: var(--space-4);
+            }
+            /* Fix CTA banner on mobile */
+            .cta-banner {
+                padding: var(--space-4) var(--space-3);
+            }
+
+                .cta-banner h2 {
+                    font-size: 1.4rem !important;
+                }
+
+                .cta-banner p {
+                    font-size: 0.9rem;
+                    max-width: 100% !important;
+                    padding: 0 var(--space-1);
+                }
+
+            .hero-actions-new {
+                flex-direction: column;
+                width: 100%;
+            }
+
+                .hero-actions-new .btn {
+                    width: 100%;
+                    justify-content: center;
+                    text-align: center;
+                }
+
+            .btn-large {
+                padding: 14px 20px;
+                font-size: 0.9rem;
+            }
+
+            .hero-badge {
+                font-size: 0.7rem;
+                padding: 4px 12px 4px 8px;
+            }
+
+            .badge-dot {
+                width: 5px;
+                height: 5px;
+            }
+            /* Remove the floating orb on mobile */
+            .hero-orb {
+                display: none;
+            }
+            /* Ensure all content stays within viewport */
+            .hero-line, .hero-line-gradient {
+                word-wrap: break-word;
+                display: block;
+            }
+        }
+        /* For very small screens */
+        @@media (max-width: 480px) {
+            .container {
+                padding: 0 var(--space-2);
+            }
+
+            .hero-headline {
+                font-size: clamp(1.5rem, 4vw, 1.8rem);
+            }
+
+            .trust-number {
+                font-size: 1.1rem;
+            }
+
+            .trust-label {
+                font-size: 0.65rem;
+            }
+
+            .hero-trust {
+                gap: var(--space-2);
+            }
+
+            .trust-item {
+                min-width: 60px;
+            }
+
+            .card-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 1.1rem;
+            }
+
+            .card h3 {
+                font-size: 1rem;
+            }
+
+            .card p {
+                font-size: 0.85rem;
+            }
+        }
+    }
 </style>
