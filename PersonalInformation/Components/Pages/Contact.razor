@@ -3,9 +3,9 @@
 @using static Microsoft.AspNetCore.Components.Web.RenderMode
 @rendermode InteractiveServer
 @inject IConfiguration Config
-@using System.Net
-@using System.Net.Mail
+@inject IHttpClientFactory HttpClientFactory
 @using System.ComponentModel.DataAnnotations
+@using System.Net.Http.Json
 
 @* Replace SeoHead with a simple div or remove it if the component doesn't exist *@
 <div class="eyebrow" style="margin-bottom: var(--space-3);">contact</div>
@@ -442,46 +442,47 @@
 
         try
         {
-            // ===== DEBUG: Check if config is being read =====
-            var username = Config["EmailSettings__Username"] ?? "NOT FOUND";
-            var password = Config["EmailSettings__Password"] ?? "NOT FOUND";
+            var apiKey = Config["Resend:ApiKey"];
 
-            Console.WriteLine($"=== CONTACT FORM DEBUG ===");
-            Console.WriteLine($"Username from config: {username}");
-            Console.WriteLine($"Password from config: {password}");
-            Console.WriteLine($"===========================");
-
-            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+            if (string.IsNullOrWhiteSpace(apiKey))
             {
                 errorMessage = "Email isn't configured yet — please email me directly instead.";
                 return;
             }
 
-            using var client = new SmtpClient("smtp.gmail.com", 587)
-            {
-                Credentials = new NetworkCredential(username, password),
-                EnableSsl = true
-            };
-
             var fullPhone = $"{form.CountryCode} {form.PhoneNumber}";
+            var bodyText = $"Name: {form.Name}\n" +
+                           $"Email: {form.Email}\n" +
+                           $"Phone: {fullPhone}\n" +
+                           $"Country: {form.Country}\n" +
+                           $"Address: {form.Address}\n\n" +
+                           $"Message:\n{form.Message}";
 
-            var mail = new MailMessage
+            var payload = new
             {
-                From = new MailAddress(username, "CrossPlatformDev Contact Form"),
-                Subject = $"New inquiry from {form.Name}",
-                Body = $"Name: {form.Name}\n" +
-                       $"Email: {form.Email}\n" +
-                       $"Phone: {fullPhone}\n" +
-                       $"Country: {form.Country}\n" +
-                       $"Address: {form.Address}\n\n" +
-                       $"Message:\n{form.Message}",
-                IsBodyHtml = false
+                from = "CrossPlatformDev Contact Form <onboarding@resend.dev>",
+                to = new[] { "aliabdulsameea69@gmail.com" },
+                reply_to = form.Email,
+                subject = $"New inquiry from {form.Name}",
+                text = bodyText
             };
-            mail.To.Add(username);
-            mail.ReplyToList.Add(new MailAddress(form.Email));
 
-            await client.SendMailAsync(mail);
-            submitted = true;
+            var client = HttpClientFactory.CreateClient("Resend");
+            client.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", apiKey);
+
+            var response = await client.PostAsJsonAsync("emails", payload);
+
+            if (response.IsSuccessStatusCode)
+            {
+                submitted = true;
+            }
+            else
+            {
+                var errBody = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Resend error: {response.StatusCode} - {errBody}");
+                errorMessage = "Something went wrong sending your message — try emailing directly instead.";
+            }
         }
         catch (Exception ex)
         {
@@ -493,7 +494,6 @@
             sending = false;
         }
     }
-
 
     private void HandleInvalidSubmit()
     {

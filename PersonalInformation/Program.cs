@@ -9,6 +9,11 @@ builder.Services.AddRazorComponents()
 builder.Services.AddScoped<ThemeService>();
 builder.Configuration.AddUserSecrets<Program>();
 
+builder.Services.AddHttpClient("Resend", client =>
+{
+    client.BaseAddress = new Uri("https://api.resend.com/");
+});
+
 var app = builder.Build();
 
 var forwardedHeaderOptions = new ForwardedHeadersOptions
@@ -19,9 +24,6 @@ var forwardedHeaderOptions = new ForwardedHeadersOptions
 forwardedHeaderOptions.KnownNetworks.Clear();
 forwardedHeaderOptions.KnownProxies.Clear();
 app.UseForwardedHeaders(forwardedHeaderOptions);
-
-var emailUsername = builder.Configuration["EmailSettings__Username"];
-var emailPassword = builder.Configuration["EmailSettings__Password"];
 
 if (!app.Environment.IsDevelopment())
 {
