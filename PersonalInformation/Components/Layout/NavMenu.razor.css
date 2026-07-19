@@ -251,3 +251,275 @@
 .theme-toggle-btn:hover .theme-toggle-track {
     border-color: var(--accent-cyan);
 }
+
+/* ===== SMALL SCREEN FIXES (Add this at the END of your file) ===== */
+
+/* Extra small screens (like 408x671) */
+@media (max-width: 480px) {
+    .site-nav {
+        width: min(var(--nav-width-mobile), 240px);
+        max-width: 260px;
+        padding: var(--space-3) var(--space-2);
+        overflow-y: auto;
+    }
+
+        /* Hide scrollbar but keep functionality */
+        .site-nav::-webkit-scrollbar {
+            width: 3px;
+        }
+
+        .site-nav::-webkit-scrollbar-thumb {
+            background: var(--border-subtle);
+            border-radius: 999px;
+        }
+
+    .logo-icon {
+        width: 100px;
+        height: 85px;
+    }
+
+    .nav-logo {
+        margin-bottom: var(--space-3);
+        padding-bottom: var(--space-2);
+    }
+
+    .nav-links ::deep a {
+        font-size: 0.78rem;
+        padding: 6px 8px;
+        gap: var(--space-2);
+    }
+
+    .nav-index {
+        font-size: 0.6rem;
+        min-width: 18px;
+    }
+
+    .nav-links ::deep a.active::before {
+        left: -12px;
+        height: 14px;
+    }
+
+    .nav-cta {
+        font-size: 0.75rem;
+        padding: 8px 12px;
+        margin-top: var(--space-3);
+        padding-top: var(--space-3);
+    }
+
+    .theme-toggle-wrapper {
+        margin-top: var(--space-2);
+        padding: var(--space-1) 0;
+    }
+
+    .theme-toggle-btn {
+        font-size: 0.75rem;
+        padding: 5px 8px;
+    }
+
+    .theme-icon {
+        font-size: 0.9rem;
+    }
+
+    .theme-toggle-track {
+        width: 32px;
+        height: 18px;
+    }
+
+    .theme-toggle-thumb {
+        width: 12px;
+        height: 12px;
+        top: 3px;
+        left: 3px;
+    }
+
+    .nav-footer-tag {
+        font-size: 0.6rem;
+        margin-top: var(--space-2);
+    }
+
+    .nav-toggle {
+        top: 12px;
+        left: 12px;
+        padding: 8px 10px;
+        gap: 4px;
+    }
+
+        .nav-toggle span {
+            width: 16px;
+            height: 2px;
+        }
+
+        .nav-toggle.active span:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+
+        .nav-toggle.active span:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+}
+
+/* Very small AND short screens (408x671 specifically) */
+@media (max-width: 480px) and (max-height: 700px) {
+    .site-nav {
+        width: min(var(--nav-width-mobile), 220px);
+        max-width: 240px;
+        padding: var(--space-2) var(--space-2);
+    }
+
+    .logo-icon {
+        width: 70px;
+        height: 60px;
+    }
+
+    .nav-logo {
+        margin-bottom: var(--space-2);
+        padding-bottom: var(--space-1);
+    }
+
+    .nav-links ::deep a {
+        font-size: 0.7rem;
+        padding: 4px 6px;
+        gap: var(--space-1);
+    }
+
+    .nav-index {
+        font-size: 0.5rem;
+        min-width: 14px;
+    }
+
+    .nav-links ::deep a.active::before {
+        left: -10px;
+        height: 12px;
+        width: 2px;
+    }
+
+    .nav-cta {
+        font-size: 0.65rem;
+        padding: 5px 8px;
+        margin-top: var(--space-2);
+        padding-top: var(--space-2);
+    }
+
+    .theme-toggle-wrapper {
+        margin-top: var(--space-1);
+        padding: var(--space-1) 0;
+    }
+
+    .theme-toggle-btn {
+        font-size: 0.65rem;
+        padding: 4px 6px;
+    }
+
+    .theme-icon {
+        font-size: 0.8rem;
+    }
+
+    .theme-label {
+        font-size: 0.65rem;
+    }
+
+    .theme-toggle-track {
+        width: 26px;
+        height: 14px;
+    }
+
+    .theme-toggle-thumb {
+        width: 10px;
+        height: 10px;
+        top: 2px;
+        left: 2px;
+    }
+
+    .nav-footer-tag {
+        font-size: 0.5rem;
+        margin-top: var(--space-1);
+        gap: 4px;
+    }
+
+        .nav-footer-tag::after {
+            width: 4px;
+            height: 4px;
+        }
+
+    .nav-toggle {
+        top: 8px;
+        left: 8px;
+        padding: 6px 8px;
+        gap: 3px;
+    }
+
+        .nav-toggle span {
+            width: 14px;
+            height: 2px;
+        }
+
+        .nav-toggle.active span:nth-child(1) {
+            transform: translateY(5px) rotate(45deg);
+        }
+
+        .nav-toggle.active span:nth-child(3) {
+            transform: translateY(-5px) rotate(-45deg);
+        }
+}
+
+/* Height-constrained screens (short height) */
+@media (max-height: 600px) {
+    .site-nav {
+        padding: var(--space-2) var(--space-3);
+        overflow-y: auto;
+    }
+
+    .logo-icon {
+        width: 80px;
+        height: 68px;
+    }
+
+    .nav-logo {
+        margin-bottom: var(--space-2);
+        padding-bottom: var(--space-2);
+    }
+
+    .nav-links ::deep a {
+        font-size: 0.75rem;
+        padding: 4px 8px;
+    }
+
+    .nav-index {
+        font-size: 0.55rem;
+        min-width: 16px;
+    }
+
+    .nav-cta {
+        font-size: 0.7rem;
+        padding: 6px 10px;
+        margin-top: var(--space-2);
+        padding-top: var(--space-2);
+    }
+
+    .theme-toggle-wrapper {
+        margin-top: var(--space-1);
+        padding: var(--space-1) 0;
+    }
+
+    .theme-toggle-btn {
+        font-size: 0.7rem;
+        padding: 4px 8px;
+    }
+
+    .theme-toggle-track {
+        width: 30px;
+        height: 16px;
+    }
+
+    .theme-toggle-thumb {
+        width: 10px;
+        height: 10px;
+        top: 3px;
+        left: 3px;
+    }
+
+    .nav-footer-tag {
+        font-size: 0.55rem;
+        margin-top: var(--space-1);
+    }
+}
