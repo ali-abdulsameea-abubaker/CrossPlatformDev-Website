@@ -66,7 +66,7 @@
             </div>
 
             <div class="projects-grid">
-                <!-- Project 1 -->
+                <!-- Project 1: PetWell -->
                 <div class="project-card reveal" style="--stagger-index:0">
                     <div class="project-card-top">
                         <div class="project-card-badge">
@@ -86,11 +86,11 @@
                         <span class="project-tag">OWASP</span>
                     </div>
                     <div class="project-links">
-                        <a href="#" class="project-link">
+                        <a href="https://www.youtube.com/watch?v=9MmI1D5OK8U" class="project-link" target="_blank">
                             <span>Live Demo</span>
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
                         </a>
-                        <a href="#" class="project-link">
+                        <a href="https://github.com/ali-abdulsameea-abubaker/pet-care-management-app" class="project-link" target="_blank">
                             <span>GitHub</span>
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
                         </a>
@@ -108,8 +108,8 @@
                     </div>
                 </div>
 
-                <!-- Project 2 -->
-                <div class="project-card reveal" style="--stagger-index:1">
+                <!-- Project 2: Internal Business Tools - DETAILED -->
+                <div class="project-card reveal project-card-expanded" style="--stagger-index:1">
                     <div class="project-card-top">
                         <div class="project-card-badge">
                             <span class="badge-icon">🔧</span>
@@ -119,15 +119,19 @@
                     </div>
                     <h3>Internal Business Tools</h3>
                     <span class="project-category">.NET / ASP.NET</span>
-                    <p>RESTful APIs and internal applications supporting daily operations, built with C#, ASP.NET Core, and SQL Server.</p>
+                    <p>Custom business management systems built for security companies and supermarkets using .NET Framework and C#.</p>
+
+
                     <div class="project-tags">
                         <span class="project-tag">C#</span>
-                        <span class="project-tag">ASP.NET Core</span>
+                        <span class="project-tag">.NET Framework</span>
+                        <span class="project-tag">ASP.NET</span>
                         <span class="project-tag">SQL Server</span>
-                        <span class="project-tag">REST API</span>
+                        <span class="project-tag">WinForms</span>
+                        <span class="project-tag">CRUD</span>
                     </div>
                     <div class="project-links">
-                        <a href="#" class="project-link">
+                        <a href="/portfolio/internal-tools" class="project-link">
                             <span>Learn More</span>
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
                         </a>
@@ -139,13 +143,18 @@
                         </div>
                         <div class="project-stat-divider"></div>
                         <div class="project-stat-item">
+                            <span class="stat-value">4+</span>
+                            <span class="stat-label">Systems Built</span>
+                        </div>
+                        <div class="project-stat-divider"></div>
+                        <div class="project-stat-item">
                             <span class="stat-value">2024</span>
                             <span class="stat-label">In Production</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project 3 -->
+                <!-- Project 3: Business Websites -->
                 <div class="project-card reveal" style="--stagger-index:2">
                     <div class="project-card-top">
                         <div class="project-card-badge">
@@ -164,7 +173,7 @@
                         <span class="project-tag">Bootstrap</span>
                     </div>
                     <div class="project-links">
-                        <a href="#" class="project-link">
+                        <a href="/portfolio/zema-supermarket" class="project-link">
                             <span>View Projects</span>
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
                         </a>
@@ -223,538 +232,3 @@
     </section>
 
 </div>
-
-<style>
-    /* ===== PORTFOLIO HERO ===== */
-    .portfolio-hero {
-        padding-top: var(--space-4);
-    }
-
-    .portfolio-hero-grid {
-        display: grid;
-        grid-template-columns: 1.1fr 1fr;
-        gap: var(--space-8);
-        align-items: center;
-        min-height: 50vh;
-    }
-
-    .portfolio-hero-content {
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-4);
-    }
-
-    .portfolio-headline {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        font-size: clamp(2.4rem, 5vw, 4rem);
-        font-weight: 700;
-        line-height: 1.05;
-        letter-spacing: -0.02em;
-        margin: 0;
-    }
-
-    .portfolio-line-gradient {
-        background: var(--accent-gradient);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-    }
-
-    .portfolio-description {
-        font-size: 1.1rem;
-        max-width: 480px;
-        color: var(--text-secondary);
-        line-height: 1.7;
-        margin: 0;
-    }
-
-    .portfolio-stats {
-        display: flex;
-        align-items: center;
-        gap: var(--space-6);
-        padding-top: var(--space-4);
-        border-top: 1px solid var(--border-subtle);
-        margin-top: var(--space-2);
-    }
-
-    .portfolio-stat {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .portfolio-stat-number {
-        font-family: var(--font-display);
-        font-size: 1.6rem;
-        font-weight: 700;
-        color: var(--text-primary);
-        letter-spacing: -0.01em;
-    }
-
-    .portfolio-stat-label {
-        font-size: 0.78rem;
-        color: var(--text-muted);
-        font-weight: 400;
-    }
-
-    .portfolio-stat-divider {
-        width: 1px;
-        height: 32px;
-        background: var(--border-subtle);
-    }
-
-    /* ===== HERO VISUAL ===== */
-    .portfolio-hero-visual {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 300px;
-    }
-
-    .portfolio-orb {
-        position: absolute;
-        width: 350px;
-        height: 350px;
-        background: radial-gradient(circle at center, rgba(0, 229, 255, 0.06), transparent 70%);
-        border-radius: 50%;
-        pointer-events: none;
-        animation: floatY 8s ease-in-out infinite;
-    }
-
-    .portfolio-icon-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: var(--space-4);
-        position: relative;
-        z-index: 1;
-    }
-
-    .portfolio-icon-card {
-        width: 100px;
-        height: 100px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: var(--bg-surface);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-lg);
-        font-size: 2.8rem;
-        transition: transform 0.4s var(--ease-out-expo), border-color 0.4s, box-shadow 0.4s;
-        cursor: default;
-    }
-
-        .portfolio-icon-card:hover {
-            transform: translateY(-8px) scale(1.05);
-            border-color: var(--border-glow);
-            box-shadow: 0 20px 60px rgba(0, 229, 255, 0.08);
-        }
-
-    /* ===== PROJECTS ===== */
-    .projects-section {
-        padding: var(--space-8) 0;
-        background: rgba(0, 0, 0, 0.15);
-        border-top: 1px solid var(--border-subtle);
-        border-bottom: 1px solid var(--border-subtle);
-    }
-
-    .projects-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: var(--space-5);
-        margin-top: var(--space-6);
-    }
-
-    .project-card {
-        background: var(--bg-surface);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-lg);
-        padding: var(--space-5);
-        transition: transform 0.4s var(--ease-out-expo), border-color 0.4s, box-shadow 0.4s;
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-3);
-        position: relative;
-        overflow: hidden;
-    }
-
-        .project-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--accent-gradient);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .project-card:hover::before {
-            opacity: 1;
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--border-glow);
-            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
-        }
-
-    .project-card-top {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-    }
-
-    .project-card-badge {
-        display: flex;
-        align-items: center;
-        gap: var(--space-1);
-        font-size: 0.65rem;
-        font-family: var(--font-mono);
-        padding: 4px 12px 4px 8px;
-        border-radius: 999px;
-        background: rgba(0, 229, 255, 0.06);
-        border: 1px solid rgba(0, 229, 255, 0.1);
-        color: var(--accent-cyan);
-    }
-
-    .badge-icon {
-        font-size: 0.7rem;
-    }
-
-    .badge-text {
-        letter-spacing: 0.04em;
-    }
-
-    .project-card-icon {
-        font-size: 2.2rem;
-        line-height: 1;
-    }
-
-    .project-card h3 {
-        font-size: 1.2rem;
-        margin: 0;
-        font-family: var(--font-display);
-        font-weight: 600;
-    }
-
-    .project-category {
-        font-size: 0.78rem;
-        color: var(--text-muted);
-        font-family: var(--font-mono);
-        margin-top: -8px;
-    }
-
-    .project-card p {
-        font-size: 0.92rem;
-        color: var(--text-secondary);
-        margin: 0;
-        line-height: 1.6;
-        flex: 1;
-    }
-
-    .project-tags {
-        display: flex;
-        gap: var(--space-2);
-        flex-wrap: wrap;
-    }
-
-    .project-tag {
-        font-size: 0.65rem;
-        font-family: var(--font-mono);
-        padding: 2px 10px;
-        border-radius: 999px;
-        border: 1px solid var(--border-subtle);
-        color: var(--text-muted);
-    }
-
-    .project-links {
-        display: flex;
-        gap: var(--space-4);
-        margin-top: var(--space-1);
-    }
-
-    .project-link {
-        display: inline-flex;
-        align-items: center;
-        gap: var(--space-1);
-        color: var(--accent-cyan);
-        font-weight: 600;
-        font-size: 0.85rem;
-        transition: gap 0.3s var(--ease-out-expo);
-    }
-
-        .project-link:hover {
-            gap: var(--space-3);
-        }
-
-        .project-link svg {
-            transition: transform 0.3s var(--ease-out-expo);
-        }
-
-        .project-link:hover svg {
-            transform: translateX(4px);
-        }
-
-    .project-card-stats {
-        display: flex;
-        align-items: center;
-        gap: var(--space-4);
-        padding-top: var(--space-3);
-        border-top: 1px solid var(--border-subtle);
-        margin-top: var(--space-1);
-    }
-
-    .project-stat-item {
-        display: flex;
-        flex-direction: column;
-    }
-
-        .project-stat-item .stat-value {
-            font-family: var(--font-display);
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .project-stat-item .stat-label {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-        }
-
-    .project-stat-divider {
-        width: 1px;
-        height: 24px;
-        background: var(--border-subtle);
-    }
-
-    /* ===== SKILLS SHOWCASE ===== */
-    .skills-showcase {
-        padding: var(--space-8) 0;
-    }
-
-    .skills-showcase-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: var(--space-8);
-        align-items: center;
-    }
-
-    .skills-showcase-content h2 {
-        font-size: clamp(2rem, 3vw, 2.6rem);
-    }
-
-    .skills-showcase-content p {
-        max-width: 400px;
-    }
-
-    .skills-showcase-icons {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--space-3);
-    }
-
-    .tech-icon {
-        padding: 10px 20px;
-        background: var(--bg-surface);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-sm);
-        font-family: var(--font-mono);
-        font-size: 0.8rem;
-        color: var(--text-secondary);
-        transition: transform 0.3s var(--ease-out-expo), border-color 0.3s, box-shadow 0.3s;
-        cursor: default;
-    }
-
-        .tech-icon:hover {
-            transform: translateY(-4px) scale(1.04);
-            border-color: var(--accent-cyan);
-            box-shadow: 0 8px 24px rgba(0, 229, 255, 0.06);
-            color: var(--text-primary);
-        }
-
-    /* ===== SECTION HEADER ===== */
-    .section-header {
-        margin-bottom: var(--space-6);
-    }
-
-        .section-header.text-center {
-            text-align: center;
-        }
-
-            .section-header.text-center h2 {
-                max-width: 600px;
-                margin: 0 auto;
-            }
-
-    /* ===== BUTTONS ===== */
-    .btn {
-        display: inline-flex;
-        align-items: center;
-        gap: var(--space-2);
-        font-family: var(--font-body);
-        font-weight: 600;
-        font-size: 0.95rem;
-        padding: 13px 26px;
-        border-radius: var(--radius-md);
-        border: 1px solid transparent;
-        cursor: pointer;
-        transition: transform var(--dur-fast) var(--ease-out-expo), box-shadow var(--dur-fast), background var(--dur-fast);
-    }
-
-    .btn-primary {
-        background: var(--accent-gradient);
-        background-size: 200% 200%;
-        color: #04121a;
-    }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0, 229, 255, 0.28);
-            animation: gradientShift 3s ease infinite;
-        }
-
-    .cta-banner {
-        border: 1px solid var(--border-glow);
-        border-radius: var(--radius-lg);
-        padding: var(--space-8) var(--space-6);
-        text-align: center;
-        background: radial-gradient(60% 100% at 50% 0%, rgba(0, 229, 255, 0.08), transparent 70%), var(--bg-surface);
-    }
-
-    .eyebrow {
-        font-family: var(--font-mono);
-        font-size: 0.82rem;
-        color: var(--accent-cyan);
-        display: inline-flex;
-        align-items: center;
-        gap: var(--space-2);
-        margin-bottom: var(--space-3);
-        letter-spacing: 0.02em;
-    }
-
-        .eyebrow::before {
-            content: "~/";
-            color: var(--text-muted);
-        }
-
-    .hero-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: var(--space-3);
-        background: rgba(0, 229, 255, 0.08);
-        border: 1px solid rgba(0, 229, 255, 0.15);
-        border-radius: 999px;
-        padding: 6px 16px 6px 10px;
-        font-size: 0.78rem;
-        font-weight: 500;
-        color: var(--accent-cyan);
-        width: fit-content;
-        font-family: var(--font-mono);
-    }
-
-    .badge-dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--success);
-        animation: pulseGlow 2s ease-in-out infinite;
-    }
-
-    .floaty {
-        animation: floatY 5s ease-in-out infinite;
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @@media (max-width: 1024px) {
-        .portfolio-hero-grid {
-            grid-template-columns: 1fr;
-            min-height: auto;
-            gap: var(--space-6);
-        }
-
-        .portfolio-hero-content {
-            order: 1;
-        }
-
-        .portfolio-hero-visual {
-            order: 0;
-        }
-
-        .portfolio-headline {
-            font-size: clamp(2rem, 4vw, 2.8rem);
-        }
-
-        .portfolio-description {
-            font-size: 1rem;
-            max-width: 100%;
-        }
-
-        .projects-grid {
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .skills-showcase-grid {
-            grid-template-columns: 1fr;
-            gap: var(--space-6);
-        }
-    }
-
-    @@media (max-width: 768px) {
-        .portfolio-stats {
-            flex-wrap: wrap;
-            gap: var(--space-4);
-        }
-
-        .portfolio-stat-divider {
-            display: none;
-        }
-
-        .projects-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .portfolio-icon-card {
-            width: 70px;
-            height: 70px;
-            font-size: 2rem;
-        }
-
-        .portfolio-orb {
-            width: 250px;
-            height: 250px;
-        }
-
-        .skills-showcase-icons {
-            gap: var(--space-2);
-        }
-
-        .tech-icon {
-            padding: 6px 14px;
-            font-size: 0.7rem;
-        }
-    }
-
-    @@media (max-width: 480px) {
-        .portfolio-stats {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .portfolio-icon-grid {
-            gap: var(--space-2);
-        }
-
-        .portfolio-icon-card {
-            width: 60px;
-            height: 60px;
-            font-size: 1.6rem;
-        }
-
-        .project-card {
-            padding: var(--space-4);
-        }
-    }
-</style>

@@ -608,10 +608,7 @@ a {
     padding-left: 20px;
 }
 
-.code-comment {
-    color: var(--text-muted);
-    font-style: italic;
-}
+
 
 .code-keyword {
     color: #FF7B9C;
@@ -868,3 +865,192 @@ a {
     .cta-banner .btn-primary svg {
         stroke: #ffffff !important;
     }
+
+/* ===== COLORFUL CODE BLOCK ===== */
+
+/* Comments - Bright Green */
+.code-comment {
+    color: #6A9955 !important;
+    font-style: italic;
+}
+
+/* Imports - Purple */
+.code-import {
+    color: #C586C0 !important;
+}
+
+/* Keywords - Blue/Purple */
+.code-keyword {
+    color: #569CD6 !important;
+}
+
+/* Strings - Orange/Gold */
+.code-string {
+    color: #CE9178 !important;
+}
+
+/* Export - Bright Cyan */
+.code-export {
+    color: #4EC9B0 !important;
+}
+
+/* Prompt - Cyan */
+.code-prompt {
+    color: #00E5FF !important;
+}
+
+/* Special highlighting for emojis in code */
+.code-string .emoji {
+    filter: none !important;
+}
+
+/* Indentation */
+.code-indent {
+    padding-left: 24px !important;
+}
+
+/* Line hover effect */
+.code-line:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 4px;
+}
+
+/* Code body background enhancement */
+.code-body {
+    background: var(--bg-elevated);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    padding: var(--space-5);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 2;
+    min-height: 480px;
+    max-height: 560px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-subtle) transparent;
+}
+
+    /* Scrollbar styling */
+    .code-body::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .code-body::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .code-body::-webkit-scrollbar-thumb {
+        background: var(--accent-cyan);
+        border-radius: 999px;
+    }
+
+/* Code line spacing */
+.code-line {
+    color: var(--text-secondary);
+    white-space: pre;
+    padding: 2px 0;
+    transition: background 0.2s ease;
+}
+
+/* Blinking cursor */
+.code-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    background: var(--accent-cyan);
+    vertical-align: text-bottom;
+    animation: blinkCursor 1s step-end infinite;
+    margin-left: 2px;
+}
+
+/* ===== COLORFUL CODE BLOCK - ADD THESE ===== */
+
+/* Imports - Purple */
+.code-import {
+    color: #C586C0 !important;
+}
+
+/* Export - Bright Cyan */
+.code-export {
+    color: #4EC9B0 !important;
+}
+
+/* Comments - Bright Green (override theme) */
+.code-comment {
+    color: #6A9955 !important;
+    font-style: italic;
+}
+
+/* Keywords - Blue (override theme) */
+.code-keyword {
+    color: #569CD6 !important;
+}
+
+/* Strings - Orange/Gold (override theme) */
+.code-string {
+    color: #CE9178 !important;
+}
+
+/* Prompt - Cyan */
+.code-prompt {
+    color: #00E5FF !important;
+}
+
+/* Indentation */
+.code-indent {
+    padding-left: 24px !important;
+}
+
+/* Line hover effect */
+.code-line:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 4px;
+}
+
+/* Code body background enhancement */
+.code-body {
+    background: var(--bg-elevated);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    padding: var(--space-5);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 2;
+    min-height: 480px;
+    max-height: 560px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-subtle) transparent;
+}
+
+    /* Scrollbar styling */
+    .code-body::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .code-body::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .code-body::-webkit-scrollbar-thumb {
+        background: var(--accent-cyan);
+        border-radius: 999px;
+    }
+
+/* Code line spacing */
+.code-line {
+    color: var(--text-secondary);
+    white-space: pre;
+    padding: 2px 0;
+    transition: background 0.2s ease;
+}
+
+/* Blinking cursor */
+.code-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    background: var(--accent-cyan);
+    vertical-align: text-bottom;
+    animation: blinkCursor 1s step-end infinite;
+    margin-left: 2px;
+}
