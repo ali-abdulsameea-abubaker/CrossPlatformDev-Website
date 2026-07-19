@@ -35,16 +35,49 @@
               "sameAs": []
             }
     </script>
+
     <link rel="stylesheet" href="@Assets["app.css"]" />
     <link rel="stylesheet" href="@Assets["PersonalInformation.styles.css"]" />
 </head>
 
 <body>
     <Routes @rendermode="InteractiveServer" />
+
     <script src="_framework/blazor.web.js"></script>
     <script src="js/site.js"></script>
     <script src="Components/Layout/ReconnectModal.razor.js"></script>
     <script src="js/home.js"></script>
 
+    <!-- Suppress Blazor WebSocket messages -->
+    <script>
+        (function() {
+        // Wait for Blazor to load
+        const originalConsoleLog = console.log;
+        const originalConsoleInfo = console.info;
+
+        function shouldSuppress(message) {
+        if (typeof message !== 'string') return false;
+        return message.includes('blazor') ||
+        message.includes('WebSocket') ||
+        message.includes('_blazor') ||
+        message.includes('Normalizing') ||
+        message.includes('Information:');
+        }
+
+        console.log = function(...args) {
+        if (args.length > 0 && shouldSuppress(args[0])) {
+        return;
+        }
+        originalConsoleLog.apply(console, args);
+        };
+
+        console.info = function(...args) {
+        if (args.length > 0 && shouldSuppress(args[0])) {
+        return;
+        }
+        originalConsoleInfo.apply(console, args);
+        };
+        })();
+    </script>
 </body>
 </html>

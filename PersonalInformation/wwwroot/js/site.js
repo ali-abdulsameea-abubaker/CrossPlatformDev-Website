@@ -1,5 +1,11 @@
 ﻿window.siteAnimations = (function () {
 
+    // Suppress Blazor logging
+    if (window.Blazor) {
+        window.Blazor._internal = window.Blazor._internal || {};
+        window.Blazor._internal.disableLogging = true;
+    }
+
     let _initialized = false;
 
     function initScrollReveal() {
