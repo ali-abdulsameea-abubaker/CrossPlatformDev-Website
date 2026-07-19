@@ -14,11 +14,18 @@ function handleReconnectStateChanged(event) {
     } else if (event.detail.state === "hide") {
         reconnectModal.close();
     } else if (event.detail.state === "failed") {
-        // Only add visibility listener if needed
-        document.addEventListener("visibilitychange", retryWhenDocumentBecomesVisible);
+        // Show the modal and let the user retry manually
+        reconnectModal.showModal();
     } else if (event.detail.state === "rejected") {
-        // Don't auto-reload - let the user decide
-        // location.reload(); // REMOVED - this was the problem
+        // 🔥 IMPORTANT: Remove or comment out the automatic location.reload()
+        // location.reload();
+        // Instead, show a message that the user can click to reload.
+        reconnectModal.showModal();
+        const message = document.querySelector('.components-reconnect-failed-visible');
+        if (message) {
+            message.innerHTML = 'Connection lost. <button id="manual-reload-btn">Click here to reload</button>';
+            document.getElementById('manual-reload-btn')?.addEventListener('click', () => location.reload());
+        }
     }
 }
 
