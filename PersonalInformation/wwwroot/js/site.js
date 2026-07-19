@@ -1,5 +1,7 @@
 ﻿window.siteAnimations = (function () {
 
+    let _initialized = false;
+
     function initScrollReveal() {
         const targets = document.querySelectorAll('.reveal:not([data-observed])');
         if (!targets.length) return;
@@ -19,18 +21,11 @@
         });
     }
 
-    // ===== THEME FUNCTIONS =====
     window.applyTheme = function (themeClass) {
-        // Remove existing theme classes from body
         document.body.classList.remove('dark-theme', 'light-theme');
-        // Add new theme class
         document.body.classList.add(themeClass);
-
-        // Update html background color
         document.documentElement.style.backgroundColor =
             themeClass === 'dark-theme' ? '#050810' : '#F0F4F8';
-
-        // Update meta theme-color for mobile browsers
         const metaThemeColor = document.querySelector('meta[name="theme-color"]');
         if (metaThemeColor) {
             metaThemeColor.content = themeClass === 'dark-theme' ? '#050810' : '#F0F4F8';
@@ -73,12 +68,9 @@
         };
 
         overlay && (overlay.onclick = close);
-
         sidebar.querySelectorAll('a').forEach(a => a.onclick = close);
     }
 
-    // Typing effect for the hero terminal.
-    // lines: array of { text, className }
     async function typeTerminal(elementId, lines, speed = 22) {
         const el = document.getElementById(elementId);
         if (!el || el.getAttribute('data-typed') === 'true') return;
@@ -106,7 +98,6 @@
         el.appendChild(cursor);
     }
 
-    // ===== INIT CODE BLOCK TYPING =====
     function initCodeTyping() {
         const codeBody = document.getElementById('code-body');
         if (!codeBody || codeBody.getAttribute('data-typed') === 'true') return;
@@ -148,9 +139,12 @@
     }
 
     function initAll() {
+        if (_initialized) return;
+        _initialized = true;
+
         initScrollReveal();
         initMobileMenu();
-        initCodeTyping(); // Call the typing effect
+        initCodeTyping();
     }
 
     // Initial load
