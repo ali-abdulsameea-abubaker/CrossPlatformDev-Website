@@ -1,6 +1,10 @@
 ﻿@page "/blog"
 @inject PersonalInformation.Services.BlogService BlogService
 @inject IJSRuntime JS
+@inject IConfiguration Config
+@using System.Net.Http
+@using System.Text
+@using System.Text.Json
 
 <div class="page-enter">
 
@@ -100,14 +104,43 @@
                     <div class="newsletter-icon">📬</div>
                     <h2>Get notified when I post.</h2>
                     <p>No spam, just good content. I'll send you an email when new articles are published.</p>
-                    <div class="newsletter-form">
-                        <input type="email" placeholder="Enter your email" class="input newsletter-input">
-                        <button class="btn btn-primary newsletter-btn">
-                            <span>Subscribe</span>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
-                        </button>
-                    </div>
-                    <span class="newsletter-note">No spam. Unsubscribe anytime.</span>
+
+                    @if (newsletterSubscribed)
+                    {
+                        <div style="padding: var(--space-4);">
+                            <span style="font-size: 3rem; display: block; margin-bottom: var(--space-2);">✅</span>
+                            <h3 style="margin-bottom: var(--space-2);">Subscribed!</h3>
+                            <p style="color: var(--text-secondary);">You'll receive an email when new posts are published.</p>
+                            <button class="btn btn-ghost" @onclick="ResetSubscription" style="margin-top: var(--space-3);">
+                                Subscribe another email
+                            </button>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="newsletter-form">
+                            <input type="email" placeholder="Enter your email" class="input newsletter-input"
+                                   @bind="newsletterEmail" @bind:event="oninput" />
+                            <button class="btn btn-primary newsletter-btn" @onclick="SubscribeNewsletter" disabled="@newsletterLoading">
+                                @if (newsletterLoading)
+                                {
+                                    <span>Sending...</span>
+                                }
+                                else
+                                {
+                                    <span>Subscribe</span>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+                                }
+                            </button>
+                        </div>
+                        @if (!string.IsNullOrEmpty(newsletterMessage))
+                        {
+                            <p style="color: @(newsletterMessage.Contains("✅") ? "var(--success)" : "var(--warning)"); margin-top: var(--space-3); font-size: 0.9rem;">
+                                @newsletterMessage
+                            </p>
+                        }
+                        <span class="newsletter-note">No spam. Unsubscribe anytime.</span>
+                    }
                 </div>
             </div>
         </div>
@@ -470,6 +503,7 @@
         gap: var(--space-3);
         max-width: 500px;
         margin: 0 auto;
+        align-items: center;
     }
 
     .newsletter-input {
@@ -482,6 +516,7 @@
         font-family: var(--font-body);
         font-size: 0.95rem;
         transition: border-color 0.3s;
+        min-width: 200px;
     }
 
         .newsletter-input:focus {
@@ -497,6 +532,7 @@
         padding: 14px 28px;
         font-size: 0.95rem;
         white-space: nowrap;
+        flex-shrink: 0;
     }
 
         .newsletter-btn svg {
@@ -505,6 +541,11 @@
 
         .newsletter-btn:hover svg {
             transform: translateX(4px);
+        }
+
+        .newsletter-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
 
     .newsletter-note {
@@ -563,6 +604,18 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(0, 229, 255, 0.28);
             animation: gradientShift 3s ease infinite;
+        }
+
+    .btn-ghost {
+        background: transparent;
+        border-color: var(--border-subtle);
+        color: var(--text-primary);
+    }
+
+        .btn-ghost:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            transform: translateY(-2px);
         }
 
     .eyebrow {
@@ -657,6 +710,11 @@
             justify-content: center;
         }
 
+        .newsletter-input {
+            width: 100%;
+            min-width: unset;
+        }
+
         .blog-writing-icon {
             width: 90px;
             height: 90px;
@@ -677,10 +735,36 @@
             padding: var(--space-4);
         }
     }
+
+    /* ===== SUBSCRIBE BUTTON - WHITE TEXT ===== */
+    .newsletter-btn {
+        color: #ffffff !important;
+    }
+
+        .newsletter-btn span {
+            color: #ffffff !important;
+        }
+
+        .newsletter-btn svg {
+            stroke: #ffffff !important;
+        }
+
+        .newsletter-btn:disabled {
+            color: #ffffff !important;
+            opacity: 0.7;
+        }
+
+            .newsletter-btn:disabled span {
+                color: #ffffff !important;
+            }
 </style>
 
 @code {
     private List<PersonalInformation.Models.BlogPost> allPosts = new();
+    private string newsletterEmail = "";
+    private bool newsletterLoading = false;
+    private string? newsletterMessage;
+    private bool newsletterSubscribed = false;
 
     protected override void OnInitialized()
     {
@@ -690,5 +774,103 @@
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await JS.InvokeVoidAsync("siteAnimations.initAll");
+    }
+
+    private async Task SubscribeNewsletter()
+    {
+        if (string.IsNullOrWhiteSpace(newsletterEmail) || !IsValidEmail(newsletterEmail))
+        {
+            newsletterMessage = "⚠️ Please enter a valid email address.";
+            return;
+        }
+
+        newsletterLoading = true;
+        newsletterMessage = null;
+        StateHasChanged();
+
+        try
+        {
+            var apiKey = Config["Resend:ApiKey"];
+
+            if (string.IsNullOrEmpty(apiKey))
+            {
+                newsletterMessage = "⚠️ Newsletter service is not configured. Please try again later.";
+                newsletterLoading = false;
+                StateHasChanged();
+                return;
+            }
+
+            using var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
+
+            var payload = new
+            {
+                from = "onboarding@resend.dev",
+                to = new[] { newsletterEmail },
+                subject = "Welcome to CrossPlatformDev Blog!",
+                html = $@"
+                    <h2>📬 Welcome to the CrossPlatformDev Blog!</h2>
+                    <p>Thanks for subscribing, <strong>{newsletterEmail}</strong>!</p>
+                    <p>You'll receive a notification whenever I publish a new article about web development, mobile apps, and business systems.</p>
+                    <p style='font-size: 0.9rem; color: #666;'>
+                        — Ali Abubaker, CrossPlatformDev
+                    </p>
+                    <hr />
+                    <p style='font-size: 0.8rem; color: #999;'>
+                        You can unsubscribe at any time by replying to this email.
+                    </p>
+                "
+            };
+
+            var content = new StringContent(
+                JsonSerializer.Serialize(payload),
+                Encoding.UTF8,
+                "application/json"
+            );
+
+            var response = await client.PostAsync("https://api.resend.com/emails", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                newsletterSubscribed = true;
+                newsletterMessage = "✅ Subscribed successfully! Check your email for confirmation.";
+            }
+            else
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                newsletterMessage = "⚠️ Something went wrong. Please try again later.";
+                Console.WriteLine($"Resend error: {error}");
+            }
+        }
+        catch (Exception ex)
+        {
+            newsletterMessage = "⚠️ Something went wrong. Please try again later.";
+            Console.WriteLine($"Newsletter error: {ex.Message}");
+        }
+        finally
+        {
+            newsletterLoading = false;
+            StateHasChanged();
+        }
+    }
+
+    private void ResetSubscription()
+    {
+        newsletterSubscribed = false;
+        newsletterEmail = "";
+        newsletterMessage = null;
+    }
+
+    private bool IsValidEmail(string email)
+    {
+        try
+        {
+            var addr = new System.Net.Mail.MailAddress(email);
+            return addr.Address == email;
+        }
+        catch
+        {
+            return false;
+        }
     }
 }
