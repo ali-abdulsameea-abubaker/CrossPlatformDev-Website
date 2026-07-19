@@ -26,13 +26,15 @@
     <script type="application/ld+json">
             {
               "@@context": "https://schema.org",
-              "@@type": "ProfessionalService",
+              "@@type": "WebSite",
               "name": "CrossPlatformDev",
               "url": "https://crossplatformdev.com",
-              "description": "Custom website development, mobile app development, and business management system development.",
-              "areaServed": "Worldwide",
-              "founder": { "@@type": "Person", "name": "Ali Abubaker" },
-              "sameAs": []
+              "description": "Custom website development, mobile apps, and business management systems.",
+              "potentialAction": {
+                "@@type": "SearchAction",
+                "target": "https://crossplatformdev.com/search?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
             }
     </script>
 
