@@ -1,11 +1,5 @@
 ﻿window.siteAnimations = (function () {
 
-    // Suppress Blazor logging
-    if (window.Blazor) {
-        window.Blazor._internal = window.Blazor._internal || {};
-        window.Blazor._internal.disableLogging = true;
-    }
-
     let _initialized = false;
 
     function initScrollReveal() {
@@ -59,22 +53,36 @@
         const toggle = document.querySelector('.nav-toggle');
         const sidebar = document.querySelector('.site-nav');
         const overlay = document.querySelector('.nav-overlay');
-        if (!toggle || !sidebar) return;
+        if (!toggle || !sidebar) {
+            console.log('Mobile menu elements not found');
+            return;
+        }
+
+        // Remove existing event listeners to avoid duplicates
+        const newToggle = toggle.cloneNode(true);
+        toggle.parentNode.replaceChild(newToggle, toggle);
+
+        const newSidebar = sidebar;
+        const newOverlay = overlay;
 
         const close = () => {
-            sidebar.classList.remove('open');
-            toggle.classList.remove('active');
-            overlay?.classList.remove('open');
+            newSidebar.classList.remove('open');
+            newToggle.classList.remove('active');
+            if (newOverlay) newOverlay.classList.remove('open');
         };
 
-        toggle.onclick = () => {
-            const isOpen = sidebar.classList.toggle('open');
-            toggle.classList.toggle('active', isOpen);
-            overlay?.classList.toggle('open', isOpen);
+        newToggle.onclick = (e) => {
+            e.stopPropagation();
+            const isOpen = newSidebar.classList.toggle('open');
+            newToggle.classList.toggle('active', isOpen);
+            if (newOverlay) newOverlay.classList.toggle('open', isOpen);
         };
 
-        overlay && (overlay.onclick = close);
-        sidebar.querySelectorAll('a').forEach(a => a.onclick = close);
+        if (newOverlay) {
+            newOverlay.onclick = close;
+        }
+
+        newSidebar.querySelectorAll('a').forEach(a => a.onclick = close);
     }
 
     async function typeTerminal(elementId, lines, speed = 22) {
@@ -145,18 +153,23 @@
     }
 
     function initAll() {
-        if (_initialized) return;
-        _initialized = true;
-
-        initScrollReveal();
+        // Always re-initialize mobile menu on each navigation
         initMobileMenu();
+        initScrollReveal();
         initCodeTyping();
     }
 
-    // Initial load
+    // Initialize on DOM ready
     document.addEventListener('DOMContentLoaded', initAll);
-    // Re-hook after Blazor's enhanced navigation swaps content
+
+    // Re-initialize after Blazor navigation
     document.addEventListener('enhancedload', initAll);
 
-    return { initAll, initScrollReveal, typeTerminal };
+    // Also re-initialize when Blazor finishes loading
+    document.addEventListener('blazorLoad', initAll);
+
+    // Expose initMobileMenu so it can be called from Blazor if needed
+    window.initMobileMenu = initMobileMenu;
+
+    return { initAll, initScrollReveal, typeTerminal, initMobileMenu };
 })();

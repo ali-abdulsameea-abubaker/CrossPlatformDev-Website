@@ -106,4 +106,8 @@ function initCodeTyping() {
 window.initHomePage = function () {
     initScrollReveal();
     initCodeTyping();
+    // Also re-initialize mobile menu when home page loads
+    if (typeof window.initMobileMenu === 'function') {
+        window.initMobileMenu();
+    }
 };
