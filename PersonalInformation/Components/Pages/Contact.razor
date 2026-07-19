@@ -442,8 +442,14 @@
 
         try
         {
-            var username = Config["EmailSettings:Username"];
-            var password = Config["EmailSettings:Password"];
+            // ===== DEBUG: Check if config is being read =====
+            var username = Config["EmailSettings:Username"] ?? "NOT FOUND";
+            var password = Config["EmailSettings:Password"] ?? "NOT FOUND";
+
+            Console.WriteLine($"=== CONTACT FORM DEBUG ===");
+            Console.WriteLine($"Username from config: {username}");
+            Console.WriteLine($"Password from config: {password}");
+            Console.WriteLine($"===========================");
 
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
@@ -477,15 +483,17 @@
             await client.SendMailAsync(mail);
             submitted = true;
         }
-        catch (Exception)
+        catch (Exception ex)
         {
             errorMessage = "Something went wrong sending your message — try emailing directly instead.";
+            Console.WriteLine($"Error: {ex.Message}");
         }
         finally
         {
             sending = false;
         }
     }
+
 
     private void HandleInvalidSubmit()
     {
