@@ -18,6 +18,7 @@
             observer.observe(el);
         });
     }
+
     // ===== THEME FUNCTIONS =====
     window.applyTheme = function (themeClass) {
         // Remove existing theme classes from body
@@ -76,7 +77,6 @@
         sidebar.querySelectorAll('a').forEach(a => a.onclick = close);
     }
 
-
     // Typing effect for the hero terminal.
     // lines: array of { text, className }
     async function typeTerminal(elementId, lines, speed = 22) {
@@ -106,9 +106,51 @@
         el.appendChild(cursor);
     }
 
+    // ===== INIT CODE BLOCK TYPING =====
+    function initCodeTyping() {
+        const codeBody = document.getElementById('code-body');
+        if (!codeBody || codeBody.getAttribute('data-typed') === 'true') return;
+
+        const lines = [
+            { text: '// full-stack developer · 5+ years experience', cls: 'code-comment' },
+            { text: '// building production software since 2019', cls: 'code-comment' },
+            { text: 'import { experience } from "./career";', cls: '' },
+            { text: 'import { projects } from "./portfolio";', cls: '' },
+            { text: '', cls: '' },
+            { text: 'const skills = {', cls: '' },
+            { text: '  frontend: "React, TypeScript, Bootstrap",', cls: '' },
+            { text: '  backend: "C#, .NET Core, ASP.NET, Node.js",', cls: '' },
+            { text: '  mobile: "Android, iOS, Cross-platform",', cls: '' },
+            { text: '  cloud: "Azure, Heroku, Cloudinary",', cls: '' },
+            { text: '  database: "SQL Server, MySQL, MongoDB",', cls: '' },
+            { text: '  tools: "Git, Azure DevOps, Postman, OWASP ZAP",', cls: '' },
+            { text: '  methodologies: "Agile, Scrum, TDD, RESTful APIs",', cls: '' },
+            { text: '};', cls: '' },
+            { text: '', cls: '' },
+            { text: 'const currentRole = {', cls: '' },
+            { text: '  title: ".NET Software Developer",', cls: '' },
+            { text: '  company: "Gerrie Electric",', cls: '' },
+            { text: '  since: "September 2024",', cls: '' },
+            { text: '  focus: "APIs, Full-stack, Cloud",', cls: '' },
+            { text: '};', cls: '' },
+            { text: '', cls: '' },
+            { text: 'const certifications = [', cls: '' },
+            { text: '  "Microsoft Azure",', cls: '' },
+            { text: '  "EAP Certified",', cls: '' },
+            { text: '  "Worker Health & Safety",', cls: '' },
+            { text: '];', cls: '' },
+            { text: '', cls: '' },
+            { text: 'export default { skills, currentRole, certifications };', cls: '' },
+            { text: '$ ▊', cls: 'code-prompt' },
+        ];
+
+        typeTerminal('code-body', lines, 15);
+    }
+
     function initAll() {
         initScrollReveal();
         initMobileMenu();
+        initCodeTyping(); // Call the typing effect
     }
 
     // Initial load
