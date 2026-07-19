@@ -443,8 +443,8 @@
         try
         {
             // ===== DEBUG: Check if config is being read =====
-            var username = Config["EmailSettings:Username"] ?? "NOT FOUND";
-            var password = Config["EmailSettings:Password"] ?? "NOT FOUND";
+            var username = Config["EmailSettings__Username"] ?? "NOT FOUND";
+            var password = Config["EmailSettings__Password"] ?? "NOT FOUND";
 
             Console.WriteLine($"=== CONTACT FORM DEBUG ===");
             Console.WriteLine($"Username from config: {username}");

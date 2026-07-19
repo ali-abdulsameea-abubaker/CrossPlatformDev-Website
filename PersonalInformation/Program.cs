@@ -20,8 +20,8 @@ forwardedHeaderOptions.KnownNetworks.Clear();
 forwardedHeaderOptions.KnownProxies.Clear();
 app.UseForwardedHeaders(forwardedHeaderOptions);
 
-var emailUsername = builder.Configuration["EmailSettings:Username"];
-var emailPassword = builder.Configuration["EmailSettings:Password"];
+var emailUsername = builder.Configuration["EmailSettings__Username"];
+var emailPassword = builder.Configuration["EmailSettings__Password"];
 
 if (!app.Environment.IsDevelopment())
 {
