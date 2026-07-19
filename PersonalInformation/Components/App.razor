@@ -20,9 +20,12 @@
     <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="icon" type="image/png" href="favicon.png" />
-    <link rel="stylesheet" href="@Assets["app.css"]" />
+
+    <!-- USE BUNDLED FILES INSTEAD OF INDIVIDUAL -->
+    <link rel="stylesheet" href="/css/bundle.css" />
     <HeadOutlet @rendermode="InteractiveServer" />
 
+    <!-- Structured Data -->
     <script type="application/ld+json">
             {
               "@@context": "https://schema.org",
@@ -38,22 +41,20 @@
             }
     </script>
 
-    <link rel="stylesheet" href="@Assets["app.css"]" />
     <link rel="stylesheet" href="@Assets["PersonalInformation.styles.css"]" />
 </head>
 
 <body>
     <Routes @rendermode="InteractiveServer" />
 
+    <!-- USE BUNDLED JS FILES -->
+    <script src="/js/bundle.js"></script>
     <script src="_framework/blazor.web.js"></script>
-    <script src="js/site.js"></script>
     <script src="Components/Layout/ReconnectModal.razor.js"></script>
-    <script src="js/home.js"></script>
 
     <!-- Suppress Blazor WebSocket messages -->
     <script>
         (function() {
-        // Wait for Blazor to load
         const originalConsoleLog = console.log;
         const originalConsoleInfo = console.info;
 
