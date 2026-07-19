@@ -15,6 +15,9 @@
     </div>
 </div>
 
+<!-- Add this script reference -->
+<script src="Components/Pages/Home.razor.js"></script>
+
 @code {
     private bool _initialized = false;
 
@@ -50,7 +53,6 @@
             StateHasChanged();
         }
 
-        // Only initialize animations ONCE, not on every render
         if (!_initialized)
         {
             _initialized = true;
