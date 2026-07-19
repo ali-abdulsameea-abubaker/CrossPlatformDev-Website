@@ -10,20 +10,41 @@ public class BlogService
 
     public BlogService(IWebHostEnvironment env)
     {
+        // Fix: Use wwwroot/posts folder
         _postsPath = Path.Combine(env.WebRootPath, "posts");
         _pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
     }
 
     public List<BlogPost> GetAllPosts()
     {
-        if (!Directory.Exists(_postsPath)) return new();
+        if (!Directory.Exists(_postsPath))
+        {
+            Console.WriteLine($"Posts directory not found: {_postsPath}");
+            return new List<BlogPost>();
+        }
 
         var posts = new List<BlogPost>();
-        foreach (var file in Directory.GetFiles(_postsPath, "*.md"))
+        var files = Directory.GetFiles(_postsPath, "*.md");
+
+        Console.WriteLine($"Found {files.Length} markdown files in {_postsPath}");
+
+        foreach (var file in files)
         {
-            var post = ParsePost(file);
-            if (post != null) posts.Add(post);
+            try
+            {
+                var post = ParsePost(file);
+                if (post != null)
+                {
+                    posts.Add(post);
+                    Console.WriteLine($"Loaded post: {post.Title}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error parsing {file}: {ex.Message}");
+            }
         }
+
         return posts.OrderByDescending(p => p.Date).ToList();
     }
 

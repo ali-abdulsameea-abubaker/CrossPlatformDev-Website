@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddScoped<ThemeService>();
+builder.Services.AddSingleton<BlogService>();
 builder.Configuration.AddUserSecrets<Program>();
 
 builder.Services.AddHttpClient("Resend", client =>
