@@ -843,3 +843,28 @@ a {
         transform: none !important;
     }
 }
+/* ===== START A PROJECT BUTTON - WHITE TEXT ===== */
+.btn-primary {
+    color: #ffffff !important;
+}
+
+    .btn-primary span {
+        color: #ffffff !important;
+    }
+
+    .btn-primary svg {
+        stroke: #ffffff !important;
+    }
+
+/* Also for the CTA button at the bottom */
+.cta-banner .btn-primary {
+    color: #ffffff !important;
+}
+
+    .cta-banner .btn-primary span {
+        color: #ffffff !important;
+    }
+
+    .cta-banner .btn-primary svg {
+        stroke: #ffffff !important;
+    }
