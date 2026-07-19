@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\js\Home.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update=".gitignore">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>.cs</LastGenOutput>

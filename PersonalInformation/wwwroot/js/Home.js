@@ -58,7 +58,7 @@ function initCodeTyping() {
         { text: '];', cls: '' },
         { text: '', cls: '' },
         { text: 'export default { skills, currentRole, certifications };', cls: '' },
-        { text: '$', cls: 'code-prompt' },
+        { text: '$', cls: 'code-prompt' }
     ];
 
     let index = 0;
@@ -107,10 +107,3 @@ window.initHomePage = function () {
     initScrollReveal();
     initCodeTyping();
 };
-
-// Also run on DOM ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', window.initHomePage);
-} else {
-    window.initHomePage();
-}
