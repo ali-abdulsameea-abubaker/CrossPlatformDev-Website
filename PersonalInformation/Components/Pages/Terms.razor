@@ -1,0 +1,157 @@
+﻿@page "/terms"
+
+<SeoHead Title="Terms of Service — CrossPlatformDev"
+         Description="Terms governing website use and project engagements with CrossPlatformDev."
+         Path="/terms" />
+
+<div class="page-enter section">
+    <div class="container" style="max-width: 820px;">
+        <span class="eyebrow">terms</span>
+        <h1>Terms of Service</h1>
+        <p class="text-muted">Last updated: @LastUpdated</p>
+
+        <div class="legal-body">
+            <p>
+                These terms cover two things: general use of this website, and the standard terms that apply
+                when you engage me for development work. Specific projects are further governed by a signed
+                agreement (like a Memorandum of Understanding or contract) between us, which takes precedence
+                over the general terms below where they differ.
+            </p>
+
+            <h2>1. Website Use</h2>
+            <p>
+                This site and its content are provided for informational purposes about CrossPlatformDev's
+                services. You may browse, read, and contact me freely. Content on this site (text, design,
+                code snippets shown as examples) may not be copied or reused for commercial purposes without
+                permission.
+            </p>
+
+            <h2>2. Project Engagements — General Terms</h2>
+            <p>
+                When you hire me for a website, mobile app, or business system, the following generally applies
+                unless a specific written agreement says otherwise:
+            </p>
+
+            <h3>Scope of Work</h3>
+            <p>
+                Every project starts with an agreed scope — what's being built, the technologies used, and
+                what's included. Changes outside that scope may involve additional cost and timeline, discussed
+                before any extra work begins.
+            </p>
+
+            <h3>Payment</h3>
+            <p>
+                Projects are typically paid in staged deposits tied to milestones (e.g. 25% at key project
+                stages — database/login setup, core interface completion, project completion, and final
+                hosting/launch), rather than one lump sum. Exact payment terms are set per project and confirmed
+                in writing before work begins. Accepted payment methods include e-transfer and cash.
+            </p>
+
+            <h3>Third-Party Costs</h3>
+            <p>
+                Costs for domains, hosting, and any required third-party APIs are separate from the development
+                fee and are the client's responsibility, paid either directly to the provider or reimbursed to
+                me if I set them up on your behalf.
+            </p>
+
+            <h3>Client Responsibilities</h3>
+            <p>
+                Clients are expected to provide necessary materials on time — content, product data, images,
+                business information, and access to accounts needed to complete the project. Delays in
+                providing these may extend the project timeline accordingly.
+            </p>
+
+            <h3>Ownership</h3>
+            <p>
+                Upon full and final payment, ownership of the custom code developed for your project transfers
+                to you. Reusable components, frameworks, or general-purpose tools I've built independently
+                remain mine and may be reused in future projects.
+            </p>
+
+            <h3>Revisions & Support</h3>
+            <p>
+                Reasonable revisions during development are included as part of the agreed scope. Ongoing
+                support, feature additions, or maintenance after launch are available separately and discussed
+                per project.
+            </p>
+
+            <h3>Project Timelines</h3>
+            <p>
+                Timelines are estimates based on the agreed scope and assume timely client feedback and
+                materials. Delays caused by the client (late content, slow feedback, scope changes) may extend
+                the delivery date.
+            </p>
+
+            <h3>Cancellation</h3>
+            <p>
+                If a client becomes unresponsive for an extended period (generally two weeks or more) without
+                communication, the project may be considered paused or ended without refund of deposits already
+                paid for completed work.
+            </p>
+
+            <h2>3. Confidentiality</h2>
+            <p>
+                Any confidential business information shared during a project — trade secrets, business plans,
+                financial details, or client data — is kept confidential during and after our working
+                relationship, and is not disclosed to third parties without consent.
+            </p>
+
+            <h2>4. Limitation of Liability</h2>
+            <p>
+                I build software carefully and test before delivery, but I'm not liable for indirect losses,
+                lost profits, or damages arising from use of the delivered software beyond the fees paid for
+                the project. Clients are responsible for maintaining their own backups and reviewing delivered
+                work before relying on it in production.
+            </p>
+
+            <h2>5. Dispute Resolution</h2>
+            <p>
+                If a disagreement arises during a project, both parties agree to first attempt to resolve it
+                through direct discussion and mutual agreement before pursuing other remedies.
+            </p>
+
+            <h2>6. Governing Law</h2>
+            <p>These terms are governed by the laws of Ontario, Canada.</p>
+
+            <h2>7. Contact</h2>
+            <p>
+                Questions about these terms? Reach out at
+                <a href="mailto:aliabdulsameea69@gmail.com">aliabdulsameea69@gmail.com</a> or
+                <a href="tel:+12893391367">+1 289 339 1367</a>.
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+    .legal-body {
+        margin-top: var(--space-6);
+        color: var(--text-secondary);
+        line-height: 1.8;
+    }
+
+        .legal-body h2 {
+            font-size: 1.4rem;
+            margin-top: var(--space-7);
+            margin-bottom: var(--space-3);
+        }
+
+        .legal-body h3 {
+            font-size: 1.05rem;
+            margin-top: var(--space-5);
+            margin-bottom: var(--space-2);
+            color: var(--text-primary);
+        }
+
+        .legal-body p {
+            margin-bottom: var(--space-4);
+        }
+
+        .legal-body strong {
+            color: var(--text-primary);
+        }
+</style>
+
+@code {
+    private string LastUpdated => DateTime.Now.ToString("MMMM d, yyyy");
+}
