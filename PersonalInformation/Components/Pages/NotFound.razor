@@ -1,6 +1,258 @@
-﻿<div class="section container text-center page-enter">
-    <span class="eyebrow">404</span>
-    <h1>Page not found.</h1>
-    <p>The page you're looking for doesn't exist.</p>
-    <a href="/" class="btn btn-primary">Back Home</a>
+﻿@page "/not-found"
+@page "/404"
+
+<SeoHead Title="Page Not Found — CrossPlatformDev"
+         Description="The page you're looking for doesn't exist. Explore our services or return home."
+         Path="/not-found" />
+
+<div class="page-enter">
+    <div class="notfound-container section">
+        <div class="container">
+            <div class="notfound-grid">
+                <div class="notfound-content">
+                    <div class="notfound-badge">
+                        <span class="notfound-icon">🔍</span>
+                        <span>404</span>
+                    </div>
+                    <h1 class="notfound-title">Page not found</h1>
+                    <p class="notfound-description">
+                        The page you're looking for doesn't exist or has been moved.
+                        Let's get you back on track.
+                    </p>
+
+                    <div class="notfound-actions">
+                        <a href="/" class="btn btn-primary">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="19" y1="12" x2="5" y2="12" />
+                                <polyline points="12 19 5 12 12 5" />
+                            </svg>
+                            Go Back Home
+                        </a>
+                        <a href="/services" class="btn btn-ghost">View Services</a>
+                    </div>
+
+                    <div class="notfound-suggestions">
+                        <p>You might be looking for:</p>
+                        <div class="suggestion-links">
+                            <a href="/services">Services</a>
+                            <span class="suggestion-divider">·</span>
+                            <a href="/portfolio">Portfolio</a>
+                            <span class="suggestion-divider">·</span>
+                            <a href="/about">About</a>
+                            <span class="suggestion-divider">·</span>
+                            <a href="/blog">Blog</a>
+                            <span class="suggestion-divider">·</span>
+                            <a href="/contact">Contact</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="notfound-visual">
+                    <div class="notfound-orb"></div>
+                    <div class="notfound-code-display">
+                        <span class="notfound-code-number">404</span>
+                        <span class="notfound-code-label">Not Found</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<style>
+    .notfound-container {
+        padding: var(--space-8) 0;
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+    }
+
+    .notfound-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: var(--space-8);
+        align-items: center;
+    }
+
+    .notfound-content {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+    }
+
+    .notfound-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2);
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        color: var(--accent-cyan);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        padding: 4px 0;
+    }
+
+    .notfound-icon {
+        font-size: 1.2rem;
+    }
+
+    .notfound-title {
+        font-size: clamp(2.4rem, 5vw, 4rem);
+        font-weight: 700;
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+        margin: 0;
+        color: var(--text-primary);
+    }
+
+    .notfound-description {
+        font-size: 1.1rem;
+        color: var(--text-secondary);
+        line-height: 1.7;
+        max-width: 480px;
+        margin: 0;
+    }
+
+    .notfound-actions {
+        display: flex;
+        gap: var(--space-4);
+        flex-wrap: wrap;
+        margin-top: var(--space-2);
+    }
+
+    .notfound-suggestions {
+        padding-top: var(--space-3);
+        border-top: 1px solid var(--border-subtle);
+    }
+
+        .notfound-suggestions p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: 0 0 var(--space-2);
+        }
+
+    .suggestion-links {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--space-2);
+        font-size: 0.9rem;
+    }
+
+        .suggestion-links a {
+            color: var(--text-secondary);
+            transition: color 0.2s;
+        }
+
+            .suggestion-links a:hover {
+                color: var(--accent-cyan);
+            }
+
+    .suggestion-divider {
+        color: var(--border-subtle);
+    }
+
+    /* ===== VISUAL ===== */
+    .notfound-visual {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 300px;
+    }
+
+    .notfound-orb {
+        position: absolute;
+        width: 350px;
+        height: 350px;
+        background: radial-gradient(circle at center, rgba(0, 229, 255, 0.06), transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        animation: floatY 8s ease-in-out infinite;
+    }
+
+    .notfound-code-display {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+    }
+
+    .notfound-code-number {
+        display: block;
+        font-family: var(--font-display);
+        font-size: 6rem;
+        font-weight: 700;
+        background: var(--accent-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        line-height: 1;
+        letter-spacing: -0.02em;
+    }
+
+    .notfound-code-label {
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        letter-spacing: 0.04em;
+        display: block;
+        margin-top: var(--space-1);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+        .notfound-grid {
+            grid-template-columns: 1fr;
+            gap: var(--space-6);
+        }
+
+        .notfound-visual {
+            order: 0;
+            min-height: 200px;
+        }
+
+        .notfound-content {
+            order: 1;
+        }
+
+        .notfound-code-number {
+            font-size: 4rem;
+        }
+
+        .notfound-orb {
+            width: 250px;
+            height: 250px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .notfound-actions {
+            flex-direction: column;
+        }
+
+            .notfound-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+        .notfound-title {
+            font-size: clamp(1.8rem, 5vw, 2.4rem);
+        }
+
+        .notfound-description {
+            font-size: 1rem;
+        }
+
+        .notfound-code-number {
+            font-size: 3rem;
+        }
+
+        .suggestion-links {
+            gap: var(--space-1);
+            font-size: 0.82rem;
+        }
+    }
+</style>
+
+@code {
+    // No additional code needed
+}

@@ -5,7 +5,7 @@
 @inject IHttpClientFactory HttpClientFactory
 @inject IJSRuntime JS
 
-<div class="ai-chat-container">
+<div class="ai-chat-container @(isOpen ? "chat-open" : "")">
     <div class="ai-chat-header" @onclick="ToggleChat">
         <div class="ai-chat-header-left">
             <span class="ai-avatar">🤖</span>
@@ -481,16 +481,56 @@
         letter-spacing: 0.02em;
     }
 
-    @@media (max-width: 480px) {
-        .ai-chat-container {
-            bottom: 12px;
-            right: 12px;
-            width: calc(100vw - 24px);
-        }
+   @@media (max-width: 480px) {
+    .ai-chat-container {
+        bottom: 16px;
+        right: 16px;
+        width: 56px;
+        transition: width 0.3s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+    }
 
-        .ai-chat-messages {
-            max-height: 260px;
-        }
+    .ai-chat-container.chat-open {
+        width: calc(100vw - 32px);
+    }
+
+    .ai-chat-header {
+        width: 56px;
+        height: 56px;
+        padding: 0;
+        border-radius: 50%;
+        justify-content: center;
+        box-shadow: 0 4px 20px rgba(0, 229, 255, 0.35);
+        transition: width 0.3s var(--ease-out-expo), border-radius 0.3s var(--ease-out-expo);
+    }
+
+    .ai-chat-container.chat-open .ai-chat-header {
+        width: 100%;
+        height: auto;
+        padding: 14px 18px;
+        border-radius: 16px 16px 0 0;
+        justify-content: space-between;
+    }
+
+    .ai-chat-header-left {
+        display: none;
+    }
+
+    .ai-chat-container.chat-open .ai-chat-header-left {
+        display: flex;
+    }
+
+    .ai-chat-header-right {
+        font-size: 1.4rem;
+    }
+
+    .ai-chat-messages {
+        max-height: 50vh;
+    }
+}
+    
+   
+    
+    
     }
 
     @@keyframes pulseGlow {
