@@ -544,11 +544,16 @@
     }
 </style>
 
+
+
+
+
 @code {
     private bool isOpen = false;
     private string? userInput;
     private bool isLoading = false;
     private List<ChatMessage> messages = new();
+    private readonly HashSet<ChatMessage> notifiedMessages = new();
 
     private const string SystemPrompt = @"You are Ali's AI assistant on his business website, CrossPlatformDev.
 Ali Abubaker is a full-stack developer based in Hamilton, ON, Canada with 5+ years of experience.
@@ -561,7 +566,20 @@ Timelines: website 2-4 weeks, mobile app 1-3 months, business system 2-4 months.
 Contact: aliabdulsameea69@gmail.com, +1 289 339 1367.
 Be warm, concise, and helpful. Keep answers short (2-4 sentences) unless asked for detail.
 If asked something unrelated to Ali or his work, answer briefly and naturally, then gently steer back.
-Always end with a natural next step when relevant (e.g. suggest the contact form).";
+Never claim to send a message, email, or note to Ali yourself — you cannot actually do that.
+Instead, tell the visitor their request has been noted and Ali will follow up, or point them to the contact form.";
+
+    // Signals that a message is a real request worth notifying Ali about,
+    // not just casual browsing or general questions.
+    private static readonly string[] LeadKeywords = new[]
+    {
+        "schedule", "book a call", "meeting", "appointment", "available on",
+        "quote", "hire", "want to start", "get started", "move forward",
+        "concern", "complaint", "issue with", "problem with", "unhappy",
+        "urgent", "deadline", "budget is", "my budget",
+        "build me", "can you build", "i need a", "i want to create",
+        "call me", "phone me", "reach me at"
+    };
 
     private class ChatMessage
     {
@@ -620,7 +638,8 @@ Always end with a natural next step when relevant (e.g. suggest the contact form
         var userMessage = userInput.Trim();
         userInput = "";
 
-        messages.Add(new ChatMessage { Text = userMessage, IsUser = true, Time = DateTime.Now.ToString("h:mm tt") });
+        var newUserMessage = new ChatMessage { Text = userMessage, IsUser = true, Time = DateTime.Now.ToString("h:mm tt") };
+        messages.Add(newUserMessage);
         StateHasChanged();
         await ScrollToBottom();
 
@@ -636,6 +655,13 @@ Always end with a natural next step when relevant (e.g. suggest the contact form
             var response = await GetAiResponse(userMessage);
             messages.Remove(typingMessage);
             messages.Add(new ChatMessage { Text = response, IsUser = false, Time = DateTime.Now.ToString("h:mm tt") });
+
+            // Check if this message looks like a real lead/request worth emailing Ali about.
+            if (LooksLikeLead(userMessage) && !notifiedMessages.Contains(newUserMessage))
+            {
+                notifiedMessages.Add(newUserMessage);
+                _ = NotifyAliByEmail(userMessage);
+            }
         }
         catch
         {
@@ -655,6 +681,56 @@ Always end with a natural next step when relevant (e.g. suggest the contact form
         }
     }
 
+    private static bool LooksLikeLead(string message)
+    {
+        var lower = message.ToLowerInvariant();
+        return LeadKeywords.Any(k => lower.Contains(k));
+    }
+
+    private async Task NotifyAliByEmail(string triggeringMessage)
+    {
+        try
+        {
+            var apiKey = Config["Resend:ApiKey"];
+            if (string.IsNullOrWhiteSpace(apiKey))
+            {
+                Console.WriteLine("Resend API key missing — skipping AI chat lead notification.");
+                return;
+            }
+
+            // Build a readable transcript of the whole conversation so far.
+            var transcript = string.Join("\n\n", messages
+                .Where(m => !m.IsTyping)
+                .Select(m => $"{(m.IsUser ? "Visitor" : "AI Assistant")} ({m.Time}): {m.Text}"));
+
+            var payload = new
+            {
+                from = "CrossPlatformDev AI Chat <onboarding@resend.dev>",
+                to = new[] { "aliabdulsameea69@gmail.com" },
+                subject = "New request from AI chat on your website",
+                text = $"A visitor's message triggered a lead notification:\n\n" +
+                       $"\"{triggeringMessage}\"\n\n" +
+                       $"---- Full conversation ----\n\n{transcript}"
+            };
+
+            var client = HttpClientFactory.CreateClient("Resend");
+            client.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", apiKey);
+
+            var response = await client.PostAsJsonAsync("emails", payload);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var errBody = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"AI chat lead email failed: {response.StatusCode} - {errBody}");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"AI chat lead email error: {ex.Message}");
+        }
+    }
+
     private async Task ScrollToBottom()
     {
         try
@@ -666,7 +742,6 @@ Always end with a natural next step when relevant (e.g. suggest the contact form
 
     private static string FormatMessage(string text)
     {
-        // Preserve line breaks from the model's response.
         return System.Net.WebUtility.HtmlEncode(text).Replace("\n", "<br />");
     }
 
@@ -681,7 +756,6 @@ Always end with a natural next step when relevant (e.g. suggest the contact form
         var client = HttpClientFactory.CreateClient("Groq");
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
 
-        // Build short conversation history so the model has context, capped to last 6 turns.
         var historyMessages = new List<object> { new { role = "system", content = SystemPrompt } };
         foreach (var m in messages.Where(m => !m.IsTyping).TakeLast(12))
         {
