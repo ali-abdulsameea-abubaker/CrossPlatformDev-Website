@@ -1,6 +1,9 @@
-﻿@using System.Text
-@using System.Text.Json
+﻿@using System.Text.Json
+@using System.Net.Http.Json
+@using System.Net.Http.Headers
 @inject IConfiguration Config
+@inject IHttpClientFactory HttpClientFactory
+@inject IJSRuntime JS
 
 <div class="ai-chat-container">
     <div class="ai-chat-header" @onclick="ToggleChat">
@@ -19,6 +22,24 @@
     @if (isOpen)
     {
         <div class="ai-chat-body">
+
+            @if (messages.Count == 0)
+            {
+                <div class="ai-quick-topics">
+                    <p class="ai-quick-topics-title">What are you looking for?</p>
+                    <select class="ai-topic-select" @onchange="OnTopicSelected">
+                        <option value="">Choose a topic — get an instant answer</option>
+                        <option value="services">🌐 What services does Ali offer?</option>
+                        <option value="pricing">💰 How much does a project cost?</option>
+                        <option value="timeline">⏱️ How long does a project take?</option>
+                        <option value="experience">🎯 What's Ali's experience?</option>
+                        <option value="portfolio">📁 Can I see past work?</option>
+                        <option value="contact">📧 How do I get in touch?</option>
+                    </select>
+                    <p class="ai-quick-topics-or">or just type your own question below</p>
+                </div>
+            }
+
             <div class="ai-chat-messages" id="chatMessages">
                 @foreach (var message in messages)
                 {
@@ -37,7 +58,7 @@
                                 }
                                 else
                                 {
-                                    @message.Text
+                                    @((MarkupString)FormatMessage(message.Text))
                                 }
                             </div>
                             <span class="message-time">@message.Time</span>
@@ -48,29 +69,18 @@
                         }
                     </div>
                 }
+                <div id="chatBottomAnchor"></div>
             </div>
 
             <div class="ai-chat-input">
-                <div class="quick-questions">
-                    <button class="quick-btn" @onclick='() => SendQuickQuestion("What services do you offer?")'>
-                        💡 Services
-                    </button>
-                    <button class="quick-btn" @onclick='() => SendQuickQuestion("How much do you charge?")'>
-                        💰 Pricing
-                    </button>
-                    <button class="quick-btn" @onclick='() => SendQuickQuestion("What is your experience?")'>
-                        🎯 Experience
-                    </button>
-                    <button class="quick-btn" @onclick='() => SendQuickQuestion("How long does a project take?")'>
-                        ⏱️ Timeline
-                    </button>
-                    <button class="quick-btn" @onclick='() => SendQuickQuestion("Can you help me with a website?")'>
-                        🌐 Website
-                    </button>
-                    <button class="quick-btn" @onclick='() => SendQuickQuestion("Tell me a joke")'>
-                        😄 Joke
-                    </button>
-                </div>
+                @if (messages.Count > 0)
+                {
+                    <div class="quick-questions">
+                        <button class="quick-btn" @onclick='() => SendQuickQuestion("What services do you offer?")'>💡 Services</button>
+                        <button class="quick-btn" @onclick='() => SendQuickQuestion("How much do you charge?")'>💰 Pricing</button>
+                        <button class="quick-btn" @onclick='() => SendQuickQuestion("Can you help me with a website?")'>🌐 Website</button>
+                    </div>
+                }
                 <div class="input-row">
                     <input type="text" @bind="userInput" @bind:event="oninput"
                            placeholder="Ask me anything..."
@@ -87,14 +97,13 @@
                         }
                     </button>
                 </div>
-                <span class="ai-footer-note">💡 Try asking anything! I'm learning every day.</span>
+                <span class="ai-footer-note">💡 Powered by AI — ask about services, pricing, or anything else.</span>
             </div>
         </div>
     }
 </div>
 
 <style>
-    /* ===== AI CHAT STYLES ===== */
     .ai-chat-container {
         position: fixed;
         bottom: 24px;
@@ -130,7 +139,6 @@
 
     .ai-avatar {
         font-size: 1.6rem;
-        line-height: 1;
         background: rgba(255,255,255,0.2);
         border-radius: 50%;
         padding: 4px;
@@ -173,7 +181,6 @@
             transform: rotate(90deg);
         }
 
-    /* ===== BODY ===== */
     .ai-chat-body {
         background: var(--bg-surface, #0B0F1A);
         border: 1px solid var(--border-subtle, #1C2436);
@@ -182,6 +189,8 @@
         overflow: hidden;
         box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
         animation: slideUp 0.3s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+        display: flex;
+        flex-direction: column;
     }
 
     @@keyframes slideUp {
@@ -196,8 +205,50 @@
         }
     }
 
+    /* ===== QUICK TOPICS ===== */
+    .ai-quick-topics {
+        padding: 18px 16px;
+        border-bottom: 1px solid var(--border-subtle, #1C2436);
+        background: var(--bg-elevated, #121A2B);
+    }
+
+    .ai-quick-topics-title {
+        margin: 0 0 10px;
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: var(--text-primary, #EAF0F7);
+    }
+
+    .ai-topic-select {
+        width: 100%;
+        padding: 11px 14px;
+        border-radius: 10px;
+        border: 1px solid var(--border-subtle, #1C2436);
+        background: var(--bg-void, #050810);
+        color: var(--text-primary, #EAF0F7);
+        font-family: var(--font-body, 'Inter', sans-serif);
+        font-size: 0.88rem;
+        cursor: pointer;
+        outline: none;
+    }
+
+        .ai-topic-select:focus {
+            border-color: var(--accent-cyan, #00E5FF);
+        }
+
+        .ai-topic-select option {
+            background: var(--bg-elevated, #121A2B);
+        }
+
+    .ai-quick-topics-or {
+        margin: 8px 0 0;
+        font-size: 0.7rem;
+        color: var(--text-muted, #5E6B82);
+        text-align: center;
+    }
+
     .ai-chat-messages {
-        max-height: 380px;
+        max-height: 340px;
         overflow-y: auto;
         padding: 16px 14px;
         display: flex;
@@ -292,7 +343,6 @@
         padding: 0 4px;
     }
 
-    /* ===== TYPING INDICATOR ===== */
     .typing-indicator {
         display: inline-flex;
         gap: 4px;
@@ -327,7 +377,6 @@
         }
     }
 
-    /* ===== INPUT ===== */
     .ai-chat-input {
         padding: 12px 14px 14px;
         border-top: 1px solid var(--border-subtle, #1C2436);
@@ -350,7 +399,6 @@
         color: var(--text-secondary, #A7B2C4);
         cursor: pointer;
         transition: all 0.2s var(--ease-out-expo);
-        font-family: var(--font-body, 'Inter', sans-serif);
         white-space: nowrap;
     }
 
@@ -372,7 +420,6 @@
         border: 1px solid var(--border-subtle, #1C2436);
         background: var(--bg-void, #050810);
         color: var(--text-primary, #EAF0F7);
-        font-family: var(--font-body, 'Inter', sans-serif);
         font-size: 0.9rem;
         outline: none;
         transition: border-color 0.3s;
@@ -431,11 +478,9 @@
         font-size: 0.55rem;
         color: var(--text-muted, #5E6B82);
         margin-top: 8px;
-        font-family: var(--font-mono, monospace);
         letter-spacing: 0.02em;
     }
 
-    /* ===== RESPONSIVE ===== */
     @@media (max-width: 480px) {
         .ai-chat-container {
             bottom: 12px;
@@ -444,16 +489,7 @@
         }
 
         .ai-chat-messages {
-            max-height: 280px;
-        }
-
-        .quick-questions {
-            gap: 4px;
-        }
-
-        .quick-btn {
-            font-size: 0.6rem;
-            padding: 3px 10px;
+            max-height: 260px;
         }
     }
 
@@ -474,6 +510,19 @@
     private bool isLoading = false;
     private List<ChatMessage> messages = new();
 
+    private const string SystemPrompt = @"You are Ali's AI assistant on his business website, CrossPlatformDev.
+Ali Abubaker is a full-stack developer based in Hamilton, ON, Canada with 5+ years of experience.
+He builds custom websites, mobile apps (Android/iOS), and business management systems (POS, inventory, supermarket systems).
+Current role: .NET Software Developer at Gerrie Electric (Sep 2024–present). Previously IT Help Desk Technician (300+ resolved cases).
+Advanced Diploma in Software Development, Mohawk College. Microsoft Azure certified.
+Tech stack: C#, .NET Core, ASP.NET, Node.js, React, TypeScript, SQL Server, MySQL, MongoDB, Azure.
+Pricing guide: simple website $1,500-$2,500, mobile app $5,000-$10,000, business system $5,000-$15,000+.
+Timelines: website 2-4 weeks, mobile app 1-3 months, business system 2-4 months.
+Contact: aliabdulsameea69@gmail.com, +1 289 339 1367.
+Be warm, concise, and helpful. Keep answers short (2-4 sentences) unless asked for detail.
+If asked something unrelated to Ali or his work, answer briefly and naturally, then gently steer back.
+Always end with a natural next step when relevant (e.g. suggest the contact form).";
+
     private class ChatMessage
     {
         public string Text { get; set; } = "";
@@ -482,22 +531,31 @@
         public bool IsTyping { get; set; }
     }
 
-    protected override void OnInitialized()
-    {
-        messages.Add(new ChatMessage
-        {
-            Text = "👋 Hi there! I'm Ali's AI assistant. Ask me about his services, experience, pricing, or anything about software development. I'm here to help!",
-            IsUser = false,
-            Time = DateTime.Now.ToString("h:mm tt")
-        });
-    }
-
     private void ToggleChat()
     {
         isOpen = !isOpen;
-        if (isOpen)
+    }
+
+    private async Task OnTopicSelected(ChangeEventArgs e)
+    {
+        var topic = e.Value?.ToString();
+        if (string.IsNullOrEmpty(topic)) return;
+
+        var question = topic switch
         {
-            StateHasChanged();
+            "services" => "What services do you offer?",
+            "pricing" => "How much does a project cost?",
+            "timeline" => "How long does a project take?",
+            "experience" => "What's your experience?",
+            "portfolio" => "Can I see your past work?",
+            "contact" => "How do I get in touch?",
+            _ => null
+        };
+
+        if (question is not null)
+        {
+            userInput = question;
+            await SendMessage();
         }
     }
 
@@ -522,49 +580,29 @@
         var userMessage = userInput.Trim();
         userInput = "";
 
-        messages.Add(new ChatMessage
-        {
-            Text = userMessage,
-            IsUser = true,
-            Time = DateTime.Now.ToString("h:mm tt")
-        });
-
+        messages.Add(new ChatMessage { Text = userMessage, IsUser = true, Time = DateTime.Now.ToString("h:mm tt") });
         StateHasChanged();
+        await ScrollToBottom();
 
-        var typingMessage = new ChatMessage
-        {
-            Text = "",
-            IsUser = false,
-            Time = DateTime.Now.ToString("h:mm tt"),
-            IsTyping = true
-        };
+        var typingMessage = new ChatMessage { Text = "", IsUser = false, Time = DateTime.Now.ToString("h:mm tt"), IsTyping = true };
         messages.Add(typingMessage);
         StateHasChanged();
+        await ScrollToBottom();
 
         isLoading = true;
 
         try
         {
-            // Always use local responses for now (they work better!)
-            var response = GetLocalResponse(userMessage);
-
-            // Try Hugging Face if you want, but fallback to local
-            // var response = await GetAIResponse(userMessage);
-
+            var response = await GetAiResponse(userMessage);
             messages.Remove(typingMessage);
-            messages.Add(new ChatMessage
-            {
-                Text = response,
-                IsUser = false,
-                Time = DateTime.Now.ToString("h:mm tt")
-            });
+            messages.Add(new ChatMessage { Text = response, IsUser = false, Time = DateTime.Now.ToString("h:mm tt") });
         }
-        catch (Exception ex)
+        catch
         {
             messages.Remove(typingMessage);
             messages.Add(new ChatMessage
             {
-                Text = $"Sorry, I'm having trouble. Please try again or email Ali at aliabdulsameea69@gmail.com",
+                Text = "Sorry, I'm having trouble connecting right now. Please try again or email Ali directly at aliabdulsameea69@gmail.com.",
                 IsUser = false,
                 Time = DateTime.Now.ToString("h:mm tt")
             });
@@ -573,208 +611,79 @@
         {
             isLoading = false;
             StateHasChanged();
+            await ScrollToBottom();
         }
     }
 
-    // ===== ENHANCED LOCAL RESPONSE =====
-    private string GetLocalResponse(string userMessage)
-    {
-        var lower = userMessage.ToLower().Trim();
-
-        // ===== FUN / CASUAL QUESTIONS =====
-        if (lower.Contains("smile") || lower.Contains("happy") || lower.Contains("joke") || lower.Contains("funny") || lower.Contains("laugh"))
-        {
-            var jokes = new[]
-            {
-                "😄 Why do programmers prefer dark mode? Because light attracts bugs!",
-                "😂 What's a developer's favorite music genre? Al-go-rhythm!",
-                "😆 Why did the developer go broke? Because he used up all his cache!",
-                "🤣 What do you call a developer who doesn't comment their code? A time traveler (because nobody knows what they were thinking)!",
-                "😅 Why do Java developers wear glasses? Because they can't C#!",
-                "😄 What's the best thing about a Boolean? Even if you're wrong, you're only off by one bit!"
-            };
-            return jokes[new Random().Next(jokes.Length)];
-        }
-
-        if (lower.Contains("love") || lower.Contains("miss") || lower.Contains("feel"))
-        {
-            return "❤️ That's sweet! I'm just a bot, but I'm here to help you. What can I assist you with today?";
-        }
-
-        if (lower.Contains("weather") || lower.Contains("rain") || lower.Contains("sunny"))
-        {
-            return "🌤️ I'm not sure about the weather right now, but I know Ali can build you a weather app if you need one! 😄 What else can I help with?";
-        }
-
-        if (lower.Contains("food") || lower.Contains("hungry") || lower.Contains("eat") || lower.Contains("pizza"))
-        {
-            return "🍕 Now you're making me hungry! Ali builds systems for supermarkets and restaurants too. Need a POS system or inventory management? Let me know!";
-        }
-
-        if (lower.Contains("dog") || lower.Contains("cat") || lower.Contains("pet"))
-        {
-            return "🐾 Speaking of pets! Ali built PetWell — a full pet care management platform with real-time notifications. Check it out on the Portfolio page!";
-        }
-
-        // ===== GREETINGS =====
-        if (lower == "hi" || lower == "hello" || lower == "hey" || lower == "sup" || lower == "howdy")
-        {
-            return "👋 Hey there! Great to hear from you. I'm Ali's AI assistant — here to help you learn about his work, services, and experience. What can I help you with today?";
-        }
-
-        if (lower.Contains("how are") || lower.Contains("how's it going") || lower.Contains("what's up"))
-        {
-            return "I'm doing great, thanks for asking! 😊 I'm always ready to help. What brings you here today? Looking for a website, an app, or a custom business system?";
-        }
-
-        if (lower.Contains("thank") || lower.Contains("thanks"))
-        {
-            return "You're very welcome! 🙌 If you have more questions, feel free to ask anytime. And if you're ready to start a project, Ali would love to hear from you at aliabdulsameea69@gmail.com!";
-        }
-
-        if (lower.Contains("bye") || lower.Contains("goodbye") || lower.Contains("see you") || lower.Contains("later"))
-        {
-            return "👋 Goodbye! It was great chatting with you. Feel free to come back anytime. Ali is always available at aliabdulsameea69@gmail.com. Have a great day!";
-        }
-
-        // ===== SERVICES =====
-        if (lower.Contains("service") || lower.Contains("offer") || lower.Contains("build") || lower.Contains("develop") || lower.Contains("create") || lower.Contains("do you"))
-        {
-            return "Ali builds websites, mobile apps (Android & iOS), and custom business management systems like POS, inventory, and supermarket systems. He specializes in full-stack development using .NET Core, Node.js, React, and TypeScript. What specific service are you looking for?";
-        }
-
-        // ===== PRICING =====
-        if (lower.Contains("price") || lower.Contains("cost") || lower.Contains("charge") || lower.Contains("how much") || lower.Contains("expensive") || lower.Contains("budget"))
-        {
-            return "💰 Pricing depends on the project scope:\n\n• Simple website: $1,500 - $2,500\n• Mobile app: $5,000 - $10,000\n• Business system: $5,000 - $15,000+\n\nAli provides custom quotes after understanding your needs. Ready to get a quote? Send him a message!";
-        }
-
-        // ===== EXPERIENCE =====
-        if (lower.Contains("experience") || lower.Contains("years") || lower.Contains("background") || lower.Contains("worked") || lower.Contains("job") || lower.Contains("career"))
-        {
-            return "Ali has 5+ years of experience in full-stack development. He's worked as a .NET Software Developer at Gerrie Electric (2024–present), as an IT Help Desk Technician resolving 300+ cases, and holds an Advanced Diploma from Mohawk College. He specializes in C#, .NET, Node.js, and cloud architecture with Azure.";
-        }
-
-        // ===== TIMELINE =====
-        if (lower.Contains("time") || lower.Contains("long") || lower.Contains("duration") || lower.Contains("timeline") || lower.Contains("how fast") || lower.Contains("quick"))
-        {
-            return "⏱️ Timeline varies by project:\n\n• Simple website: 2–4 weeks\n• Mobile app: 1–3 months\n• Business system: 2–4 months\n\nAli gives clear timelines during the discovery call. Ready to get started?";
-        }
-
-        // ===== TECH STACK =====
-        if (lower.Contains("tech") || lower.Contains("stack") || lower.Contains("language") || lower.Contains("framework") || lower.Contains("using"))
-        {
-            return "Ali's tech stack includes: C#, .NET Core, ASP.NET, Node.js, React, TypeScript, SQL Server, MySQL, MongoDB, and Azure. He uses Git, Azure DevOps, follows Agile/Scrum, and focuses on secure coding (OWASP).";
-        }
-
-        // ===== CONTACT =====
-        if (lower.Contains("email") || lower.Contains("contact") || lower.Contains("reach") || lower.Contains("phone") || lower.Contains("call"))
-        {
-            return "You can reach Ali at: 📧 aliabdulsameea69@gmail.com 📞 +1 289 339 1367. He'll get back to you within 24 hours. What would you like to discuss?";
-        }
-
-        // ===== ABOUT ALI =====
-        if (lower.Contains("ali") || lower.Contains("who") || lower.Contains("about") || lower.Contains("name") || lower.Contains("him"))
-        {
-            return "Ali Abubaker is a senior full-stack developer based in Hamilton, ON, Canada. He has 5+ years of experience, works as a .NET Developer at Gerrie Electric, holds a Microsoft Azure certification, and is passionate about building software that solves real problems.";
-        }
-
-        // ===== PROJECTS =====
-        if (lower.Contains("project") || lower.Contains("portfolio") || lower.Contains("work") || lower.Contains("built") || lower.Contains("example"))
-        {
-            return "Recent projects include PetWell — a full-stack pet care platform (Node.js, Express, MySQL), internal business tools with .NET, and custom websites for small businesses. Check out the Portfolio page for more details!";
-        }
-
-        // ===== EDUCATION =====
-        if (lower.Contains("education") || lower.Contains("college") || lower.Contains("diploma") || lower.Contains("school") || lower.Contains("study"))
-        {
-            return "Ali holds an Advanced Diploma in Software Development from Mohawk College (graduating Dec 2025). Coursework: .NET Programming, Data Structures, Mobile Web Development, Secure Software Development, and Cybersecurity Testing.";
-        }
-
-        // ===== CERTIFICATIONS =====
-        if (lower.Contains("certification") || lower.Contains("certified") || lower.Contains("azure"))
-        {
-            return "Ali holds a Microsoft Azure Certification (2024), Worker Health & Safety Awareness, and EAP Certification. He's fluent in English with intermediate Arabic skills.";
-        }
-
-        // ===== CAN YOU / ABILITY =====
-        if (lower.Contains("can you") || lower.Contains("are you") || lower.Contains("do you") && !lower.Contains("you offer"))
-        {
-            return "I'm Ali's AI assistant! 🤖 I can help you learn about his services, experience, pricing, and projects. I can also tell jokes if you ask! 😄 What can I help you with today?";
-        }
-
-        // ===== DEFAULT WITH PERSONALITY =====
-        return "That's an interesting question! 🤔 I'm not 100% sure, but I'd recommend connecting with Ali directly. You can email him at aliabdulsameea69@gmail.com or use the contact form on this site. In the meantime, feel free to ask me about services, pricing, experience, or tech stack — or ask me to tell you a joke! 😄";
-    }
-
-    // ===== HUGGING FACE API (Optional - Currently Disabled) =====
-    private async Task<string> GetAIResponse(string userMessage)
+    private async Task ScrollToBottom()
     {
         try
         {
-            var apiKey = Config["HuggingFace:ApiKey"];
-            if (string.IsNullOrEmpty(apiKey))
-            {
-                return GetLocalResponse(userMessage);
-            }
-
-            using var client = new HttpClient();
-            client.Timeout = TimeSpan.FromSeconds(30);
-            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
-
-            var prompt = $@"You are Ali's AI assistant. Ali is a full-stack developer with 5+ years experience.
-He builds websites, apps, and business systems. Based in Hamilton, ON. Email: aliabdulsameea69@gmail.com.
-
-Be friendly, helpful, and conversational. Keep responses short and natural.
-
-User: {userMessage}
-Assistant:";
-
-            var payload = new
-            {
-                inputs = prompt,
-                parameters = new
-                {
-                    max_new_tokens = 150,
-                    temperature = 0.7,
-                    return_full_text = false
-                }
-            };
-
-            var content = new StringContent(
-                JsonSerializer.Serialize(payload),
-                Encoding.UTF8,
-                "application/json"
-            );
-
-            var response = await client.PostAsync(
-                "https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium",
-                content
-            );
-
-            if (response.IsSuccessStatusCode)
-            {
-                var json = await response.Content.ReadAsStringAsync();
-                try
-                {
-                    var results = JsonSerializer.Deserialize<List<HuggingFaceResponse>>(json);
-                    var text = results?.FirstOrDefault()?.generated_text?.Trim();
-                    if (!string.IsNullOrEmpty(text) && text.Length > 5)
-                    {
-                        return text;
-                    }
-                }
-                catch { }
-            }
+            await JS.InvokeVoidAsync("siteAnimations.scrollChatToBottom", "chatMessages");
         }
-        catch { }
-
-        // Fallback to local
-        return GetLocalResponse(userMessage);
+        catch { /* ignore if JS not ready yet */ }
     }
 
-    private class HuggingFaceResponse
+    private static string FormatMessage(string text)
     {
-        public string? generated_text { get; set; }
+        // Preserve line breaks from the model's response.
+        return System.Net.WebUtility.HtmlEncode(text).Replace("\n", "<br />");
+    }
+
+    private async Task<string> GetAiResponse(string userMessage)
+    {
+        var apiKey = Config["Groq:ApiKey"];
+        if (string.IsNullOrWhiteSpace(apiKey))
+        {
+            return "AI chat isn't configured yet — please email Ali directly at aliabdulsameea69@gmail.com.";
+        }
+
+        var client = HttpClientFactory.CreateClient("Groq");
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
+
+        // Build short conversation history so the model has context, capped to last 6 turns.
+        var historyMessages = new List<object> { new { role = "system", content = SystemPrompt } };
+        foreach (var m in messages.Where(m => !m.IsTyping).TakeLast(12))
+        {
+            historyMessages.Add(new { role = m.IsUser ? "user" : "assistant", content = m.Text });
+        }
+        historyMessages.Add(new { role = "user", content = userMessage });
+
+        var payload = new
+        {
+            model = "llama-3.1-8b-instant",
+            messages = historyMessages,
+            temperature = 0.6,
+            max_tokens = 300
+        };
+
+        var response = await client.PostAsJsonAsync("chat/completions", payload);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            var errBody = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"Groq error: {response.StatusCode} - {errBody}");
+            return "Sorry, I couldn't process that right now. You can reach Ali directly at aliabdulsameea69@gmail.com.";
+        }
+
+        var json = await response.Content.ReadFromJsonAsync<GroqResponse>();
+        var reply = json?.choices?.FirstOrDefault()?.message?.content?.Trim();
+
+        return string.IsNullOrWhiteSpace(reply)
+            ? "I'm not sure how to answer that — try asking about services, pricing, or experience, or email Ali directly."
+            : reply;
+    }
+
+    private class GroqResponse
+    {
+        public List<GroqChoice>? choices { get; set; }
+    }
+    private class GroqChoice
+    {
+        public GroqMessage? message { get; set; }
+    }
+    private class GroqMessage
+    {
+        public string? content { get; set; }
     }
 }

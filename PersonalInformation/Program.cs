@@ -34,6 +34,12 @@ builder.Services.AddHttpClient("Resend", client =>
     client.BaseAddress = new Uri("https://api.resend.com/");
 });
 
+builder.Services.AddHttpClient("Groq", client =>
+{
+    client.BaseAddress = new Uri("https://api.groq.com/openai/v1/");
+    client.Timeout = TimeSpan.FromSeconds(20);
+});
+
 var app = builder.Build();
 
 // Use WebOptimizer middleware

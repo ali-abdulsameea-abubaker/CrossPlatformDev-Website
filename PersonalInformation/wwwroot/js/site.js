@@ -21,6 +21,16 @@
         });
     }
 
+
+    function scrollChatToBottom(containerId) {
+        const el = document.getElementById(containerId);
+        if (!el) return;
+        el.scrollTop = el.scrollHeight;
+    }
+
+
+
+
     window.applyTheme = function (themeClass) {
         document.body.classList.remove('dark-theme', 'light-theme');
         document.body.classList.add(themeClass);
@@ -225,5 +235,5 @@
     // Expose initMobileMenu so it can be called from Blazor if needed
     window.initMobileMenu = initMobileMenu;
 
-    return { initAll, initScrollReveal, typeTerminal, initMobileMenu };
+    return { initAll, initScrollReveal, typeTerminal, initMobileMenu, scrollChatToBottom };
 })();
