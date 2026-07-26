@@ -1115,17 +1115,17 @@ a {
     margin-bottom: var(--space-7);
 }
 
-    .section-header-modern-left .section-label {
-        justify-content: flex-start;
-    }
+.section-header-modern-left .section-label {
+    justify-content: flex-start;
+}
 
-    .section-header-modern-left .section-title {
-        max-width: 600px;
-    }
+.section-header-modern-left .section-title {
+    max-width: 600px;
+}
 
-    .section-header-modern-left .section-subtitle {
-        margin: 0;
-    }
+.section-header-modern-left .section-subtitle {
+    margin: 0;
+}
 
 /* ----- Modern CTA Banner ----- */
 .cta-banner-modern {
@@ -1138,17 +1138,17 @@ a {
     overflow: hidden;
 }
 
-    .cta-banner-modern::before {
-        content: "";
-        position: absolute;
-        top: -50%;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 600px;
-        height: 300px;
-        background: radial-gradient(ellipse at center, rgba(0, 229, 255, 0.04), transparent 70%);
-        pointer-events: none;
-    }
+.cta-banner-modern::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 300px;
+    background: radial-gradient(ellipse at center, rgba(0, 229, 255, 0.04), transparent 70%);
+    pointer-events: none;
+}
 
 .cta-label {
     display: flex;
@@ -1214,9 +1214,9 @@ a {
         text-align: center;
     }
 
-        .section-header-modern-left .section-label {
-            justify-content: center;
-        }
+    .section-header-modern-left .section-label {
+        justify-content: center;
+    }
 
     .section-title {
         font-size: clamp(1.6rem, 5vw, 2rem);
@@ -1311,7 +1311,7 @@ a {
     letter-spacing: 0.02em;
 }
 
-    .eyebrow::before {
-        content: "~/";
-        color: var(--text-muted);
-    }
+.eyebrow::before {
+    content: "~/";
+    color: var(--text-muted);
+}

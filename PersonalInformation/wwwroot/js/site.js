@@ -22,6 +22,8 @@
     }
 
 
+
+
     function scrollChatToBottom(containerId) {
         const el = document.getElementById(containerId);
         if (!el) return;
@@ -215,6 +217,8 @@
         setTimeout(typeNext, 600);
     }
 
+
+    
 
     function initAll() {
         // Always re-initialize mobile menu on each navigation

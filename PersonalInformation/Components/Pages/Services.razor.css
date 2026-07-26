@@ -552,3 +552,312 @@
     background: linear-gradient(90deg, var(--accent-cyan), transparent);
     margin-left: var(--space-1);
 }
+
+/* ========================================
+   PROCESS SECTION - REDESIGNED
+   ======================================== */
+
+.process-modern {
+    padding: var(--space-8) 0;
+    background: var(--bg-void);
+    position: relative;
+}
+
+    .process-modern::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+    }
+
+.process-subtitle {
+    color: var(--text-secondary);
+    max-width: 500px;
+    margin: var(--space-2) auto 0;
+    font-size: 1rem;
+}
+
+.process-modern-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+    position: relative;
+}
+
+    /* Vertical line connecting steps */
+    .process-modern-grid::before {
+        content: '';
+        position: absolute;
+        top: 40px;
+        left: 10%;
+        right: 10%;
+        height: 2px;
+        background: linear-gradient(90deg, var(--accent-cyan), var(--border-subtle), var(--accent-cyan));
+        opacity: 0.15;
+        z-index: 0;
+    }
+
+.process-modern-step {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: var(--space-4);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    transition: all 0.5s var(--ease-out-expo);
+}
+
+    .process-modern-step:hover {
+        transform: translateY(-8px);
+        border-color: var(--border-glow);
+        box-shadow: 0 12px 40px rgba(0, 229, 255, 0.05);
+    }
+
+.process-modern-number {
+    position: relative;
+    margin-bottom: var(--space-3);
+}
+
+    .process-modern-number span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: var(--accent-gradient);
+        color: #04121a;
+        font-family: var(--font-mono);
+        font-size: 1rem;
+        font-weight: 700;
+        position: relative;
+        z-index: 2;
+        transition: all 0.4s var(--ease-out-expo);
+    }
+
+.process-modern-step:hover .process-modern-number span {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);
+}
+
+.process-modern-line {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: calc(100% + var(--space-4));
+    height: 2px;
+    background: var(--border-subtle);
+    opacity: 0.3;
+}
+
+.process-modern-step:last-child .process-modern-line {
+    display: none;
+}
+
+.process-modern-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.process-modern-icon {
+    font-size: 2rem;
+    line-height: 1;
+    margin-bottom: var(--space-1);
+    transition: transform 0.4s var(--ease-out-expo);
+}
+
+.process-modern-step:hover .process-modern-icon {
+    transform: scale(1.15) rotate(-5deg);
+}
+
+.process-modern-content h4 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0;
+    font-family: var(--font-display);
+}
+
+.process-modern-content p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.6;
+    max-width: 200px;
+}
+
+.process-modern-tag {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--accent-cyan);
+    background: rgba(0, 229, 255, 0.06);
+    border: 1px solid rgba(0, 229, 255, 0.08);
+    padding: 2px 12px;
+    border-radius: 999px;
+    margin-top: var(--space-1);
+    letter-spacing: 0.04em;
+}
+
+.process-modern-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    margin-top: var(--space-7);
+    padding: var(--space-4);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    flex-wrap: wrap;
+}
+
+    .process-modern-cta span {
+        font-size: 1.05rem;
+        font-weight: 500;
+        color: var(--text-primary);
+    }
+
+.btn-process {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 10px 24px;
+    border-radius: var(--radius-sm);
+    background: var(--accent-gradient);
+    color: #04121a;
+    text-decoration: none;
+    transition: all 0.3s var(--ease-out-expo);
+}
+
+    .btn-process:hover {
+        transform: translateX(4px);
+        box-shadow: 0 4px 20px rgba(0, 229, 255, 0.25);
+    }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+    .process-modern-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-4);
+    }
+
+        .process-modern-grid::before {
+            display: none;
+        }
+
+    .process-modern-line {
+        display: none !important;
+    }
+
+    .process-modern-content p {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .process-modern {
+        padding: var(--space-5) 0;
+    }
+
+    .process-modern-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-3);
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .process-modern-step {
+        flex-direction: row;
+        text-align: left;
+        padding: var(--space-3);
+        gap: var(--space-4);
+    }
+
+    .process-modern-number {
+        margin-bottom: 0;
+        flex-shrink: 0;
+    }
+
+        .process-modern-number span {
+            width: 40px;
+            height: 40px;
+            font-size: 0.85rem;
+        }
+
+    .process-modern-content {
+        align-items: flex-start;
+    }
+
+    .process-modern-icon {
+        font-size: 1.5rem;
+        margin-bottom: 0;
+    }
+
+    .process-modern-content h4 {
+        font-size: 0.95rem;
+    }
+
+    .process-modern-content p {
+        font-size: 0.8rem;
+        max-width: 100%;
+    }
+
+    .process-modern-tag {
+        font-size: 0.55rem;
+        padding: 1px 10px;
+    }
+
+    .process-modern-cta {
+        flex-direction: column;
+        text-align: center;
+        padding: var(--space-3);
+        gap: var(--space-3);
+    }
+
+        .process-modern-cta span {
+            font-size: 0.95rem;
+        }
+
+    .btn-process {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .process-modern-step {
+        padding: var(--space-2);
+        gap: var(--space-2);
+    }
+
+    .process-modern-number span {
+        width: 32px;
+        height: 32px;
+        font-size: 0.7rem;
+    }
+
+    .process-modern-icon {
+        font-size: 1.2rem;
+    }
+
+    .process-modern-content h4 {
+        font-size: 0.85rem;
+    }
+
+    .process-modern-content p {
+        font-size: 0.75rem;
+    }
+}
