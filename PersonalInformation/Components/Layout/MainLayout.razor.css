@@ -12,6 +12,6 @@
 @media (max-width: 860px) {
     .content-area {
         margin-left: 0;
-        padding-top: 72px; /* room for the mobile toggle button */
+        padding-top: 50px; /* room for the mobile toggle button */
     }
 }

@@ -10,3 +10,53 @@
     position: absolute;
     left: -9999px;
 }
+
+
+/* ===== FIX: Remove excessive top padding on pages ===== */
+.page-enter {
+    animation: fadeInUp var(--dur-med) var(--ease-out-expo);
+    padding-top: 0 !important;
+}
+
+/* Hero sections - reduce top padding */
+.about-hero,
+.portfolio-hero,
+.services-hero,
+.blog-hero,
+.tools-hero,
+.service-hero,
+.zema-hero,
+.contact-hero {
+    padding-top: var(--space-2) !important; /* Reduced from var(--space-4) */
+}
+
+/* First section in any page */
+.section:first-child {
+    padding-top: var(--space-2) !important;
+}
+
+/* On mobile, reduce even more */
+@media (max-width: 860px) {
+    .about-hero,
+    .portfolio-hero,
+    .services-hero,
+    .blog-hero,
+    .tools-hero,
+    .service-hero,
+    .zema-hero,
+    .section:first-child {
+        padding-top: 0 !important;
+    }
+
+    .hero-grid-new,
+    .about-hero-grid,
+    .portfolio-hero-grid,
+    .services-hero-grid,
+    .blog-hero-grid,
+    .tools-hero-grid,
+    .service-hero-grid,
+    .zema-hero-grid {
+        padding-top: var(--space-2) !important;
+        min-height: auto !important;
+    }
+}
